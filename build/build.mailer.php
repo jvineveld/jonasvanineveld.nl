@@ -40,9 +40,9 @@ class mailer extends site{
 	private function replace_template_contents($fields){
 		$email = $this->mail_template;
 
-		foreach($fields as $field)
+		foreach($fields as $tag => $content)
 		{
-			$email = str_replace($field['tag'], $field['content'], $email);
+			$email = str_replace($tag, $content, $email);
 		}
 
 		return $email;
@@ -56,6 +56,28 @@ class mailer extends site{
 	public function mail_success($msg){
 		$this->notice = $msg;
 		$this->mail_send = 'succes';
+	}
+
+	public function send_mail($content, $subject = false){
+		if(empty($content))
+			return;
+
+		// Set headers
+		//------------------------------------------------------------------------------
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		$headers .= 'From: <jonas@makeityourown.nl>' . "\r\n";
+
+		$subject = $subject ?: "jonasvanineveld.nl contact";
+
+		if(mail($this->to_adress,$subject,$content,$headers))
+		{
+			$this->mail_success('Thanks for contacting me!');
+		}
+		else
+		{
+			$this->mail_error('Something went wrong sending email.. Please try again later');
+		}
 	}
 
 	public function sendPostMail(){
@@ -77,28 +99,6 @@ class mailer extends site{
 			'{{location}}' => $location
 		]);
 
-		$this-send_mail($email_content);
-	}
-
-	public function send_mail($content, $subject = false){
-		if(empty($content))
-			return;
-
-		// Set headers
-		//------------------------------------------------------------------------------
-		$headers = "MIME-Version: 1.0" . "\r\n";
-		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-		$headers .= 'From: <jonas@makeityourown.nl>' . "\r\n";
-
-		$subject = $subject ?: "jonasvanineveld.nl contact";
-
-		if(mail($to_adress,$subject,$content,$headers))
-		{
-			$this->mail_success('Thanks for contacting me!');
-		}
-		else
-		{
-			$this->mail_error('Something went wrong sending email.. Please try again later');
-		}
+		$this->send_mail($email_content);
 	}
 }
