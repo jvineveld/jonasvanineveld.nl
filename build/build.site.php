@@ -125,9 +125,17 @@ class site{
 
 	public function set_page_path($page = false){
 		$page = $page ? $page : $this->page;
-		$template_dir = __DIR__.'/../pages/'.$page.'/';
 
-		$this->page_path = is_dir($template_dir) ? $template_dir : false;
+		$template_dir = __DIR__.'/../pages/'.$page.'/';
+		$dir = is_dir($template_dir) ? $template_dir : false;
+
+		if(!$dir) // also check in development folder
+		{
+			$template_dir = __DIR__.'/../pages/in-dev/'.$page.'/';
+			$dir = is_dir($template_dir) ? $template_dir : false;
+		}
+
+		$this->page_path = $dir;
 	}
 
 	public function get_page_content_file($page = false, $get_content = false){
