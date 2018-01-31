@@ -127,6 +127,67 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/pages\/es6-moremenu\/foot.phtml": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/pages\/es6-moremenu\/foot.phtml",
+		"oF": 0
+		},
+	"\/pages\/es6-moremenu\/head.phtml": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/pages\/es6-moremenu\/head.phtml",
+		"oF": 0
+		},
+	"\/pages\/es6-moremenu\/index.phtml": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/pages\/es6-moremenu\/index.phtml",
+		"oF": 0
+		},
+	"\/pages\/es6-moremenu\/resources\/js\/demo.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/pages\/es6-moremenu\/resources\/js\/min\/demo-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/pages\/es6-moremenu\/resources\/js\/es6-moremenu.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "\/pages\/es6-moremenu\/resources\/js\/min\/es6-moremenu-min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/pages\/es6-moremenu\/resources\/js\/min\/es6-moremenu-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/pages\/es6-moremenu\/resources\/js\/min\/min\/es6-moremenu-min-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/pages\/es6-moremenu\/resources\/js\/scrollto.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/pages\/es6-moremenu\/resources\/js\/min\/scrollto-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/pages\/frontpage\/foot.phtml": {
 		"cB": 0,
 		"ft": 8192,
@@ -184,87 +245,6 @@
 		"mi": 1,
 		"oA": 1,
 		"oAP": "\/pages\/frontpage\/resources\/js\/min\/min\/frontpage-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/foot.phtml": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/foot.phtml",
-		"oF": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/head.phtml": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/head.phtml",
-		"oF": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/index.phtml": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/index.phtml",
-		"oF": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/demo.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/demo-min.js",
-		"oF": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/es6-moremenu.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/es6-moremenu-min.js",
-		"oF": 1,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/jquery.moremenu.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/jquery.moremenu-min.js",
-		"oF": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/es6-moremenu-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/min\/es6-moremenu-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/jquery.moremenu-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/min\/jquery.moremenu-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/scrollto.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/scrollto-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
