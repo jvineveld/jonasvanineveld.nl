@@ -9,6 +9,13 @@
 	],
 "creatorBuild": "26148",
 "files": {
+	"\/.gitignore": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/.gitignore",
+		"oF": 0
+		},
 	"\/.htaccess": {
 		"cB": 0,
 		"ft": 8192,
@@ -44,13 +51,6 @@
 		"oAP": "\/build\/build.site.php",
 		"oF": 0
 		},
-	"\/config-sample.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/config-sample.php",
-		"oF": 0
-		},
 	"\/config.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -77,6 +77,13 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/init.php",
+		"oF": 0
+		},
+	"\/LICENSE": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/LICENSE",
 		"oF": 0
 		},
 	"\/pages\/classcarousel\/foot.phtml": {
@@ -181,6 +188,87 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/pages\/in-dev\/es6-moremenu\/foot.phtml": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/foot.phtml",
+		"oF": 0
+		},
+	"\/pages\/in-dev\/es6-moremenu\/head.phtml": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/head.phtml",
+		"oF": 0
+		},
+	"\/pages\/in-dev\/es6-moremenu\/index.phtml": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/index.phtml",
+		"oF": 0
+		},
+	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/demo.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/demo-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/es6-moremenu.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/es6-moremenu-min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/jquery.moremenu.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/jquery.moremenu-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/es6-moremenu-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/min\/es6-moremenu-min-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/jquery.moremenu-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/min\/jquery.moremenu-min-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/pages\/in-dev\/es6-moremenu\/resources\/js\/scrollto.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/pages\/in-dev\/es6-moremenu\/resources\/js\/min\/scrollto-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/pages\/moremenu\/foot.phtml": {
 		"cB": 0,
 		"ft": 8192,
@@ -221,13 +309,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"\/readme.html": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/readme.html",
-		"oF": 0
 		},
 	"\/readme.md": {
 		"cB": 0,
@@ -623,66 +704,6 @@
 		"mi": 1,
 		"oA": 1,
 		"oAP": "\/resources\/js\/min\/form-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/resources\/js\/min\/combined-vendor-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/resources\/js\/min\/min\/combined-vendor-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/resources\/js\/min\/form-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/resources\/js\/min\/min\/form-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/resources\/js\/min\/github-buttons-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/resources\/js\/min\/min\/github-buttons-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/resources\/js\/min\/main-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/resources\/js\/min\/min\/main-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/resources\/js\/min\/nice-fiddle-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/resources\/js\/min\/min\/nice-fiddle-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/resources\/js\/min\/rulers-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/resources\/js\/min\/min\/rulers-min-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2018,7 +2039,7 @@
 		},
 	"esLintConfigFileHandlingType": 0,
 	"esLintECMAVersion": 7,
-	"esLintEnvironmentsMask": 1,
+	"esLintEnvironmentsMask": 17,
 	"esLintRules": {
 		"accessor-pairs": {
 			"active": 0,
@@ -3076,7 +3097,7 @@
 			"flagValue": -1
 			},
 		"esnext": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"evil": {
@@ -3334,7 +3355,7 @@
 			"flagValue": -1
 			},
 		"es6": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"eval": {
