@@ -1,0 +1,199 @@
+<?php global $site; ?>
+<div id="card-wrapper">
+	<input type="radio" name="page-triggers" id="trigger-page-home" checked>
+	<input type="radio" name="page-triggers" id="trigger-page-about">
+	<input type="radio" name="page-triggers" id="trigger-page-contact">
+	<input type="radio" name="page-triggers" id="trigger-page-projects">
+	<input type="radio" name="page-triggers" id="trigger-page-development">
+	<input type="radio" name="page-triggers" id="trigger-page-no-js-used">
+
+	<div class="bg-quote" title="Code should be understandable, functional and minimal.">
+		<div><span>C</span><span>o</span><span>d</span><span>e</span> <span>s</span><span>h</span><span>o</span><span>u</span><span>l</span><span>d</span> <span>b</span><span>e</span> <span>u</span><span>n</span><span>d</span><span>e</span><span>r</span><span>s</span><span>t</span><span>a</span><span>n</span><span>d</span><span>a</span><span>b</span><span>l</span><span>e</span><span>,</span></div> <div><div><span>o</span><span>r</span><span>g</span><span>a</span><span>n</span><span>i</span><span>z</span><span>e</span><span>d</span></div> <div><span>a</span><span>n</span><span>d</span> <span>m</span><span>i</span><span>n</span><span>i</span><span>m</span><span>a</span><span>l</span><span>.</span></div></div>
+	</div>
+
+	<?php
+	/**
+	 * Email notice
+	 */
+	if($site->mailer->mail_send!==false){ ?>
+
+	<input type="radio" name="notice-trigger" id="trigger-notice-on" checked>
+	<input type="radio" name="notice-trigger" id="trigger-notice-off">
+	<div id="notice">
+		<label class="close-link" for="trigger-notice-off">
+			<svg viewPort="0 0 21 21" version="1.1" width="20px" heights="20px"
+			     xmlns="http://www.w3.org/2000/svg">
+			    <line x1="1" y1="16"
+			          x2="16" y2="1"
+			          stroke="black"
+			          stroke-width="2"
+					  id="close_line_1" stroke-linecap="round"/>
+			    <line x1="1" y1="1"
+			          x2="16" y2="16"
+			          stroke="black"
+			          stroke-width="2"
+					  id="close_line_2" stroke-linecap="round"/>
+			</svg>
+		</label>
+
+		<?php printf('<p>%s</p>', $site->mailer->notice); ?>
+	</div>
+
+	<script type="text/javascript">
+		<?php if($site->mailer->mail_send=='success'){ ?>
+		gtag('event', 'actions', { 'contact_form': 'submitted' });
+		<?php } else { ?>
+		gtag('event', 'actions', { 'contact_form': 'submitted' });
+		<?php } ?>
+	</script>
+
+	<?php } ?>
+
+	<div id="v-card">
+		<label class="close-link" for="trigger-page-home">
+			<svg viewPort="0 0 21 21" version="1.1" width="20px" heights="20px"
+			     xmlns="http://www.w3.org/2000/svg">
+			    <line x1="1" y1="16"
+			          x2="16" y2="1"
+			          stroke="black"
+			          stroke-width="2"
+					  id="close_line_1" stroke-linecap="round"/>
+			    <line x1="1" y1="1"
+			          x2="16" y2="16"
+			          stroke="black"
+			          stroke-width="2"
+					  id="close_line_2" stroke-linecap="round"/>
+			</svg>
+		</label>
+
+		<div class="front">
+			<h1>Jonas van Ineveld</h1>
+			<div class="logo"><?php echo $site->get_svg('logo-2'); ?></div>
+			<div class="inner">
+				<div class="line-overflow-container">
+					<div class="line"></div>
+				</div>
+
+				<div class="actions">
+					<label class="about-me" for="trigger-page-about">
+						<?php echo $site->get_svg('adress-card'); ?>
+						<span class='info'>About</span>
+					</label>
+					<label class="projects" for="trigger-page-projects">
+						<?php echo $site->get_svg('projects'); ?>
+						<span class='info'>Projects</span>
+					</label>
+					<label class="development" for="trigger-page-development">
+						<?php echo $site->get_svg('development'); ?>
+						<span class='info'>Development</span>
+					</label>
+					<label class="contact-link" for="trigger-page-contact">
+						<?php echo $site->get_svg('envelope-both'); ?>
+						<span class='info'>Contact</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="back">
+			<div class="page active" id="page-about">
+				<div class="content">
+					<p>Hi, i'm Jonas van Ineveld, a full stack developer living in the netherlands.<br>
+					Born in 1991, I began creating simple flash applications in 2003.<br>
+					Currently i’m lead frontend developer at 42functions.</p>
+
+					<strong>Some of the things i do:</strong>
+					<ul>
+						<li>Write plugins and themes for WordPress</li>
+						<li>Write themes for Magento 1 and 2</li>
+						<li>Create interactive dashboards, both the frontend interface and backend code</li>
+						<li>Optimize frontend and SEO indexing performance of website's & webshops</li>
+						<li>Build <abbr title="conversion rate optimization">CRO</abbr> tests</li>
+						<li>Write Angular webapps</li>
+						<li>Write lots of php, also just for shortening tasks.</li>
+						<li>Manage multiple ubuntu VPS's with both Apache and nginx</li>
+						<li>And do almost anything else JS, HTML, CSS related..</li>
+					</ul>
+					<strong>Currently exploring:</strong>
+					<ul style="margin-bottom: 0;">
+						<li>Vue.js</li>
+						<li>webpack</li>
+						<li>ES6</li>
+					</ul>
+
+					<div class="logos">
+						<a id="xlii_logo" href="http://42functions.nl" target="_blank" title="42functions" data-track="42functions" data-track-type="external-link"><svg data-name="Logo 42functions" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432.96 85.86"><defs><style>.cls-1{fill:#f7941e;}.cls-1,.cls-2{fill-rule:evenodd;}.cls-2{fill:#383838;}</style></defs><title>logo</title><path class="cls-1" d="M78.83,240.11h22.23V260.7h11V240.11h5.15v-8.42h-5.15V176.24H97.55L78.83,230.52v9.59Zm22.23-8.42H88.66l12.17-39.07h0.23v39.07Z" transform="translate(-78.84 -175.54)"/><path class="cls-1" d="M125.14,260.7H160.7v-9.83H136.84l17.66-33c4.56-8.89,5.38-14,5.38-23.51,0-13.92-3.51-18.83-17.08-18.83-13,0-16.38,4.56-16.38,15.91V198h11v-5.5c0-5.85,1.17-8.54,5.61-8.54,3.74,0,5.85,2.22,5.85,10.06,0,9-1.87,14.86-6.55,23.63l-17.2,31.82V260.7Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M180.69,260.69h11V209.53h6.81v-7.75h-6.81V189.46c0-3.4,1.41-5,4.81-5h2V176h-3.75c-11.73,0-14.08,3.64-14.08,12v13.85h-5.52v7.75h5.52v51.17Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M239.5,201.78h-11v44.95c0,4.58-2.11,6.22-4.81,6.22-3.4,0-4.22-2.23-4.22-5.28V201.78h-11v48c0,8.69,4.81,11.62,10.33,11.62a11.37,11.37,0,0,0,6-1.53,10.91,10.91,0,0,0,4.22-4.11h0.23v4.93H239.5V201.78Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M253.31,260.69h11V215.75c0-4.58,2.11-6.22,4.81-6.22,3.4,0,4.22,2.23,4.22,5.28v45.89h11v-48c0-8.69-4.81-11.62-10.33-11.62a11.37,11.37,0,0,0-6,1.53,10.92,10.92,0,0,0-4.23,4.11h-0.23v-4.93H253.31v58.91Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M296.7,246.73c0,10.91,7.28,14.67,15.61,14.67,6.81,0,14.2-2.7,14.2-11.62v-8.92H316.18v7c0,3.64-1.29,5.75-4.22,5.75s-4.22-2-4.22-5.52V215.75c0-4.58,1.64-6.92,4.22-6.92s4.22,1.88,4.22,6.34v6.46H326.5v-8.8c0-6.81-4.34-11.73-14.32-11.73-9.74,0-15.49,5.87-15.49,15.84v29.81Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M340.92,252.83c0,5.28,3.17,7.86,12,7.86,3,0,5.87-.23,7.16-0.35V252.6a8.66,8.66,0,0,1-2.82.35c-3.29,0-5.28-.82-5.28-5.28V209.53h6.81v-7.75H352v-15l-11,3.87v11.15h-5.51v7.75h5.51v43.3Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M372.94,260.69h11V201.78h-11v58.91Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M396.05,246.73c0,10.91,7.28,14.67,15.73,14.67,9.86,0,15.61-5.87,15.61-15.84V215.75c0-10.91-7.28-14.67-15.73-14.67-9.86,0-15.61,5.87-15.61,15.84v29.81Zm11-30.51c0-4.7,1.17-7.39,4.7-7.39s4.58,2.7,4.58,7.39v30c0,4.7-1.17,7.39-4.58,7.39s-4.7-2.7-4.7-7.39v-30Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M439.08,260.69h11V215.75c0-4.58,2.11-6.22,4.81-6.22,3.4,0,4.22,2.23,4.22,5.28v45.89h11v-48c0-8.69-4.81-11.62-10.33-11.62a11.37,11.37,0,0,0-6,1.53,10.92,10.92,0,0,0-4.23,4.11H449.4v-4.93H439.08v58.91Z" transform="translate(-78.84 -175.54)"/><path class="cls-2" d="M511.21,220.79v-9c0-7-4.34-10.68-12.56-10.68-9.86,0-15.25,3.52-15.25,14.67,0,8.1.12,9,8.92,16.55l2.46,2.11c6.34,5.4,6.69,6.34,6.69,12.67,0,4.69-.47,6.57-4.11,6.57-2.58,0-4.11-.94-4.11-4.58V241H482.93v8.33c0,8.57,4.69,12.09,13.14,12.09,11.74,0,15.73-4.34,15.73-15.84,0-8.57-1.64-11-10.21-18.54-7.39-6.45-7.86-6.81-7.86-12.79,0-4.11.82-5.4,3.75-5.4s3.87,1.76,3.87,6.34v5.63h9.86Z" transform="translate(-78.84 -175.54)"/></svg></a>
+
+						<a href="https://www.linkedin.com/in/jonasvanineveld/" id="linkedin_logo" target="_blank" title="My linkedin profile" data-track="LinkedIn profiel" data-track-type="external-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.86 76.25"><g id="layer1"><g id="g3019"><path id="path14" class="cls-1" d="M213.88,7.25a5.53,5.53,0,0,1,5.6-5.46h64.57a5.53,5.53,0,0,1,5.6,5.46V72.57a5.53,5.53,0,0,1-5.6,5.46H219.48a5.53,5.53,0,0,1-5.6-5.46V7.25Z" transform="translate(-1.79 -1.78)"/><path id="path16" d="M1.79,65.65H33.41V55.27H13.23V15.66H1.79v50Z" transform="translate(-1.79 -1.78)"/><path id="path18" d="M49.41,65.65V31.22H38V65.65H49.41ZM43.69,26.52c4,0,6.47-2.64,6.47-5.95s-2.48-5.95-6.4-5.95-6.47,2.57-6.47,5.95,2.48,5.95,6.32,5.95h0.07Z" transform="translate(-1.79 -1.78)"/><path id="path20" d="M54.73,65.65H66.17V46.42a7.83,7.83,0,0,1,.38-2.79,6.26,6.26,0,0,1,5.87-4.18c4.14,0,5.8,3.16,5.8,7.78V65.65H89.66V45.91c0-10.58-5.65-15.5-13.18-15.5a11.4,11.4,0,0,0-10.39,5.8h0.08v-5H54.73c0.15,3.23,0,34.43,0,34.43h0Z" transform="translate(-1.79 -1.78)"/><path id="path22" d="M105.8,15.66H94.36v50H105.8V54.49l2.86-3.6,9,14.76H131.7L116.65,44.28l13.18-14.54H116s-9.41,13-10.24,14.55V15.66h0Z" transform="translate(-1.79 -1.78)"/><path id="path24" d="M162.31,51.29a28,28,0,0,0,.38-4.5c0-8.9-4.52-17.94-16.41-17.94-12.72,0-18.6,10.06-18.6,19.19,0,11.29,7.15,18.34,19.65,18.34a35.58,35.58,0,0,0,13.33-2.28l-1.51-7.56A31.13,31.13,0,0,1,149,58.09c-5.35,0-10-2.19-10.39-6.87l23.72,0.07h0Zm-23.79-7.74c0.3-2.94,2.26-7.27,7.15-7.27,5.19,0,6.4,4.63,6.4,7.27H138.52Z" transform="translate(-1.79 -1.78)"/><path id="path26" d="M190.93,15.66V33h-0.15c-1.66-2.42-5.12-4-9.71-4-8.81,0-16.56,7.05-16.49,19.09,0,11.16,7,18.43,15.74,18.43,4.74,0,9.26-2.06,11.52-6h0.23l0.45,5.22h10.16c-0.15-2.42-.3-6.61-0.3-10.72V15.66H190.93Zm0,34.05a12.81,12.81,0,0,1-.23,2.5,6.74,6.74,0,0,1-6.7,5.36c-4.74,0-7.83-3.82-7.83-9.84,0-5.65,2.64-10.21,7.9-10.21a6.77,6.77,0,0,1,6.7,5.43,9.5,9.5,0,0,1,.15,2.06v4.7h0Z" transform="translate(-1.79 -1.78)"/><path id="path28" class="cls-2" d="M236.85,65.61V31.18H225.41V65.61h11.44Zm-5.72-39.13c4,0,6.47-2.64,6.47-5.95s-2.48-5.95-6.4-5.95-6.47,2.57-6.47,5.95,2.48,5.95,6.32,5.95h0.07Z" transform="translate(-1.79 -1.78)"/><path id="path30" class="cls-2" d="M243.18,65.61h11.44V46.38a7.84,7.84,0,0,1,.38-2.79,6.26,6.26,0,0,1,5.87-4.19c4.14,0,5.8,3.16,5.8,7.79V65.61h11.44V45.87c0-10.58-5.65-15.5-13.18-15.5a11.4,11.4,0,0,0-10.39,5.8h0.08v-5H243.18c0.15,3.23,0,34.43,0,34.43h0Z" transform="translate(-1.79 -1.78)"/></g></g></svg></a>
+
+						<a id="github_logo" href="https://github.com/krinkled" target="_blank" title="Jonas van Ineveld op GitHub" data-track="Github profiel" data-track-type="external-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360.18 97.41"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M69.37,41.69H39.11a1.42,1.42,0,0,0-1.41,1.41V57.9a1.42,1.42,0,0,0,1.41,1.42H50.91V77.71s-2.65.9-10,.9c-8.65,0-20.73-3.16-20.73-29.72S32.78,18.82,44.59,18.82c10.22,0,14.63,1.8,17.43,2.67a1.42,1.42,0,0,0,1.69-1.39L67.09,5.8a1.32,1.32,0,0,0-.54-1.1C65.41,3.88,58.47,0,40.93,0,20.73,0,0,8.6,0,49.92S23.73,97.41,43.73,97.41c16.56,0,26.6-7.08,26.6-7.08a1.22,1.22,0,0,0,.46-1.07V43.11A1.41,1.41,0,0,0,69.37,41.69Z"/><path class="cls-1" d="M225.36,5A1.41,1.41,0,0,0,224,3.53h-17A1.42,1.42,0,0,0,205.5,5V37.89H178.94V5a1.41,1.41,0,0,0-1.41-1.42h-17A1.42,1.42,0,0,0,159.08,5V94.13a1.42,1.42,0,0,0,1.41,1.43h17a1.42,1.42,0,0,0,1.41-1.43V56H205.5l0,38.14a1.42,1.42,0,0,0,1.41,1.43h17.08a1.42,1.42,0,0,0,1.41-1.43Z"/><ellipse class="cls-1" cx="90.54" cy="16.66" rx="10.99" ry="11.1"/><path class="cls-1" d="M100.31,75.32V34.15a1.42,1.42,0,0,0-1.41-1.42h-17a1.63,1.63,0,0,0-1.48,1.59v59c0,1.73,1.08,2.25,2.48,2.25H98.22c1.68,0,2.09-.82,2.09-2.28Z"/><path class="cls-1" d="M290.12,32.87H273.21a1.42,1.42,0,0,0-1.41,1.43V78a19.11,19.11,0,0,1-10.39,3.14c-6.1,0-7.72-2.77-7.72-8.74V34.29a1.42,1.42,0,0,0-1.41-1.43H235.12a1.42,1.42,0,0,0-1.41,1.43v41c0,17.73,9.88,22.07,23.48,22.07,11.15,0,20.15-6.16,20.15-6.16a35.81,35.81,0,0,0,.62,3.63,1.49,1.49,0,0,0,1.24.77l10.92,0a1.42,1.42,0,0,0,1.41-1.42V34.29A1.42,1.42,0,0,0,290.12,32.87Z"/><path class="cls-1" d="M336.35,30.86a31.8,31.8,0,0,0-16.14,4.29V5a1.41,1.41,0,0,0-1.41-1.42H301.71A1.41,1.41,0,0,0,300.3,5V94.13a1.42,1.42,0,0,0,1.41,1.43h11.86a1.41,1.41,0,0,0,1.24-.76,27.79,27.79,0,0,0,.72-4.11s7,6.62,20.22,6.62c15.53,0,24.44-7.88,24.44-35.37S346,30.86,336.35,30.86Zm-6.67,50.24a20.28,20.28,0,0,1-9.84-2.84V50a22.54,22.54,0,0,1,8.74-2.84c6.09-.55,12,1.29,12,15.82C340.53,78.33,337.88,81.36,329.68,81.11Z"/><path class="cls-1" d="M149.29,32.72H136.51l0-16.89c0-.64-.33-1-1.07-1H118c-.68,0-1,.3-1,.95V33.28s-8.73,2.11-9.32,2.28a1.42,1.42,0,0,0-1,1.36v11A1.42,1.42,0,0,0,108,49.31H117V75.69c0,19.6,13.75,21.52,23,21.52a38.89,38.89,0,0,0,10.15-1.67,1.32,1.32,0,0,0,.8-1.28V82.2a1.44,1.44,0,0,0-1.41-1.42c-.74,0-2.65.3-4.61.3-6.28,0-8.41-2.92-8.41-6.7s0-25.07,0-25.07h12.78a1.42,1.42,0,0,0,1.41-1.42V34.15A1.41,1.41,0,0,0,149.29,32.72Z"/></g></g></svg></a>
+
+					</div>
+
+				</div>
+			</div>
+			<div class="page" id="page-contact">
+				<div class="head">
+					<h2>Contact</h2>
+				</div>
+				<?php $site->get_template('contact-form'); ?>
+			</div>
+			<div class="page" id="page-projects">
+				<div class="head">
+					<h2>Projects</h2>
+				</div>
+				<div class="content">
+					<div class="project">
+						<a href="http://subtitleframe.com" id="subtitleframe" target="_blank" data-track="SubtitleFrame.com" data-track-type="project-link">
+							<div class="logo">
+								<?php echo $site->get_svg('logo-subtitleframe'); ?>
+							</div>
+						</a>
+					</div>
+					<div class="project">
+						<a href="http://www.bokbonapartments.com/" id="bokbonapts" target="_blank" data-track="Bokamba bonaire apartments" data-track-type="project-link">
+							<div class="logo">
+								<img src="resources/images/logo-bokbokapts.png" alt="" width="186" height="84" alt="Bokamba bonaire apartments">
+							</div>
+						</a>
+					</div>
+					<div class="project">
+						<a href="http://www.althera.nl/" id="althera" target="_blank" data-track="Althera" data-track-type="project-link">
+							<div class="logo">
+								<img src="resources/images/logo-althera.png" alt="" width="160" height="69" alt="Althera">
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="page" id="page-development">
+				<ul class="content">
+					<li>
+						<a href="/es6-moremenu" data-track="MoreMenu" data-track-type="development-link">
+							<strong>JS ES6 MoreMenu</strong>
+							<small>Will calculate how many menu items fit, and place the not-fitting ones in a "more" menu.</small>
+						</a>
+					</li>
+					<li>
+						<a href="/moremenu" data-track="MoreMenu" data-track-type="development-link">
+							<strong>jQuery.MoreMenu</strong>
+							<small>Will calculate how many menu items fit, and place the not-fitting ones in a "more" menu.</small>
+						</a>
+					</li>
+					<li>
+						<a href="/classcarousel" data-track="ClassCarousel" data-track-type="development-link">
+							<strong>jQuery.ClassCarousel</strong>
+							<small>A lightweight carousel class</small>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="page" id="page-no-js-used">
+				<div class="content">
+					<p>For this page i did not use any JavaScript :) (<small>only for analytics..</small>)<br>It's all html and css</p>
+					<p><a id="github_link" href="https://github.com/krinkled/jonasvanineveld.nl" data-track="Source code on Github" data-track-type="external-link">Check the source on github!</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<label id="no-js-used" for="trigger-page-no-js-used">No JavaScript used!</label>

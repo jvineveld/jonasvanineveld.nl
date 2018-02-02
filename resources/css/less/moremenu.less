@@ -1,0 +1,182 @@
+/**
+ * MoreMenu demo page
+ *
+ * @author Jonas van Ineveld
+ */
+ 
+@import "includes/_pages";
+
+#mm_demo
+{
+	width: 880px;
+	margin: 0 auto 50px;
+	border: 2px solid #555;
+	border-radius: 3px;
+	padding: 20px;
+	position: relative;
+	max-width: 100%;
+	user-select:none;
+	min-width: 416px;
+	max-width: 95vw;
+
+	ul
+	{
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+	}
+
+	.menu
+	{
+		font-size: 0;
+		border:1px solid #888;
+		border-radius: 3px;
+
+		> li
+		{
+			display: inline-block;
+			font-size: 15px;
+			line-height: 50px;
+
+			+ li::before
+			{
+				content: " ";
+				position: absolute;
+				top:10px;
+				bottom: 10px;
+				width: 1px;
+				left:-1;
+				background: #ccc;
+			}
+
+			&.has-subs
+			{
+				> a
+				{
+					&:after
+					{
+						content:" ";
+						border-left: 5px solid transparent;
+						border-right: 5px solid transparent;
+						border-top: 5px solid #333;
+						display: inline-block;
+						margin-left: 10px;
+					}
+				}
+			}
+
+			ul
+			{
+				position: absolute;
+				white-space: nowrap;
+				top: 100%;
+				left: 0;
+
+				background: #f2f2f2;
+				border-radius: 4px;
+				box-shadow: 1px 2px 2px rgba(0,0,0,.2);
+
+				display: none;
+
+				min-width: 100%;
+
+				li.has-subs
+				{
+					> a
+					{
+						position: relative;
+						padding-right: 30px;
+
+						&:after
+						{
+							content:" ";
+							border-top: 5px solid transparent;
+							border-bottom: 5px solid transparent;
+							border-left: 5px solid #333;
+							display: inline-block;
+							margin-left: 10px;
+
+							position: absolute;
+							top: 21px;
+    						right: 14px;
+						}
+					}
+				}
+
+				ul
+				{
+					top: 0;
+					left: 100%;
+				}
+			}
+		}
+
+
+		li
+		{
+			position: relative;
+			z-index: 10;
+
+			&:hover
+			{
+				> ul
+				{
+					display: block;
+				}
+			}
+		}
+
+	}
+
+	a
+	{
+		display: block;
+		padding: 0 20px;
+		text-decoration: none;
+	}
+
+	a:after{ display: none; }
+
+
+	#demo-sizing-bar
+	{
+		position: absolute; z-index: 1;
+		top: 50%;
+		margin-top: -30px;
+		right: -12px;
+		width: 22px;
+		height: 60px;
+		background: transparent;
+		cursor: col-resize;
+
+		&:before
+		{
+			content: " ";
+			position: absolute;
+			top: 26px;
+			left: 0px;
+			border-top:transparent 6px solid;
+			border-bottom:transparent 6px solid;
+			border-right:#aaa 6px solid;
+		}
+
+		&:after
+		{
+			content: " ";
+			position: absolute;
+			top: 26px;
+			right: 0px;
+			border-top:transparent 6px solid;
+			border-bottom:transparent 6px solid;
+			border-left:#aaa 6px solid;
+		}
+
+		&:hover
+		{
+			border-color: #333;
+
+			&:before{ border-right-color: #333; }
+			&:after{ border-left-color: #333; }
+		}
+	}
+}

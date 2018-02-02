@@ -1,0 +1,95 @@
+/**
+ * Fiddle frame
+ *
+ * @author Jonas van Ineveld
+ */
+
+.demo-fiddle
+{
+	border: 2px solid #1f2532;
+	border-radius: 3px;
+
+	+ .demo-fiddle
+	{
+		margin-top: 30px;
+	}
+
+	iframe
+	{
+		width: 100.1%; // removes the white line on the right edge in chrome
+		opacity: 1;
+		transition: opacity .3s;
+	}
+
+	button
+	{
+		float: right;
+		line-height: inherit;
+		background: none;
+		border:0;
+		color: inherit;
+		padding: 0;
+		margin: 0;
+
+		&:hover
+		{
+			background: none;
+		}
+
+		+ button
+		{
+			margin-right: 10px;
+		}
+
+		&.active
+		{
+			font-weight: bold;
+		}
+	}
+
+	.fiddle-head
+	{
+		background: #1f2532;
+		padding: 10px 10px;
+		line-height: 20px;
+		color: #abb9c2;
+		border-bottom: 1px solid #262e3d;
+	}
+
+	.fiddle-name
+	{
+		font-weight: bold;
+	}
+
+	.frame-wrapper
+	{
+		overflow: hidden;
+		background: #3d4658;
+	}
+
+	&.loading
+	{
+		iframe
+		{
+			opacity: 0;
+		}
+
+		.frame-wrapper
+		{
+			position: relative;
+
+			&:before
+			{
+				content: " ";
+				position: absolute;
+				top:50%; left:50%;
+				transform: translate(-50%, -50%);
+
+				width: 50px;
+				height: 50px;
+
+				background: url(/resources/images/preloader.svg);
+			}
+		}
+	}
+}

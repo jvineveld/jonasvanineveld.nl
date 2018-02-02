@@ -1,0 +1,17 @@
+/**
+ * usefull mixins
+ *
+ * @author Jonas van Ineveld
+ */
+
+.mobile(@rules) {
+    @media only screen and (max-width: @mobileWidth) {
+        @rules();
+    }
+}
+
+.tablet(@rules	) {
+    @media only screen and (max-width: @tabletWidth) {
+        @rules();
+    }
+}

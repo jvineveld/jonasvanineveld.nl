@@ -1,0 +1,121 @@
+/**
+ * ClassCarousel demo page
+ *
+ * @author Jonas van Ineveld
+ */
+
+@import "includes/_pages";
+
+.no-transition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.actions
+{
+	text-align: center;
+}
+
+iframe
+{
+	border:0;
+}
+
+#cc_demo
+{
+	@min_left: 20%;
+	@max_right: 60%;
+	@visible_items: 5;
+	@itemwidth: 100% / (@visible_items * 2);
+
+	.items
+	{
+		position: relative;
+
+		margin: 40px 0;
+		list-style-type: none;
+		padding: 0px;
+		height: 90px;
+
+		&:before
+		{
+			content:".hidden-left";
+			position: absolute;
+			top:-22px;
+			left:30px;
+
+			font-size: 12px;
+			font-family: 'courier new';
+		}
+
+		&:after
+		{
+			content:".hidden-right";
+			position: absolute;
+			top:-22px;
+			right:30px;
+
+			font-size: 12px;
+			font-family: 'courier new';
+		}
+	}
+
+	.item
+	{
+		position: absolute;
+		left: 0;
+		transition: all .4s;
+
+		width: @itemwidth;
+		padding-top: 2%;
+		padding-bottom: 2%;
+		border: 3px solid #597380;
+   		background: #607D8B;
+   		color: #21282b;
+		border-radius: 3px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		font-family: 'Montserrat', sans-serif;
+
+		&:after
+		{
+			position: absolute;
+			top:-30px; left:0; right: 0; display: block;
+			text-align: center;
+			padding: 4px;
+			font-size: 12px;
+			font-family: 'courier new';
+		}
+
+		&.loc_1:after{content: ".loc_1";}
+		&.loc_2:after{content: ".loc_2";}
+		&.loc_3:after{content: ".loc_3";}
+		&.loc_4:after{content: ".loc_4";}
+		&.loc_5:after{content: ".loc_5";}
+
+		&.hidden-left
+		{
+			left:-10%;
+			border-radius: 150px;
+		}
+
+		&.hidden-right
+		{
+			left:110%;
+			border-radius: 150px;
+		}
+	}
+
+	.item-loop (@i) when (@i > 0) {
+	    .item.loc_@{i} {
+			@left: (@max_right / (@visible_items)) * (@i - 1) + @min_left;
+	        left: @left;
+	    }
+	    .item-loop(@i - 1);
+	}
+	.item-loop(@visible_items);
+}

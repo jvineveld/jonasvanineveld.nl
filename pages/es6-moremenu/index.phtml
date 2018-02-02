@@ -1,0 +1,120 @@
+<?php global $site; ?>
+<div id="wrapper">
+
+	<section id="content">
+		<header>
+			<h1>ES6 MoreMenu</h1>
+			<span class="subline">
+				A EcmaScript6 MoreMenu module
+			</span>
+
+			<a title="ES6 MoreMenu JS" href="https://github.com/krinkled/es6-MoreMenu" class="btn" target="_blank" data-track="ES6 MoreMenu github link" data-track-type="external-link">Download on GitHub</a>
+		</header>
+
+		<div id="mm_demo">
+			<div class="demo-body">
+				<ul class="menu">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Projects</a></li>
+					<li class="has-subs">
+						<a href="#">Top line</a>
+						<ul>
+							<li><a href="#">Red products</a></li>
+							<li><a href="#">Blue products</a></li>
+						</ul>
+					</li>
+					<li class="has-subs">
+						<a href="#">Bottom line</a>
+						<ul>
+							<li><a href="#">Red products</a></li>
+							<li><a href="#">Blue products</a></li>
+						</ul>
+					</li>
+					<li class="has-subs">
+						<a href="#">Sweet line</a>
+						<ul>
+							<li><a href="#">Red products</a></li>
+							<li><a href="#">Blue products</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Service</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+			<span id="demo-sizing-bar"></span>
+		</div>
+	</section>
+
+	<section id="plugin-information">
+		<div class="side">
+			<ul class='toc'>
+				<li><a href="#introduction" title="">Introduction</a></li>
+				<li><a href="#how-it-works" title="">How it works</a></li>
+				<li><a href="#getting-started" title="">Getting started</a></li>
+				<li><a href="#examples" title="">Examples</a></li>
+				<li><a href="#faq" title="">FAQ</a></li>
+			</ul>
+		</div>
+		<div class="content-container">
+			<div id="introduction">
+				<h2 style="margin-top:0;">The easy fix for long horizontal menu's</h2>
+				<p style="font-size: 1.8rem; margin-top: 0;">With this plugin you can add more menu functionality to your website.</p>
+				<h2 id="how-it-works">How it works</h2>
+				<p>When the menu is initialized on a menu, it will check how many items fit on it's row. The not fitting items will be placed inside a 'more..' menu item. This way you wont have trouble making menu items fit on a small device.</p>
+			</div>
+			<div id="getting-started">
+				<h2>Getting started</h2>
+				<p>Use the plugin as follows:</p>
+				<pre><code lang="javascript">import {moreMenu} from "./es6-moremenu.js";
+
+var mm_menu = new moreMenu('#menu');</code></pre>
+				<div class="row">
+				<div class='col'>
+				<h2>Options</h2>
+				<dl>
+					<dt>more_link_contents</dt>
+					<dd>label of the 'more' menu item.</dd>
+					<dt>extra_offset</dt>
+					<dd>more whitespace on the right edge of the menubar</dd>
+				</dl>
+				</div>
+
+				<div class='col'>
+					<h2>Default configuration</h2>
+				<pre><code lang="javascript">var settings = {
+	more_link_contents: '&#x3C;a href=&#x22;#&#x22;&#x3E;More..&#x3C;/a&#x3E;',
+	extra_offset: 1
+};</code></pre>
+			</div></div></div>
+
+			<div id="examples">
+				<h2>Methods</h2>
+				<dl>
+					<dt>refresh_menu_items</dt>
+					<dd>With this method you can refresh the menu items array. When you have for instance created a new menu item with js after initialisation.</dd>
+					<dt>move_unfitting_items</dt>
+					<dd>Checks how many items fit, and moves the unfitting ones. When you change the width of the menu, you should call this method to update the menu.</dd>
+				</dl>
+			</div>
+
+			<div id="examples">
+				<h2>Events</h2>
+				<p>These are triggerd on the element on which the plugin is initialized.</p>
+				<dl>
+					<dt>mm_initialized</dt>
+					<dd>This event is triggerd when the more menu has been constructed.</dd>
+					<dt>mm_moved_items</dt>
+					<dd>This event is called each time the class has been updated.</dd>
+				</dl>
+			</div>
+
+			<div id="faq">
+				<h2>Frequently asked questions</h2>
+				<p>None yet actualy, but i would love to hear your questions or feedback.</p>
+				<a href="/#!/contact">Leave your questions and/or feedback here.</a>
+			</div>
+		</div>
+	</section>
+</div>

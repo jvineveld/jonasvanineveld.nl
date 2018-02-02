@@ -1,0 +1,68 @@
+<?php
+global $site;
+$site->get_template('footer'); ?>
+
+<link rel="stylesheet" href="/resources/js/vendor/highlight/styles/default.css">
+
+<script src="/resources/js/vendor/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/resources/js/vendor/highlight/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="/pages/moremenu/resources/js/jquery.moremenu.js" type="text/javascript" charset="utf-8"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+
+	// TOC scroll anchor animation
+	$(document).on('click', '.toc a', function(e){
+		var rulerHeight = 20,
+			offset = 20,
+			$el = $($(this).attr('href'));
+
+		if($el.length)
+		{
+			e.preventDefault();
+			$('html, body').animate({ scrollTop: $el.offset().top - (rulerHeight + offset) }, 600);
+		}
+	});
+
+	var mm_menu = $('#mm_demo .menu').moreMenu();
+
+	var mm_demo = function(){
+		var $frame = $('#mm_demo'),
+			$resize_el = $('#demo-sizing-bar'),
+			is_resizing = false;
+
+		function resizing(e){
+			if(is_resizing)
+			{
+				var frame_pos_x = $frame.offset().left,
+					frame_width = $frame.width(),
+					mouse_pos_x = e.clientX - 40;
+
+				$frame.width(mouse_pos_x-frame_pos_x)
+				mm_menu.move_unfitting_items()
+			}
+		}
+
+		function start_resizing(){
+			is_resizing = true;
+		}
+
+		function stop_resizing(){
+			is_resizing = false;
+		}
+
+		function init(){
+			$resize_el.on('mousedown', start_resizing);
+			$(document).on('mousemove', mm_menu.throttle(resizing, 30));
+			$(document).on('mouseup', stop_resizing);
+		}
+
+		init();
+	}
+
+	new mm_demo();
+
+</script>
+
+<!-- <script src="/resources/js/combined.js?v=1.0" type="text/javascript" charset="utf-8" defer></script> -->
