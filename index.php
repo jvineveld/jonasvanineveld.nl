@@ -18,7 +18,7 @@
 			- SSL certificate
 
 	Check the source code on my github!
-	https://github.com/krinkled/jonasvanineveld.nl
+	https://github.com/jvineveld/jonasvanineveld.nl
 -->
 <html>
 <head>
