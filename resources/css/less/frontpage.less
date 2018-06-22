@@ -132,6 +132,10 @@ h1{ font-size: 32px; }
 	align-items: center;
 	justify-content: center;
 
+	opacity: 0;
+	animation: simple-fade-in .3s forwards;
+	animation-delay: .2s;
+
 	.mobile({
 		padding-top: 20px;
 		padding-bottom: 70px;
@@ -929,10 +933,87 @@ svg#envelope
 	}
 }
 
-#xlii_logo
+#cv_download
 {
 	cursor: pointer;
+
+	position: absolute;
+	top: 100%; left: 50%;
+	margin-top: 30px;
+	width: 130px;
+	margin-left: -65px;
+
+	z-index: -1;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	text-decoration: none;
+
+	opacity: 0;
+	animation: simple-fade-in .3s forwards ease-out;
+	animation-delay: .4s;
+
+	#cv_icon
+	{
+		width: 30px;
+		height: 39px;
+
+		path
+		{
+			fill: #888;
+		}
+	}
+
+	#hover-line
+	{
+		position: absolute;
+		top:-3px; right: -25px;
+		width:140px;
+		height: 40px;
+
+		path
+		{
+			stroke: #888;
+			stroke-dasharray: 240;
+			stroke-dashoffset: 240;
+		}
+	}
+
+	span
+	{
+		font-weight: bold;
+		font-size: 20px;
+		color: #888;
+	}
+
+	&:hover{
+		span{
+			color: #666;
+		}
+
+		#cv_icon
+		{	
+			path{
+				fill: #666;
+			}
+		}
+
+		#hover-line
+		{
+			path
+			{
+				animation: dash .7s forwards cubic-bezier(0.51, 0.01, 0, 0.99);
+			}
+		}
+	}
 }
+
+@keyframes dash {
+	to {
+	  stroke-dashoffset: 0;
+	}
+  }
 
 #linkedin_logo
 {
