@@ -44,16 +44,19 @@
 			if(name=='home')
 				return;
 
-			gtag('event', 'actions', { 'page_view': name });
+			gtag('event', 'actions', {
+				'event_category' : 'page_view',
+				'event_label' : name
+			});
 		}
 
 		function track_click(event){
-			var link = event.currentTarget,
-				obj = {}
+			var link = event.currentTarget;
 
-			obj[link.getAttribute("data-track-type")] = link.getAttribute("data-track");
-
-			gtag('event', 'clicks', obj);
+			gtag('event', 'clicks', {
+				'event_category' : link.getAttribute("data-track-type"),
+				'event_label' : link.getAttribute("data-track")
+			});
 		}
 
 		function set_listeners(){
