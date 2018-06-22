@@ -3,7 +3,7 @@
  */
 
 import moreMenu from "./es6-moremenu.js";
-import scrollTo from "./scrollto.js";
+import scrollTo from "./scrollto.js"; /* used for page functionality, not for demo */
 
 function mm_demo(){
 	var $frame = document.getElementById('mm_demo'),

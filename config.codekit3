@@ -158,6 +158,16 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/pages\/es6-moremenu\/resources\/js\/es5-notice.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/pages\/es6-moremenu\/resources\/js\/min\/es5-notice-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/pages\/es6-moremenu\/resources\/js\/es6-moremenu.js": {
 		"ft": 64,
 		"ma": 0,
@@ -166,6 +176,16 @@
 		"oAP": "\/pages\/es6-moremenu\/resources\/js\/min\/es6-moremenu-min.js",
 		"oF": 1,
 		"sC": 1,
+		"tS": 1
+		},
+	"\/pages\/es6-moremenu\/resources\/js\/min\/es5-notice-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/pages\/es6-moremenu\/resources\/js\/min\/min\/es5-notice-min-min.js",
+		"oF": 0,
+		"sC": 0,
 		"tS": 0
 		},
 	"\/pages\/es6-moremenu\/resources\/js\/min\/es6-moremenu-min.js": {
@@ -712,6 +732,16 @@
 		"mi": 1,
 		"oA": 1,
 		"oAP": "\/resources\/js\/min\/form-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/resources\/js\/min\/nice-fiddle-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/resources\/js\/min\/min\/nice-fiddle-min-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0

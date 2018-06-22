@@ -8,7 +8,6 @@
 			$frame = $('<iframe />');
 
 		var fiddle_id = $fiddle.data('id'),
-			fiddle_version = $fiddle.data('version'),
 			fiddle_height = $fiddle.data('height');
 
 		var frame_url = 'https://jsfiddle.net/krinkled/'+fiddle_id+'/embedded/result,html,js,css/dark/';

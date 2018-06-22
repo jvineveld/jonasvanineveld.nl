@@ -1,0 +1,1 @@
+!function($){function t(t){var e=$(t),d=$("<iframe />"),a=e.data("id"),i=e.data("height"),n="https://jsfiddle.net/krinkled/"+a+"/embedded/result,html,js,css/dark/";d.attr("src",n).attr("width","100%").attr("height",i),d.appendTo(e.find(".frame-wrapper")),d.on("load",function(){e.removeClass("loading")})}$(".demo-fiddle").each(function(){t(this)})}(jQuery);
