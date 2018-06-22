@@ -7,7 +7,7 @@
 		"uuidString": "3E1C1BB7-0C45-48F4-823D-1191AFE59DB4"
 		}
 	],
-"creatorBuild": "26148",
+"creatorBuild": "26680",
 "files": {
 	"\/.gitignore": {
 		"cB": 0,
@@ -535,11 +535,38 @@
 		"oF": 0,
 		"oS": 3
 		},
+	"\/resources\/curriculum-vitae.pdf": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/resources\/curriculum-vitae.pdf",
+		"oF": 0
+		},
 	"\/resources\/images\/adress-card.svg": {
 		"ft": 2097152,
 		"miP": 0,
 		"oA": 2,
 		"oAP": "\/resources\/images\/adress-card.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"\/resources\/images\/cv.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "\/resources\/images\/cv.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"\/resources\/images\/cv_download_line.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "\/resources\/images\/cv_download_line.svg",
 		"oF": 0,
 		"opt": 0,
 		"plM": 3758088159,
@@ -600,6 +627,7 @@
 	"\/resources\/images\/logo-bokbokapts.jpg": {
 		"ft": 16384,
 		"iS": 17538,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/resources\/images\/logo-bokbokapts.jpg",
 		"oF": 0,
@@ -1373,6 +1401,7 @@
 	"\/resources\/js\/vendor\/highlight\/styles\/pojoaque.jpg": {
 		"ft": 16384,
 		"iS": 1186,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/resources\/js\/vendor\/highlight\/styles\/pojoaque.jpg",
 		"oF": 0,
@@ -1621,7 +1650,8 @@
 	"creationDate": 536366379,
 	"displayValue": "jonasvanineveld.nl",
 	"displayValueWasSetByUser": 1,
-	"iconImageName": "meme-angryPicard"
+	"iconImageName": "meme-angryPicard",
+	"iconImageWasSetByUser": 0
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -1629,6 +1659,7 @@
 	"animateCSSInjections": 1,
 	"autoBuildNewItems": 1,
 	"autoprefixerBrowserString": "> 1%, last 2 versions, Firefox ESR, Opera 12.1",
+	"autoprefixerEnableIEGrid": 0,
 	"babelAuxiliaryCommentAfter": "",
 	"babelAuxiliaryCommentBefore": "",
 	"babelConfigFileHandlingType": 0,
@@ -2192,6 +2223,10 @@
 		"id-match": {
 			"active": 0,
 			"optionString": "'^[a-z]+([A-Z][a-z]+)*$', {'properties': false, 'onlyDeclarations': true}"
+			},
+		"implicit-arrow-linebreak": {
+			"active": 0,
+			"optionString": "'beside'"
 			},
 		"indent": {
 			"active": 0,
@@ -3419,6 +3454,7 @@
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
+		"outputFormat": 0,
 		"quality": 100
 		},
 	"languageDefaultsJS": {
