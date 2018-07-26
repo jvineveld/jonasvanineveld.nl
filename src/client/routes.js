@@ -13,8 +13,8 @@ import JobTypes from './pages/job-types'
 export default 	() => (<BrowserRouterClass>
 	<Switch>
 		<Route path="/" exact component={Intro}/>
-		<Route path="/#about" exact component={About}/>
+		<Route path="/#wie-ik-ben" exact component={About}/>
 		<Route path="/#contact" exact component={Contact}/>
-		<Route path="/#job-types" exact component={JobTypes}/>
+		<Route path="/#wat-ik-doe" exact component={JobTypes}/>
 	</Switch>
 </BrowserRouterClass>)
