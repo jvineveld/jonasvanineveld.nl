@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Jonas van ineveld</title>
 
-	<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700" rel="stylesheet">
 	<link rel="stylesheet" href="/styles/css/index.css">
 </head>
 <body>
@@ -31,7 +31,7 @@
 				<p>Ik heb ervaring met het koppelen van MailChimp, Mail +, SugarCRM, ClockWise, Slack en de Google Cloud omgeving. </p>
 				<p>Zolang er een REST, Oauth, of andere API beschikbaar is, kan er gekoppeld worden :-)</p>
 
-				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				<button id="back-btn" title="Ga terug" onclick="show_tab(this, 'intro')"><span></span></button>
 			</article>
 
 			<article id="tab-plain-html">
@@ -61,45 +61,68 @@
 				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 			</article>
 			
+			<article id="tab-contact">
+					<h2>Contact</h2>
+					
+					<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				</article>
 		</section>
 	
 		<aside>
 			<nav>
-				<button type="button" onclick="show_tab('connectors')">Koppelen van systemen</button>
-				<button type="button" onclick="show_tab('plain-html')">Plain HTML templates</button>
-				<button type="button" onclick="show_tab('campain_pages')">Grafische visuals</button>
-				<button type="button" onclick="show_tab('cms')">WordPress & Magento 1/2</button>
-				<button type="button" onclick="show_tab('custom')">Maatwerk applicaties</button>
-				<button type="button" onclick="show_tab('optimisation')">Laadtijd & rendering optimalisatie</button>
+				<button type="button" onclick="show_tab(this, 'connectors')">Koppelen van systemen</button>
+				<button type="button" onclick="show_tab(this, 'plain-html')">Plain HTML templates</button>
+				<button type="button" onclick="show_tab(this, 'campain_pages')">Grafische visuals</button>
+				<button type="button" onclick="show_tab(this, 'cms')">WordPress & Magento 1/2</button>
+				<button type="button" onclick="show_tab(this, 'custom')">Maatwerk applicaties</button>
+				<button type="button" onclick="show_tab(this, 'optimisation')">Laadtijd & rendering optimalisatie</button>
 			</nav>
 		</aside>
 	</div>
+
+
+	<footer>
+		<span id="phone"></span> <span class="spacer">of</span> <button type="button" onclick="show_tab(this, 'contact')">stuur een bericht</button>
+	</footer>
 
 	<script>
 		var out_animation_time = 500;
 		var $prev_tab = document.getElementById('tab-intro');
 
 		function remove_active_classes(){
-			var buttons = document.querySelectorAll('[id^="tab"]')
-			for(var i=0; i<buttons.length; i++){
-				buttons[i].removeAttribute('data-active')
+			var tabs = document.querySelectorAll('[id^="tab"]')
+			for(var i=0; i<tabs.length; i++){
+				tabs[i].removeAttribute('data-active')
 			}
 		}
 
-		function show_tab(tab){
-			var $tab = document.getElementById('tab-'+tab)
+		function show_tab(el, tab){
+			
+			var _tab = tab ? tab : el,
+				$tab = document.getElementById('tab-'+_tab)
 
 			if($tab){
 				if($prev_tab) $prev_tab.setAttribute('data-active', 'out')
 
+				var buttons = document.querySelectorAll('aside button')
+
+				for(var i=0; i<buttons.length; i++){
+					buttons[i].removeAttribute('data-active')
+				}
+
+
+				if(_tab === tab) el.setAttribute('data-active', true)
+
 				setTimeout(function(){
 					remove_active_classes()
-					
+
 					$tab.setAttribute('data-active', true)
 					document.getElementById("main").classList = tab
 					$prev_tab = $tab
 				}, out_animation_time)
 			} 
+
+			console.log(this)
 		}
 
 		var animation_lines = ['h2'];
@@ -121,6 +144,9 @@
 		}
 
 		create_animation_lines()
+
+		var n = ['+31','(0)6','409','356','87'];
+		document.getElementById('phone').innerHTML = n.join(' ');
 
 	</script>
 

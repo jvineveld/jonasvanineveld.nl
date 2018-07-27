@@ -51,6 +51,7 @@ strong
 h1{ 
 	font-weight: normal;
 	color: #fff;
+	font-weight: 500;
 }
 
 #avatar
@@ -90,7 +91,7 @@ h2{
 		display: inline-block;
 	}
 
-	@for $i from 1 through 60 {
+	@for $i from 1 through 38 {
 		span:nth-child(#{$i}){
 			animation-delay: $i * .02s;
 		}		
@@ -146,6 +147,9 @@ aside
 		outline: none;
 
 		cursor: pointer;
+
+		background: url('/images/star.svg') left 0 top 50% no-repeat;
+		background-size: 25px 25px;
 	
 		&::before{
 			position: absolute;
@@ -156,12 +160,51 @@ aside
 			margin-top:-12.5px;
 			width: 25px;
 			height: 25px;
-			background: url('/images/star.svg');
+			background: url('/images/star-hover.svg') no-repeat 50% 50%;
+
+			opacity: 0;
+			transition: all .4s;
+		}
+
+		&::after{
+			position: absolute;
+			display: block;
+			content:" ";
+			left:0;
+			top:50%;
+			margin-top:-12.5px;
+			width: 25px;
+			height: 25px;
+			transition: all .4s;
+			opacity: 0;
+			transform: scale(1.8);
+			background: url('/images/star-full.svg') no-repeat 50% 50%;
 		}
 
 		&:hover
 		{
 			color: #fff;
+
+			&:before
+			{
+				opacity: 1;
+			}
+		}
+
+		&[data-active]
+		{
+			color: #fff;
+
+			&:before
+			{
+				opacity: 1;
+			}
+
+			&:after
+			{
+				transform: scale(1);
+				opacity: 1;
+			}
 		}
 	}
 }
@@ -249,6 +292,40 @@ aside
 			{
 				background: #fff;
 			}
+		}
+	}
+}
+
+footer
+{
+	position: fixed;
+	bottom: 40px;
+	left:0; width: 100%;
+	font-size: 20px;
+	font-weight: 500;
+
+	.spacer
+	{
+		margin: 0 40px;
+	}
+
+	button
+	{
+		background: none;
+		border: 1px solid #979797;
+		border-radius: 3px;
+		color: #fff;
+		font-size: inherit;
+		display: inline-block;
+		line-height: 22px;
+		padding: 3px 8px 6px;
+		font-weight: 500;
+
+		cursor: pointer;
+
+		&:hover
+		{
+			background: rgba(255,255,255,.1);
 		}
 	}
 }
