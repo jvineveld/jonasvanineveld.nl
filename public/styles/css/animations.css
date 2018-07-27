@@ -1,0 +1,67 @@
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translate(20px, 20px) scale(0.7); }
+  to {
+    opacity: 1;
+    transform: translate(0, 0); } }
+
+@keyframes line-out {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+@keyframes tab-in {
+  from {
+    opacity: 0;
+    transform: translate(0, -100px) scale(1.2); }
+  to {
+    opacity: 1;
+    transform: translate(0, 0); } }
+
+@keyframes tab-out {
+  from {
+    opacity: 1;
+    transform: translate(0, 0); }
+  to {
+    opacity: 0;
+    transform: translate(0, 100px) scale(1); } }
+
+@keyframes back-btn-in {
+  from {
+    transform: translate(-200px, 0); }
+  to {
+    transform: translate(0, 0); } }
+
+@keyframes back-btn-span-1-in {
+  from {
+    opacity: 0;
+    transform: rotate(-200deg) scale(0.9); }
+  to {
+    opacity: 1;
+    transform: rotate(45deg) scale(1); } }
+
+@keyframes back-btn-span-2-in {
+  from {
+    opacity: 0;
+    transform: rotate(-300deg) scale(0.9); }
+  to {
+    transform: rotate(-45deg) scale(1);
+    opacity: 1; } }
+
+@keyframes head-span-in {
+  from {
+    opacity: 0;
+    transform: translate(10px, -10px) scale(1); }
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1; } }
+
+@keyframes avatar-in {
+  from {
+    opacity: 0;
+    transform: translate(0, 30px) scale(1); }
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1; } }

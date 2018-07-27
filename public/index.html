@@ -1,16 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Jonas van Ineveld</title>
-	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans+Condensed:400,400i|IBM+Plex+Sans:100,100i,400,400i,700,700i|IBM+Plex+Serif:400,400i" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Jonas van ineveld</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/styles/css/index.css">
 </head>
-
 <body>
-    <div id="root"></div>
-</body>
+	<div class="wrapper">
+		<section id="main">
 
+			<article id="tab-intro" data-active>
+				<img id=avatar src=/images/avatar.png alt='Jonas van Ineveld' width=176 height=176 />
+
+				<header>
+					<h1>Ik ontwerp en realiseer <strong>digitale platformen</strong></h1>
+				</header>
+				<p>Zowel <strong>online</strong> als (intranet) <strong>bedrijfsapplicaties</strong>.</p>
+				<p>Ik houd van <strong>schone frontends</strong>, <strong>snelle laadtijden</strong><br /> en een <strong>super gebruikersgemak / -interface</strong></p>
+				<p>Ik werk voor zowel grote merken als nieuwe startups,<br /><strong>freelance</strong> en <strong>interim</strong>.</p>
+				<p>Ik ben een <strong>Pixel Perfectionist</strong></p>
+			</article>
+
+			<article id="tab-connectors">
+				<h2>Koppelen van Systemen</h2>
+				<p>Vaak wordt er binnen bedrijven met veel verschillende online platformen gewerkt. Als deze platformen niet goed op elkaar aansluiten kan dit lijden tot extra werkzaamheden als informatie dubbel invoeren, of informatie die verloren raakt door menselijke fouten.</p>
+				<p>Ik heb ervaring met het koppelen van MailChimp, Mail +, SugarCRM, ClockWise, Slack en de Google Cloud omgeving. </p>
+				<p>Zolang er een REST, Oauth, of andere API beschikbaar is, kan er gekoppeld worden :-)</p>
+
+				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+			</article>
+
+			<article id="tab-plain-html">
+				<h2>Plain HTML templates</h2>
+				<p>Minimale code en veel resultaat. Bij plain HTML templates werk ik enkel een statische document uit bestaande uit HTML, CSS (sass of less) en JavaScript. </p>
+				<p>Deze templates zijn niet helemaal functioneel, maar dienen als basis voor backend developers om hun code op aan te sluiten. </p>
+				<p>Ik schrijf HTML5 valide code, en zorg dat alles cross-browser lekker werkt.</p>
+				
+				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+			</article>
+
+			<article id="tab-cms">
+				<h2>WordPress & Magento 1/2</h2>
+				
+				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+			</article>
+
+			<article id="tab-custom">
+				<h2>Maatwerk applicaties</h2>
+				
+				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+			</article>
+		
+			<article id="tab-optimisation">
+				<h2>Laadtijd & rendering optimalisatie</h2>
+				
+				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+			</article>
+			
+		</section>
+	
+		<aside>
+			<nav>
+				<button type="button" onclick="show_tab('connectors')">Koppelen van systemen</button>
+				<button type="button" onclick="show_tab('plain-html')">Plain HTML templates</button>
+				<button type="button" onclick="show_tab('campain_pages')">Grafische visuals</button>
+				<button type="button" onclick="show_tab('cms')">WordPress & Magento 1/2</button>
+				<button type="button" onclick="show_tab('custom')">Maatwerk applicaties</button>
+				<button type="button" onclick="show_tab('optimisation')">Laadtijd & rendering optimalisatie</button>
+			</nav>
+		</aside>
+	</div>
+
+	<script>
+		var out_animation_time = 500;
+		var $prev_tab = document.getElementById('tab-intro');
+
+		function remove_active_classes(){
+			var buttons = document.querySelectorAll('[id^="tab"]')
+			for(var i=0; i<buttons.length; i++){
+				buttons[i].removeAttribute('data-active')
+			}
+		}
+
+		function show_tab(tab){
+			var $tab = document.getElementById('tab-'+tab)
+
+			if($tab){
+				if($prev_tab) $prev_tab.setAttribute('data-active', 'out')
+
+				setTimeout(function(){
+					remove_active_classes()
+					
+					$tab.setAttribute('data-active', true)
+					document.getElementById("main").classList = tab
+					$prev_tab = $tab
+				}, out_animation_time)
+			} 
+		}
+
+		var animation_lines = ['h2'];
+
+		function create_animation_lines(){
+			animation_lines.forEach(function(line){
+				var lines = document.querySelectorAll(line);
+
+				if(!lines.length)
+					return;
+				
+				for(var i=0; i<lines.length; i++){
+					$line = lines[i];
+					$line.innerHTML = $line.innerHTML.replace(/./g, function(match){
+						return '<span>'+match+'</span>';
+					})
+				}
+			})
+		}
+
+		create_animation_lines()
+
+	</script>
+
+</body>
 </html>

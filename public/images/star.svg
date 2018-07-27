@@ -1,0 +1,7 @@
+<svg width="25px" height="23px" viewBox="0 0 25 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="star" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-opacity="0.433169158">
+        <g id="Desktop" fill-rule="nonzero" stroke="#F5A623" stroke-width="3">
+            <path d="M17.8551191,19.8706891 L16.8323824,13.9076764 L21.1647647,9.68464727 L15.1775596,8.81465543 L12.5,3.38932719 L9.82244044,8.81465543 L3.83523526,9.68464727 L8.16761763,13.9076764 L7.14488089,19.8706891 L12.5,17.0553364 L17.8551191,19.8706891 Z" id="Star"></path>
+        </g>
+    </g>
+</svg>
