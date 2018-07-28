@@ -9,20 +9,22 @@
 	<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700" rel="stylesheet">
 	<link rel="stylesheet" href="/styles/css/index.css">
 </head>
-<body>
+<body class="no-js"><script>document.getElementsByTagName('body')[0].className = ''</script>
 	<div class="wrapper">
 		<section id="main">
 
 			<article id="tab-intro" data-active>
 				<img id=avatar src=/images/avatar.png alt='Jonas van Ineveld' width=176 height=176 />
 
-				<header>
-					<h1>Ik ontwerp en realiseer <strong>digitale platformen</strong></h1>
-				</header>
-				<p>Zowel <strong>online</strong> als (intranet) <strong>bedrijfsapplicaties</strong>.</p>
-				<p>Ik houd van <strong>schone frontends</strong>, <strong>snelle laadtijden</strong><br /> en een <strong>super gebruikersgemak / -interface</strong></p>
-				<p>Ik werk voor zowel grote merken als nieuwe startups,<br /><strong>freelance</strong> en <strong>interim</strong>.</p>
-				<p>Ik ben een <strong>Pixel Perfectionist</strong></p>
+				<div>
+					<header>
+						<h1>Ik ontwerp en realiseer <strong>digitale platformen</strong></h1>
+					</header>
+					<p>Zowel <strong>online</strong> als (intranet) <strong>bedrijfsapplicaties</strong>.</p>
+					<p>Ik houd van <strong>schone frontends</strong>, <strong>snelle laadtijden</strong><br /> en een <strong>super gebruikersgemak / -interface</strong></p>
+					<p>Ik werk voor zowel grote merken als nieuwe startups,<br /><strong>freelance</strong> en <strong>interim</strong>.</p>
+					<p>Ik ben een <strong>Pixel Perfectionist</strong></p>
+				</div>
 			</article>
 
 			<article id="tab-connectors">
@@ -31,7 +33,7 @@
 				<p>Ik heb ervaring met het koppelen van MailChimp, Mail +, SugarCRM, ClockWise, Slack en de Google Cloud omgeving. </p>
 				<p>Zolang er een REST, Oauth, of andere API beschikbaar is, kan er gekoppeld worden :-)</p>
 
-				<button id="back-btn" title="Ga terug" onclick="show_tab(this, 'intro')"><span></span></button>
+				<button class="back-btn" title="Ga terug" onclick="show_tab(this, 'intro')"><span></span></button>
 			</article>
 
 			<article id="tab-plain-html">
@@ -40,25 +42,43 @@
 				<p>Deze templates zijn niet helemaal functioneel, maar dienen als basis voor backend developers om hun code op aan te sluiten. </p>
 				<p>Ik schrijf HTML5 valide code, en zorg dat alles cross-browser lekker werkt.</p>
 				
-				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+			</article>
+
+			<article id="tab-visuals">
+				<h2>Grafische visuals</h2>
+				<p>Door websites heen, of op campagne pagina's wil je soms wat meer dan alleen een statische mooi design.</p>
+				<p>Goed gebruik transitities en animaties, kan een UX duidelijker en moderner maken.</p>
+				<p>Ik schrijf simpele animaties met behulp van CSS transities, animaties.</p>
+				<p>Uitgebreide animaties maak ik met behulp van GSAP.</p>
+				
+				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-cms">
 				<h2>WordPress & Magento 1/2</h2>
-				
-				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				<p>Afgelopen 7 jaar heb ik vele magento 1, 2 en wordpress website's uitgewerkt.</p>
+				<p>Ook het ontwikkelen van plugins / extensies / shortcodes voor deze CMS systemen is geen probleem.</p>
+				<p>Volledig maatwerk, of het aanpassen van bestaande thema's naar de look en feel van je brand.</p>
+				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-custom">
 				<h2>Maatwerk applicaties</h2>
-				
-				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				<p>Heb je een idee voor een interactieve applicatie? Ik help graag bij het uitdenken en ontwikkelen van jou idee.</p>
+				<p>Ik heb ervaring met meerdere interactieve frontend frameworks (react, angular), en heb met veel verschillende software omgevingen gewerkt.</p>
+				<p>Voorbeelden van applicaties:</p>
+
+				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 			</article>
 		
 			<article id="tab-optimisation">
 				<h2>Laadtijd & rendering optimalisatie</h2>
-				
-				<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				<p>De laadtijd van je website is extreem belangrijk voor een goede conversie. Maar behalve de laadtijd, is de gebruikerservaring na het laden ook belangrijk.</p>
+				<p>Scrolt alles lekker vloeiend? geen haperingen? Zijn de animaties soepel, en hoe is dat voor een oude android telefoon?</p>
+				<p>Een website kan nog zo mooi en slim gemaakt zijn, maar als het niet soepel werkt is de ervaring voor de gebruiker slecht.</p>
+				<p>In het verleden heb ik verschillende grote website's ge-optimaliseerd. </p>
+				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 			</article>
 			
 			<article id="tab-contact">
@@ -85,15 +105,49 @@
 						<button type="submit" class="outline" onclick="validateFields(this); return false;">Verzenden</button> <span id="validation-info"></span>
 					</form>
 					
-					<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+					<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 				</article>
 		</section>
 	
 		<aside>
+			<div class="social">
+				<a href="https://github.com/jvineveld" title="My github profile"><svg id="github_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 543.94 140.92" width="110" >
+					<defs>
+						<style>.cls-2{fill-rule:evenodd;}</style>
+					</defs>
+					<g>
+						<g>
+							<path class="cls-1" d="M253.12,67.91H222.86a1.42,1.42,0,0,0-1.41,1.41v14.8a1.42,1.42,0,0,0,1.41,1.42h11.81v18.39s-2.65.9-10,.9C216,104.83,204,101.67,204,75.1S216.54,45,228.34,45c10.22,0,14.63,1.8,17.43,2.67a1.42,1.42,0,0,0,1.69-1.39L250.84,32a1.32,1.32,0,0,0-.54-1.1c-1.14-.81-8.08-4.7-25.62-4.7-20.21,0-40.93,8.6-40.93,49.92s23.73,47.48,43.73,47.48c16.56,0,26.6-7.08,26.6-7.08a1.22,1.22,0,0,0,.46-1.07V69.32A1.41,1.41,0,0,0,253.12,67.91Z" />
+							<path class="cls-1" d="M409.11,31.17a1.41,1.41,0,0,0-1.4-1.42h-17a1.42,1.42,0,0,0-1.41,1.42V64.1H362.69V31.17a1.41,1.41,0,0,0-1.41-1.42h-17a1.42,1.42,0,0,0-1.41,1.42v89.18a1.42,1.42,0,0,0,1.41,1.43h17a1.42,1.42,0,0,0,1.41-1.43V82.2h26.56l0,38.14a1.42,1.42,0,0,0,1.41,1.43H407.7a1.42,1.42,0,0,0,1.41-1.43Z" />
+							<ellipse class="cls-1" cx="274.29" cy="42.87" rx="10.99" ry="11.1" />
+							<path class="cls-1" d="M284.07,101.53V60.37a1.42,1.42,0,0,0-1.41-1.42h-17a1.63,1.63,0,0,0-1.48,1.59v59c0,1.73,1.08,2.25,2.48,2.25H282c1.68,0,2.09-.82,2.09-2.28Z" />
+							<path class="cls-1" d="M473.88,59.08H457a1.42,1.42,0,0,0-1.41,1.43v43.73a19.11,19.11,0,0,1-10.39,3.14c-6.1,0-7.72-2.77-7.72-8.74V60.51A1.42,1.42,0,0,0,436,59.08H418.88a1.42,1.42,0,0,0-1.41,1.43v41c0,17.73,9.88,22.07,23.48,22.07,11.15,0,20.15-6.16,20.15-6.16a35.81,35.81,0,0,0,.62,3.63,1.49,1.49,0,0,0,1.24.77l10.92,0a1.42,1.42,0,0,0,1.41-1.42V60.51A1.42,1.42,0,0,0,473.88,59.08Z" />
+							<path class="cls-1" d="M520.1,57.08A31.8,31.8,0,0,0,504,61.36V31.17a1.41,1.41,0,0,0-1.41-1.42H485.46a1.41,1.41,0,0,0-1.41,1.42v89.18a1.42,1.42,0,0,0,1.41,1.43h11.86a1.41,1.41,0,0,0,1.24-.76,27.79,27.79,0,0,0,.72-4.11s7,6.62,20.22,6.62c15.53,0,24.44-7.88,24.44-35.37S529.71,57.08,520.1,57.08Zm-6.67,50.24a20.28,20.28,0,0,1-9.84-2.84V76.24a22.54,22.54,0,0,1,8.74-2.84c6.09-.55,12,1.29,12,15.82C524.28,104.55,521.63,107.57,513.43,107.32Z" />
+							<path class="cls-1" d="M333,58.94H320.26l0-16.89c0-.64-.33-1-1.07-1H301.75c-.68,0-1,.3-1,.95V59.49s-8.73,2.11-9.32,2.28a1.42,1.42,0,0,0-1,1.36v11a1.42,1.42,0,0,0,1.41,1.42h8.93v26.38c0,19.6,13.75,21.52,23,21.52a38.89,38.89,0,0,0,10.15-1.67,1.32,1.32,0,0,0,.8-1.28V108.42a1.44,1.44,0,0,0-1.41-1.42c-.74,0-2.65.3-4.61.3-6.28,0-8.41-2.92-8.41-6.7s0-25.07,0-25.07H333a1.42,1.42,0,0,0,1.41-1.42V60.36A1.41,1.41,0,0,0,333,58.94Z" />
+							<path class="cls-2 alt" d="M72.24,0A72.25,72.25,0,0,0,49.41,140.79c3.61.66,4.93-1.57,4.93-3.48,0-1.72-.06-6.26-.1-12.29-20.1,4.37-24.34-9.68-24.34-9.68-3.29-8.35-8-10.57-8-10.57-6.56-4.48.5-4.39.5-4.39,7.25.51,11.07,7.44,11.07,7.44,6.44,11,16.91,7.85,21,6,.66-4.67,2.52-7.85,4.59-9.66-16-1.82-32.91-8-32.91-35.7a27.92,27.92,0,0,1,7.44-19.39c-.74-1.83-3.22-9.17.71-19.12,0,0,6.07-1.94,19.87,7.41a68.48,68.48,0,0,1,36.17,0C104.13,28,110.18,30,110.18,30c3.94,9.95,1.46,17.29.72,19.12a27.88,27.88,0,0,1,7.43,19.39c0,27.75-16.89,33.86-33,35.65,2.59,2.23,4.9,6.64,4.9,13.38,0,9.66-.09,17.45-.09,19.82,0,1.93,1.3,4.18,5,3.47A72.25,72.25,0,0,0,72.24,0Z" />
+						</g>
+					</g>
+				</svg></a>
+				<a href="https://www.linkedin.com/in/jonasvanineveld/" title="My linkedIn profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.86 76.25" width="110" height="29">
+					<g>
+						<g>
+							<path d="M213.88,7.25a5.53,5.53,0,0,1,5.6-5.46h64.57a5.53,5.53,0,0,1,5.6,5.46V72.57a5.53,5.53,0,0,1-5.6,5.46H219.48a5.53,5.53,0,0,1-5.6-5.46V7.25Z" transform="translate(-1.79 -1.78)"></path>
+							<path d="M1.79,65.65H33.41V55.27H13.23V15.66H1.79v50Z" transform="translate(-1.79 -1.78)"></path>
+							<path d="M49.41,65.65V31.22H38V65.65H49.41ZM43.69,26.52c4,0,6.47-2.64,6.47-5.95s-2.48-5.95-6.4-5.95-6.47,2.57-6.47,5.95,2.48,5.95,6.32,5.95h0.07Z" transform="translate(-1.79 -1.78)"></path>
+							<path d="M54.73,65.65H66.17V46.42a7.83,7.83,0,0,1,.38-2.79,6.26,6.26,0,0,1,5.87-4.18c4.14,0,5.8,3.16,5.8,7.78V65.65H89.66V45.91c0-10.58-5.65-15.5-13.18-15.5a11.4,11.4,0,0,0-10.39,5.8h0.08v-5H54.73c0.15,3.23,0,34.43,0,34.43h0Z" transform="translate(-1.79 -1.78)"></path>
+							<path d="M105.8,15.66H94.36v50H105.8V54.49l2.86-3.6,9,14.76H131.7L116.65,44.28l13.18-14.54H116s-9.41,13-10.24,14.55V15.66h0Z" transform="translate(-1.79 -1.78)"></path>
+							<path d="M162.31,51.29a28,28,0,0,0,.38-4.5c0-8.9-4.52-17.94-16.41-17.94-12.72,0-18.6,10.06-18.6,19.19,0,11.29,7.15,18.34,19.65,18.34a35.58,35.58,0,0,0,13.33-2.28l-1.51-7.56A31.13,31.13,0,0,1,149,58.09c-5.35,0-10-2.19-10.39-6.87l23.72,0.07h0Zm-23.79-7.74c0.3-2.94,2.26-7.27,7.15-7.27,5.19,0,6.4,4.63,6.4,7.27H138.52Z" transform="translate(-1.79 -1.78)"></path>
+							<path d="M190.93,15.66V33h-0.15c-1.66-2.42-5.12-4-9.71-4-8.81,0-16.56,7.05-16.49,19.09,0,11.16,7,18.43,15.74,18.43,4.74,0,9.26-2.06,11.52-6h0.23l0.45,5.22h10.16c-0.15-2.42-.3-6.61-0.3-10.72V15.66H190.93Zm0,34.05a12.81,12.81,0,0,1-.23,2.5,6.74,6.74,0,0,1-6.7,5.36c-4.74,0-7.83-3.82-7.83-9.84,0-5.65,2.64-10.21,7.9-10.21a6.77,6.77,0,0,1,6.7,5.43,9.5,9.5,0,0,1,.15,2.06v4.7h0Z" transform="translate(-1.79 -1.78)"></path>
+							<path fill="#21243B" class="alt" d="M236.85,65.61V31.18H225.41V65.61h11.44Zm-5.72-39.13c4,0,6.47-2.64,6.47-5.95s-2.48-5.95-6.4-5.95-6.47,2.57-6.47,5.95,2.48,5.95,6.32,5.95h0.07Z" transform="translate(-1.79 -1.78)"></path>
+							<path fill="#21243B" class="alt" d="M243.18,65.61h11.44V46.38a7.84,7.84,0,0,1,.38-2.79,6.26,6.26,0,0,1,5.87-4.19c4.14,0,5.8,3.16,5.8,7.79V65.61h11.44V45.87c0-10.58-5.65-15.5-13.18-15.5a11.4,11.4,0,0,0-10.39,5.8h0.08v-5H243.18c0.15,3.23,0,34.43,0,34.43h0Z" transform="translate(-1.79 -1.78)"></path>
+						</g>
+					</g>
+				</svg></a>
+			</div>
 			<nav>
 				<button type="button" onclick="show_tab(this, 'connectors')">Koppelen van systemen</button>
 				<button type="button" onclick="show_tab(this, 'plain-html')">Plain HTML templates</button>
-				<button type="button" onclick="show_tab(this, 'campain_pages')">Grafische visuals</button>
+				<button type="button" onclick="show_tab(this, 'visuals')">Grafische visuals</button>
 				<button type="button" onclick="show_tab(this, 'cms')">WordPress & Magento 1/2</button>
 				<button type="button" onclick="show_tab(this, 'custom')">Maatwerk applicaties</button>
 				<button type="button" onclick="show_tab(this, 'optimisation')">Laadtijd & rendering optimalisatie</button>
@@ -105,6 +159,18 @@
 	<footer>
 		<span id="phone"></span> <span class="spacer">of</span> <button type="button" class="outline" onclick="show_tab(this, 'contact')">stuur een bericht</button>
 	</footer>
+
+	<div class="sounds">
+		<audio controls preload="true" id="tick_1" volume="0.1">
+			<source src="/sounds/select.wav"></source>
+		</audio>
+		<audio controls preload="true" id="tick_2" volume="0.1">
+			<source src="/sounds/new.wav"></source>
+		</audio>			
+		<audio controls preload="true" id="tick_3" volume="0.1">
+			<source src="/sounds/select3-short.mp3"></source>
+		</audio>	
+	</div>
 
 	<script>
 		var out_animation_time = 500;
@@ -157,7 +223,7 @@
 				
 				for(var i=0; i<lines.length; i++){
 					$line = lines[i];
-					$line.innerHTML = $line.innerHTML.replace(/./g, function(match){
+					$line.innerHTML = $line.innerHTML.replace('&amp;', '&').replace(/./g, function(match){
 						return '<span>'+match+'</span>';
 					})
 				}
@@ -185,7 +251,7 @@
 			{
 				el.parentElement.setAttribute('data-valid', 'filled')
 			}
-			else if(val.length === 0 && valid)
+			else if(val.length === 0 && valid !== true)
 			{
 				el.parentElement.removeAttribute('data-valid')
 
@@ -205,12 +271,18 @@
 				var $typeLabel = document.getElementById('email_phone_type'),
 					is_mail = isNaN(val[0]) && val[0] !== '+' ? true : false,
 					label = 'Email';
-
-					if(val.length > 6 && valid !== 'valid')
-						el.parentElement.setAttribute('data-valid', 'valid')
 					
 					if(!is_mail)
+					{
 						label = 'Telefoon';
+
+						if(val.length > 8 && valid !== 'valid')
+							el.parentElement.setAttribute('data-valid', 'valid')
+					}
+					else{
+						if(val.length > 6 && valid !== 'valid')
+							el.parentElement.setAttribute('data-valid', 'valid')
+					}
 
 					$typeLabel.innerHTML = label;
 					
@@ -225,7 +297,50 @@
 			}
 		}
 
-		show_tab('contact');
+		function add_sounds(){
+			var sounds = {
+				select: document.getElementById('tick_1'),
+				select2: document.getElementById('tick_3'),
+				activate: document.getElementById('tick_2'),
+				leave: document.getElementById('tick_2'),
+			}
+			
+			var tab_buttons = document.querySelectorAll('aside button');
+
+			for(var i=0; i<tab_buttons.length; i++){
+				var $button = tab_buttons[i]
+				$button.appendChild(sounds.select.cloneNode(true))
+				$button.appendChild(sounds.activate.cloneNode(true))
+
+				$button.addEventListener("mouseover", function( event ) {
+					var audioNode = event.target.childNodes[1];
+					audioNode.play()
+				})	
+				$button.addEventListener("click", function( event ) {
+					var audioNode = event.target.childNodes[2];
+					audioNode.play()
+				})	
+			}
+
+			var buttons = document.querySelectorAll('.back-btn, button.outline, .social a')
+
+			for(var i=0; i<buttons.length; i++){
+				var $button = buttons[i]
+				$button.appendChild(sounds.select2.cloneNode(true))
+				$button.appendChild(sounds.activate.cloneNode(true))
+
+				$button.addEventListener("mouseover", function( event ) {
+					var audioNode = event.target.childNodes[1];
+					audioNode.play()
+				})	
+				$button.addEventListener("click", function( event ) {
+					var audioNode = event.target.childNodes[2];
+					audioNode.play()
+				})	
+			}
+		}
+
+		add_sounds()
 	</script>
 
 </body>

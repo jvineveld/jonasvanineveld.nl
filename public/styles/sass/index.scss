@@ -55,6 +55,14 @@ h1{
 	font-weight: 500;
 }
 
+audio{ 
+	display: none;
+}
+
+button{
+	font-family: 'Maven Pro', sans-serif;
+}
+
 button.outline
 {
 	background: none;
@@ -64,7 +72,7 @@ button.outline
 	font-size: inherit;
 	display: inline-block;
 	line-height: 22px;
-	padding: 3px 8px 6px;
+	padding: 5px 8px;
 	font-weight: 500;
 
 	cursor: pointer;
@@ -101,6 +109,23 @@ h1
 	opacity: 0;
 	animation: line-in .3s forwards cubic-bezier(0.19, 1, 0.22, 1);
 	animation-delay: .6s;
+}
+
+[data-active='out']
+{	
+	@for $i from 1 through 10 {
+		p:nth-child(#{$i}), 
+		li:nth-child(#{$i}){
+			animation: line-out .3s forwards cubic-bezier(0.19, 1, 0.22, 1);
+			animation-delay: 0;
+		}
+	}
+
+	h1
+	{
+		animation: line-out .3s forwards cubic-bezier(0.19, 1, 0.22, 1);
+		animation-delay: 0;
+	}
 }
 
 h2{
@@ -144,7 +169,44 @@ article
 	}
 }
 
+.social
+{
+	text-align: left;
 
+	svg
+	{
+		max-width: 83px;
+	}
+
+	a
+	{
+		position: relative;
+		vertical-align: middle;
+		display: inline-block;
+		line-height: 0;
+		background: transparent;
+
+		+ a
+		{
+			margin-left: 35px;
+		}
+
+		svg
+		{
+			fill: #fff;
+			opacity: .4;
+			pointer-events: none;
+		}
+
+		&:hover
+		{
+			svg
+			{
+				opacity: 1;
+			}
+		}
+	}
+}
 
 aside
 {
@@ -159,7 +221,8 @@ aside
 		background: none;
 		border:0;
 		color: #9B9B9B;
-		font-size: 18px;
+		font-size: 1rem;
+		line-height: 1.6;
 		font-weight: bold;
 		height: 80px;
 		width: 100%;
@@ -245,9 +308,19 @@ aside
 	{
 		display: none;
 	}
+
+	article
+	{
+		max-width: 600px;
+	}
+
+	.back-btn
+	{
+		right:0;
+	}
 }
 
-#back-btn
+.back-btn
 {
 	position: absolute;
 	display: block;
@@ -267,6 +340,8 @@ aside
 		position: absolute;
 		width: 0;
 		height: 0;
+
+		pointer-events: none;
 
 		transition: transform .2s ease-out;
 		transform-origin: 50% 50%;
@@ -334,7 +409,7 @@ footer
 	position: fixed;
 	bottom: 40px;
 	left:0; width: 100%;
-	font-size: 20px;
+	font-size: 1.2rem;
 	font-weight: 500;
 
 	.spacer
@@ -342,3 +417,5 @@ footer
 		margin: 0 40px;
 	}
 }
+
+@import "responsive/general";

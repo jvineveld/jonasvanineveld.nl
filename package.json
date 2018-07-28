@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Personal website",
 	"scripts": {
-		"build-css": "node-sass-chokidar public/styles/sass -o public/styles/css",
+		"build-css": "node-sass-chokidar public/styles/sass/index.scss -o public/styles/css",
 		"watch-css": "npm run build-css && node-sass-chokidar public/styles/sass -o public/styles/css --watch --recursive",
 		"start": "node server.js"
 	},

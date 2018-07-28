@@ -1,6 +1,7 @@
 form ul {
   list-style-type: none;
-  padding: 0; }
+  padding: 0;
+  margin-top: 40px; }
   form ul li {
     position: relative;
     margin: 0 0 30px; }
@@ -8,9 +9,19 @@ form ul {
       position: absolute;
       right: 100%;
       margin-right: 20px;
-      top: 0;
+      top: 3px;
       font-weight: bold;
-      opacity: 0; }
+      opacity: 0;
+      transform: translate(20px, 0);
+      transition: all .3s;
+      font-size: 14px; }
+
+form label[data-valid] span {
+  opacity: 1;
+  transform: translate(0, 0); }
+
+form label[data-valid="valid"] span {
+  color: #1fde1f; }
 
 form input, form textarea {
   width: 100%;
@@ -21,8 +32,42 @@ form input, form textarea {
   border-radius: 3px;
   font-size: 14px;
   padding: 0 15px;
-  outline: none; }
+  outline: none;
+  transition: all .3s ease-out;
+  box-sizing: border-box; }
+  form input:focus, form textarea:focus {
+    border-color: #F5A623; }
 
 form textarea {
-  height: 150px;
-  padding: 10px 15px; }
+  height: 100px;
+  padding: 15px 15px; }
+  form textarea:focus {
+    height: 220px; }
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff;
+  opacity: 1;
+  /* Firefox */ }
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #fff; }
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #fff; }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #fff;
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px #464c7c inset;
+  transition: background-color 5000s ease-in-out 0s; }

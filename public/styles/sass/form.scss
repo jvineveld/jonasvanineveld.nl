@@ -1,3 +1,5 @@
+@import "variables";
+
 form
 {
 	ul
@@ -16,9 +18,12 @@ form
 				position: absolute;
 				right: 100%;
 				margin-right:20px;
-				top:0;
+				top:3px;
 				font-weight: bold;
 				opacity: 0;
+				transform: translate(20px, 0);
+				transition: all .3s;
+				font-size: 14px;
 			}
 
 
@@ -31,6 +36,7 @@ form
 			span
 			{
 				opacity: 1;
+				transform: translate(0, 0);
 			}
 		}
 
@@ -56,6 +62,7 @@ form
 		outline: none;
 
 		transition: all .3s ease-out;
+		box-sizing: border-box;
 
 		&:focus
 		{
