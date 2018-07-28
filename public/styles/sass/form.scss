@@ -1,0 +1,103 @@
+form
+{
+	ul
+	{
+		list-style-type: none;
+		padding:0;
+		margin-top: 40px;
+
+		li
+		{
+			position: relative;
+			margin: 0 0 30px;
+
+			span
+			{
+				position: absolute;
+				right: 100%;
+				margin-right:20px;
+				top:0;
+				font-weight: bold;
+				opacity: 0;
+			}
+
+
+		}
+	}
+
+	label
+	{
+		&[data-valid]{
+			span
+			{
+				opacity: 1;
+			}
+		}
+
+		&[data-valid="valid"]{
+			span
+			{
+				color: #1fde1f;
+			}
+		}
+	}
+
+	input, textarea
+	{
+		width: 100%;
+		height: 40px;
+		background: transparent;
+		border:1px solid #fff;
+		color: #fff;
+		border-radius: 3px;
+		font-size: 14px;
+		padding: 0 15px;
+
+		outline: none;
+
+		transition: all .3s ease-out;
+
+		&:focus
+		{
+			border-color: $cta_color;
+		}
+	}
+
+	textarea{
+		height: 100px;
+		padding: 15px 15px;
+
+		&:focus
+		{
+			height: 220px;
+		}
+	}
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #fff;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #fff;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #fff;
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px lighten($bg_color, 20%) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}

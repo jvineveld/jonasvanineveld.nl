@@ -63,6 +63,27 @@
 			
 			<article id="tab-contact">
 					<h2>Contact</h2>
+					<form action="/mail" onsubmit="validateFields(this); return false;">
+						<ul>
+							<li data-field="name">
+								<label>
+									<span>Naam</span>
+									<input type="text" placeholder="Wat is je naam?" onkeyup="validateInput(this, 'name')">
+								</label>
+							</li>
+							<li data-field="email">
+								<label>
+									<span id="email_phone_type">Email</span>
+									<input type="text" placeholder="Email of telefoon nummer" onkeyup="validateInput(this, 'contact')">
+								</label>
+							</li>
+							<li data-field="description"><label>
+								<span>Omschrijving</span>
+								<textarea name="desc" cols="30" rows="10" placeholder="Wat zou je willen weten?" onkeyup="validateInput(this, 'description')"></textarea>
+							</label></li>
+						</ul>
+						<button type="submit" class="outline" onclick="validateFields(this); return false;">Verzenden</button> <span id="validation-info"></span>
+					</form>
 					
 					<button id="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 				</article>
@@ -82,7 +103,7 @@
 
 
 	<footer>
-		<span id="phone"></span> <span class="spacer">of</span> <button type="button" onclick="show_tab(this, 'contact')">stuur een bericht</button>
+		<span id="phone"></span> <span class="spacer">of</span> <button type="button" class="outline" onclick="show_tab(this, 'contact')">stuur een bericht</button>
 	</footer>
 
 	<script>
@@ -147,7 +168,64 @@
 
 		var n = ['+31','(0)6','409','356','87'];
 		document.getElementById('phone').innerHTML = n.join(' ');
+		
+		function validateFields(e){
+			// e.preventDefault();
+			
+			var form = document.querySelector('form');
+			var data = new FormData(form);
+			console.log(data)
+		}
 
+		function validateInput(el, type){
+			var val = el.value,
+				valid = el.parentElement.dataset.valid
+
+			if(val.length > 0 && !valid)
+			{
+				el.parentElement.setAttribute('data-valid', 'filled')
+			}
+			else if(val.length === 0 && valid)
+			{
+				el.parentElement.removeAttribute('data-valid')
+
+				return;
+			}
+
+			switch(type){
+				case 'name':
+					if(val.length > 6 && valid !== 'valid')
+						el.parentElement.setAttribute('data-valid', 'valid')
+					else if(val.length > 0 && val.length < 6 && valid === 'valid')
+						el.parentElement.setAttribute('data-valid', 'filled')
+					return;
+				break;
+				case 'contact':
+
+				var $typeLabel = document.getElementById('email_phone_type'),
+					is_mail = isNaN(val[0]) && val[0] !== '+' ? true : false,
+					label = 'Email';
+
+					if(val.length > 6 && valid !== 'valid')
+						el.parentElement.setAttribute('data-valid', 'valid')
+					
+					if(!is_mail)
+						label = 'Telefoon';
+
+					$typeLabel.innerHTML = label;
+					
+					return;
+				break;
+				case 'desc':
+					if(val.length > 6 && valid !== 'valid')
+						el.parentElement.setAttribute('data-valid', 'valid')
+					
+					return;
+				break;
+			}
+		}
+
+		show_tab('contact');
 	</script>
 
 </body>
