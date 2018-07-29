@@ -452,11 +452,11 @@ article {
   text-align: left;
   max-width: 500px;
   margin: 0 auto;
-  min-height: 495px;
-  max-height: article [data-active];
-    max-height-display: block;
-    max-height-opacity: 0;
-    max-height-animation: tab-in 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+  min-height: 495px; }
+  article[data-active] {
+    display: block;
+    opacity: 0;
+    animation: tab-in 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
   article[data-active='out'] {
     animation: tab-out 0.3s ease-in forwards; }
   article h2 {
