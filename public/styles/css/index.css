@@ -326,124 +326,124 @@ h1 {
   animation: line-out 0.3s forwards cubic-bezier(0.19, 1, 0.22, 1);
   animation-delay: 0; }
 
-h2 span {
+[data-charanimate] span {
   opacity: 0;
   min-width: 8px;
   animation: head-span-in 0.3s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: inline-block; }
 
-h2 span:nth-child(1) {
+[data-charanimate] span:nth-child(1) {
   animation-delay: 0.02s; }
 
-h2 span:nth-child(2) {
+[data-charanimate] span:nth-child(2) {
   animation-delay: 0.04s; }
 
-h2 span:nth-child(3) {
+[data-charanimate] span:nth-child(3) {
   animation-delay: 0.06s; }
 
-h2 span:nth-child(4) {
+[data-charanimate] span:nth-child(4) {
   animation-delay: 0.08s; }
 
-h2 span:nth-child(5) {
+[data-charanimate] span:nth-child(5) {
   animation-delay: 0.1s; }
 
-h2 span:nth-child(6) {
+[data-charanimate] span:nth-child(6) {
   animation-delay: 0.12s; }
 
-h2 span:nth-child(7) {
+[data-charanimate] span:nth-child(7) {
   animation-delay: 0.14s; }
 
-h2 span:nth-child(8) {
+[data-charanimate] span:nth-child(8) {
   animation-delay: 0.16s; }
 
-h2 span:nth-child(9) {
+[data-charanimate] span:nth-child(9) {
   animation-delay: 0.18s; }
 
-h2 span:nth-child(10) {
+[data-charanimate] span:nth-child(10) {
   animation-delay: 0.2s; }
 
-h2 span:nth-child(11) {
+[data-charanimate] span:nth-child(11) {
   animation-delay: 0.22s; }
 
-h2 span:nth-child(12) {
+[data-charanimate] span:nth-child(12) {
   animation-delay: 0.24s; }
 
-h2 span:nth-child(13) {
+[data-charanimate] span:nth-child(13) {
   animation-delay: 0.26s; }
 
-h2 span:nth-child(14) {
+[data-charanimate] span:nth-child(14) {
   animation-delay: 0.28s; }
 
-h2 span:nth-child(15) {
+[data-charanimate] span:nth-child(15) {
   animation-delay: 0.3s; }
 
-h2 span:nth-child(16) {
+[data-charanimate] span:nth-child(16) {
   animation-delay: 0.32s; }
 
-h2 span:nth-child(17) {
+[data-charanimate] span:nth-child(17) {
   animation-delay: 0.34s; }
 
-h2 span:nth-child(18) {
+[data-charanimate] span:nth-child(18) {
   animation-delay: 0.36s; }
 
-h2 span:nth-child(19) {
+[data-charanimate] span:nth-child(19) {
   animation-delay: 0.38s; }
 
-h2 span:nth-child(20) {
+[data-charanimate] span:nth-child(20) {
   animation-delay: 0.4s; }
 
-h2 span:nth-child(21) {
+[data-charanimate] span:nth-child(21) {
   animation-delay: 0.42s; }
 
-h2 span:nth-child(22) {
+[data-charanimate] span:nth-child(22) {
   animation-delay: 0.44s; }
 
-h2 span:nth-child(23) {
+[data-charanimate] span:nth-child(23) {
   animation-delay: 0.46s; }
 
-h2 span:nth-child(24) {
+[data-charanimate] span:nth-child(24) {
   animation-delay: 0.48s; }
 
-h2 span:nth-child(25) {
+[data-charanimate] span:nth-child(25) {
   animation-delay: 0.5s; }
 
-h2 span:nth-child(26) {
+[data-charanimate] span:nth-child(26) {
   animation-delay: 0.52s; }
 
-h2 span:nth-child(27) {
+[data-charanimate] span:nth-child(27) {
   animation-delay: 0.54s; }
 
-h2 span:nth-child(28) {
+[data-charanimate] span:nth-child(28) {
   animation-delay: 0.56s; }
 
-h2 span:nth-child(29) {
+[data-charanimate] span:nth-child(29) {
   animation-delay: 0.58s; }
 
-h2 span:nth-child(30) {
+[data-charanimate] span:nth-child(30) {
   animation-delay: 0.6s; }
 
-h2 span:nth-child(31) {
+[data-charanimate] span:nth-child(31) {
   animation-delay: 0.62s; }
 
-h2 span:nth-child(32) {
+[data-charanimate] span:nth-child(32) {
   animation-delay: 0.64s; }
 
-h2 span:nth-child(33) {
+[data-charanimate] span:nth-child(33) {
   animation-delay: 0.66s; }
 
-h2 span:nth-child(34) {
+[data-charanimate] span:nth-child(34) {
   animation-delay: 0.68s; }
 
-h2 span:nth-child(35) {
+[data-charanimate] span:nth-child(35) {
   animation-delay: 0.7s; }
 
-h2 span:nth-child(36) {
+[data-charanimate] span:nth-child(36) {
   animation-delay: 0.72s; }
 
-h2 span:nth-child(37) {
+[data-charanimate] span:nth-child(37) {
   animation-delay: 0.74s; }
 
-h2 span:nth-child(38) {
+[data-charanimate] span:nth-child(38) {
   animation-delay: 0.76s; }
 
 article {
@@ -451,11 +451,12 @@ article {
   display: none;
   text-align: left;
   max-width: 500px;
-  margin: 0 auto; }
-  article[data-active] {
-    display: block;
-    opacity: 0;
-    animation: tab-in 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+  margin: 0 auto;
+  min-height: 495px;
+  max-height: article [data-active];
+    max-height-display: block;
+    max-height-opacity: 0;
+    max-height-animation: tab-in 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
   article[data-active='out'] {
     animation: tab-out 0.3s ease-in forwards; }
   article h2 {
@@ -619,7 +620,7 @@ footer {
   .wrapper {
     height: 93%; } }
 
-@media all and (max-height: 700px) {
+@media all and (max-height: 800px) {
   .wrapper {
     padding: 0 !important; }
   aside button {
@@ -699,8 +700,49 @@ footer {
     padding-bottom: 10px;
     bottom: auto;
     z-index: 20;
-    background: #21243B; } }
+    background: #21243B; }
+    footer .spacer {
+      margin: 0 20px; }
+  article {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #21243B;
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 100%; }
+    article#tab-intro {
+      position: relative;
+      width: auto;
+      height: auto;
+      padding: 0; }
+    article[data-active] {
+      z-index: 24; }
+  .back-btn,
+  #main.contact .back-btn {
+    top: 20px;
+    right: 20px; }
+  #tab-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    #tab-intro > div {
+      order: 1; }
+    #tab-intro #avatar {
+      order: 2;
+      margin-top: 30px; } }
 
 @media all and (max-width: 520px) {
   html {
     font-size: 16px; } }
+
+@media all and (max-width: 462px) {
+  footer .spacer {
+    display: none; }
+  footer #phone {
+    display: block;
+    margin-bottom: 10px; }
+  .wrapper {
+    padding-top: 130px; } }

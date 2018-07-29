@@ -128,7 +128,7 @@ h1
 	}
 }
 
-h2{
+[data-charanimate]{
 	span
 	{
 		opacity: 0;
@@ -151,6 +151,8 @@ article
 	text-align: left;
 	max-width: 500px;
 	margin: 0 auto;
+	min-height: 495px;
+	max-height: 
 
 	&[data-active]{
 		display: block;

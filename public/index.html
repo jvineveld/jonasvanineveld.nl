@@ -223,9 +223,13 @@
 				
 				for(var i=0; i<lines.length; i++){
 					$line = lines[i];
-					$line.innerHTML = $line.innerHTML.replace('&amp;', '&').replace(/./g, function(match){
+					$line.innerHTML = $line.innerHTML.replace('&amp;', '&').replace('<strong>', '*').replace('</strong>', '**').replace(/./g, function(match){
+						if(match==='*') return '<strong>';
+						if(match==='**') return '</strong>';
 						return '<span>'+match+'</span>';
 					})
+
+					$line.setAttribute('data-charanimate', 'true')
 				}
 			})
 		}
