@@ -83,7 +83,7 @@
 			
 			<article id="tab-contact">
 					<h2>Contact</h2>
-					<form action="/mail" onsubmit="validateFields(this); return false;">
+					<form action="" method="post" onsubmit="validateFields" id="contactform">
 						<ul>
 							<li data-field="name">
 								<label>
@@ -190,7 +190,7 @@
 
 			if($tab){
 				document.getElementById('main').setAttribute('data-trans-to', _tab)
-				
+
 				if($prev_tab) $prev_tab.setAttribute('data-active', 'out')
 
 				var buttons = document.querySelectorAll('aside button')
@@ -242,9 +242,11 @@
 		function validateFields(e){
 			// e.preventDefault();
 			
-			var form = document.querySelector('form');
+			var form = document.forms.contactform;
 			var data = new FormData(form);
-			console.log(data)
+			console.log(e, data)
+
+			return false;
 		}
 
 		function validateInput(el, type){

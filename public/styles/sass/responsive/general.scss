@@ -4,7 +4,7 @@
 	}
 }
 
-@media all and (max-height:800px){
+@media all and (max-height:670px){
 	.wrapper
 	{
 		padding: 0 !important;
@@ -32,6 +32,7 @@
 	article[data-active]
 	{
 		max-width: 700px;
+		min-height: 0;
 	}
 
 	.wrapper:before
@@ -48,8 +49,13 @@
 }
 
 @media all and (max-height:830px) and (max-width: 1344px){
-	.wrapper > aside {
-		flex: 0 0 30%;
+	.wrapper {
+		&:before{
+			display: none;
+		}
+		> aside {
+			flex: 0 0 30%;
+		}
 	}
 }
 
