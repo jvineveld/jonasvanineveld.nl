@@ -189,6 +189,8 @@
 				$tab = document.getElementById('tab-'+_tab)
 
 			if($tab){
+				document.getElementById('main').setAttribute('data-trans-to', _tab)
+				
 				if($prev_tab) $prev_tab.setAttribute('data-active', 'out')
 
 				var buttons = document.querySelectorAll('aside button')
@@ -223,9 +225,7 @@
 				
 				for(var i=0; i<lines.length; i++){
 					$line = lines[i];
-					$line.innerHTML = $line.innerHTML.replace('&amp;', '&').replace('<strong>', '*').replace('</strong>', '**').replace(/./g, function(match){
-						if(match==='*') return '<strong>';
-						if(match==='**') return '</strong>';
+					$line.innerHTML = $line.innerHTML.replace('&amp;', '&').replace(/./g, function(match){
 						return '<span>'+match+'</span>';
 					})
 

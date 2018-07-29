@@ -66,3 +66,35 @@
   to {
     transform: rotate(0) scale(1);
     opacity: 1; } }
+
+@keyframes aside-social-in {
+  from {
+    opacity: 0;
+    transform: translate(30px, 0); }
+  to {
+    transform: translate(0, 0);
+    opacity: 1; } }
+
+@keyframes aside-social-out {
+  from {
+    opacity: 1;
+    transform: translate(0, 0); }
+  to {
+    opacity: 0;
+    transform: translate(30px, 0); } }
+
+@keyframes aside-btn-in {
+  from {
+    opacity: 0;
+    transform: translate(0, 30px); }
+  to {
+    transform: translate(0, 0);
+    opacity: 1; } }
+
+@keyframes aside-btn-out {
+  from {
+    opacity: 1;
+    transform: translate(0, 0); }
+  to {
+    transform: translate(0, 30px);
+    opacity: 0; } }

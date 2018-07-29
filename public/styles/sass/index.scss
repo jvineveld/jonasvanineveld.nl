@@ -235,6 +235,9 @@ aside
 
 		background: url('/images/star.svg') left 0 top 50% no-repeat;
 		background-size: 25px 25px;
+
+		opacity: 0;
+		animation: aside-btn-in .4s ease-out forwards;
 	
 		&::before{
 			position: absolute;
@@ -293,6 +296,20 @@ aside
 			}
 		}
 	}
+
+	.social a{
+		opacity: 0;
+		animation: aside-social-in .4s ease-out forwards;
+
+		&:nth-child(1){ animation-delay: .8s }
+		&:nth-child(2){ animation-delay: 1s }
+	}
+
+	@for $i from 1 through 6 {
+		button:nth-child(#{$i}){
+			animation-delay: 1s + $i * .05s;
+		}		
+	}
 }
 
 #tab-intro
@@ -320,6 +337,32 @@ aside
 		right:0;
 	}
 }
+
+[data-trans-to="contact"] + aside 
+{
+	.social a{
+		animation: aside-social-out .3s ease-in forwards;
+		opacity: 1;
+	
+		@for $i from 1 through 2 {
+			&:nth-child(#{$i}){
+				animation-delay:  $i * .05s;
+			}		
+		}
+	}
+
+	button{
+		animation: aside-btn-out .3s ease-in forwards;
+		opacity: 1;
+	
+		@for $i from 1 through 6 {
+			&:nth-child(#{$i}){
+				animation-delay:  $i * .05s;
+			}		
+		}
+	}
+}
+
 
 .back-btn
 {
@@ -412,6 +455,10 @@ footer
 	left:0; width: 100%;
 	font-size: 1.2rem;
 	font-weight: 500;
+
+	animation: aside-btn-in .3s ease-out forwards;
+	animation-delay: .5s;
+	opacity: 0;
 
 	.spacer
 	{
