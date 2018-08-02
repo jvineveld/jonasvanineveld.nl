@@ -13,8 +13,12 @@
 	<div class="wrapper">
 		<section id="main">
 
-			<article id="tab-intro" data-active>
-				<img id=avatar src=/images/avatar.png alt='Jonas van Ineveld' width=176 height=176 />
+			<article id=tab-intro data-active>
+				<div id=avatar>
+					<span class=deco></span>
+					<button id=start-game>Start <img src=/images/gamepad.svg></button>
+					<img src=/images/avatar.png alt='Jonas van Ineveld' width=176 height=176 />
+				</div>
 
 				<div>
 					<header>
@@ -38,7 +42,7 @@
 
 			<article id="tab-plain-html">
 				<h2>Plain HTML templates</h2>
-				<p>Minimale code en veel resultaat. Bij plain HTML templates werk ik enkel een statische document uit bestaande uit HTML, CSS (sass of less) en JavaScript. </p>
+				<p>Minimale code en veel resultaat. Bij plain HTML templates werk ik enkel een statisch document uit bestaande uit HTML, CSS (sass of less) en JavaScript. </p>
 				<p>Deze templates zijn niet helemaal functioneel, maar dienen als basis voor backend developers om hun code op aan te sluiten. </p>
 				<p>Ik schrijf HTML5 valide code, en zorg dat alles cross-browser lekker werkt.</p>
 				
@@ -47,19 +51,19 @@
 
 			<article id="tab-visuals">
 				<h2>Grafische visuals</h2>
-				<p>Door websites heen, of op campagne pagina's wil je soms wat meer dan alleen een statische mooi design.</p>
+				<p>Door websites heen, op campagne pagina's, of in banners wil je soms wat meer dan alleen een statische mooi design.</p>
 				<p>Goed gebruik transitities en animaties, kan een UX duidelijker en moderner maken.</p>
-				<p>Ik schrijf simpele animaties met behulp van CSS transities, animaties.</p>
-				<p>Uitgebreide animaties maak ik met behulp van GSAP.</p>
-				
+				<p>Ik schrijf simpele animaties met behulp van CSS transities en animaties.</p>
+				<p>Uitgebreide animaties maak ik met behulp van de javascript GSAP bibliotheek.</p>
 				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-cms">
 				<h2>WordPress & Magento 1/2</h2>
-				<p>Afgelopen 7 jaar heb ik vele magento 1, 2 en wordpress website's uitgewerkt.</p>
+				<p>Voor het beheer van de website wordt meestal een CMS systeem gebruikt.</p>
+				<p>Afgelopen 7 jaar heb ik vele magento 1, 2 en wordpress templates uitgewerkt.</p>
 				<p>Ook het ontwikkelen van plugins / extensies / shortcodes voor deze CMS systemen is geen probleem.</p>
-				<p>Volledig maatwerk, of het aanpassen van bestaande thema's naar de look en feel van je brand.</p>
+				<p>Heeft u een WordPress of Magento site waar u gave ideeën voor heeft? Neem dan vooral contact met me op.</p>
 				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
@@ -67,7 +71,14 @@
 				<h2>Maatwerk applicaties</h2>
 				<p>Heb je een idee voor een interactieve applicatie? Ik help graag bij het uitdenken en ontwikkelen van jou idee.</p>
 				<p>Ik heb ervaring met meerdere interactieve frontend frameworks (react, angular), en heb met veel verschillende software omgevingen gewerkt.</p>
-				<p>Voorbeelden van applicaties:</p>
+				<p>Denk bij maatwerk aan bijvoorbeeld:</p>
+				<ul>
+					<li>Een omgeving voor je medewerkers</li>
+					<li>Gemakkelijke registratie van specifieke werkzaamheden</li>
+					<li>Formulier funnels voor administratieve documenten</li>
+					<li>Automatische gemailde PDF rapporten</li>
+					<li>etc..</li>
+				</ul>
 
 				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
 			</article>
@@ -170,6 +181,15 @@
 		<audio controls preload="true" id="tick_3" volume="0.1">
 			<source src="/sounds/select3-short.mp3"></source>
 		</audio>	
+	</div>
+
+	<div id="background-video-wrapper">
+		<div class="video-container">
+			<video autoplay loop muted>
+				<source src="/videos/background.mp4" type="video/mp4" />
+				<!-- <source src="PATH_TO_WEBM" type="video/webm" /> -->
+			</video>
+		</div>
 	</div>
 
 	<script>
@@ -320,10 +340,12 @@
 
 				$button.addEventListener("mouseover", function( event ) {
 					var audioNode = event.target.childNodes[1];
+					audioNode.volume = 0.3;
 					audioNode.play()
 				})	
 				$button.addEventListener("click", function( event ) {
 					var audioNode = event.target.childNodes[2];
+					audioNode.volume = 0.3;
 					audioNode.play()
 				})	
 			}
@@ -337,10 +359,12 @@
 
 				$button.addEventListener("mouseover", function( event ) {
 					var audioNode = event.target.childNodes[1];
+					audioNode.volume = 0.3;
 					audioNode.play()
 				})	
 				$button.addEventListener("click", function( event ) {
 					var audioNode = event.target.childNodes[2];
+					audioNode.volume = 0.3;
 					audioNode.play()
 				})	
 			}

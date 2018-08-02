@@ -67,6 +67,36 @@
     transform: rotate(0) scale(1);
     opacity: 1; } }
 
+@keyframes avatar-before {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+@keyframes avatar-after {
+  0% {
+    transform: translate(0px, 7px); }
+  5% {
+    transform: translate(0px, 5px); }
+  13% {
+    transform: translate(0px, -5px); }
+  15% {
+    transform: translate(0px, 2px); }
+  35% {
+    transform: translate(0px, 8px); }
+  40% {
+    transform: translate(0px, -10px); }
+  45% {
+    transform: translate(0px, 0px); }
+  55% {
+    transform: translate(0px, -3px); }
+  70% {
+    transform: translate(0px, 5px); }
+  80% {
+    transform: translate(0px, 3px); }
+  100% {
+    transform: translate(0px, 7px); } }
+
 @keyframes aside-social-in {
   from {
     opacity: 0;
@@ -251,10 +281,95 @@ button.outline {
       transform: scale(1);
       transition: all .3s; }
 
+#background-video-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden; }
+  #background-video-wrapper .video-container {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; }
+  #background-video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  #background-video-wrapper:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: rgba(33, 36, 59, 0.7); }
+
 #avatar {
   opacity: 0;
   animation: avatar-in .3s ease-out forwards;
-  animation-delay: .3s; }
+  animation-delay: .3s;
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  display: inline-block; }
+  #avatar .deco {
+    display: block;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all .4s;
+    width: 176px;
+    height: 176px;
+    position: absolute;
+    top: 0;
+    left: 0; }
+    #avatar .deco:before {
+      content: " ";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -101px 0 0 -100px;
+      height: 202px;
+      width: 200px;
+      background: url("/images/avatar-hover.png");
+      transform-origin: 50% 50%;
+      z-index: -1;
+      transition: all .4s; }
+    #avatar .deco:after {
+      content: " ";
+      position: absolute;
+      left: 50%;
+      top: -40px;
+      margin-left: -18px;
+      height: 17px;
+      width: 36px;
+      background: url("/images/quadcopter.svg") no-repeat center center;
+      background-size: 36px auto;
+      z-index: -1;
+      border-radius: 50%;
+      transition: all .4s; }
+  #avatar #start-game {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #232323;
+    color: #fff;
+    z-index: 3; }
+  #avatar:hover .deco {
+    opacity: 1;
+    transform: scale(1); }
+    #avatar:hover .deco:before {
+      animation: avatar-before 5s infinite linear; }
+    #avatar:hover .deco:after {
+      animation: avatar-after 5s infinite linear; }
+  #avatar img {
+    max-width: 100%;
+    position: relative;
+    z-index: 2; }
 
 p:nth-child(1),
 li:nth-child(1) {
@@ -511,6 +626,20 @@ article {
   article h2 {
     margin-top: 0;
     line-height: 30px; }
+  article ul {
+    list-style-type: none; }
+    article ul li {
+      position: relative; }
+      article ul li:before {
+        position: absolute;
+        top: 50%;
+        left: -30px;
+        margin-top: -10px;
+        width: 20px;
+        height: 20px;
+        content: " ";
+        background: url("/images/chevron-right.svg") no-repeat center center;
+        background-size: 20px auto; }
 
 .social {
   text-align: left; }
@@ -689,16 +818,19 @@ aside {
     left: 0;
     width: 100%;
     height: 100%;
-    border: 2px solid #21243B;
+    border: 2px solid #fff;
     border-radius: 4px;
     box-sizing: border-box;
     transform: scale(1.3);
+    opacity: 0;
     transition: all .4s;
     transform-origin: 50% 50%; }
   .back-btn:hover span, .back-btn:focus span {
     transform: rotate(90deg); }
     .back-btn:hover span:before, .back-btn:hover span:after, .back-btn:focus span:before, .back-btn:focus span:after {
       background: #fff; }
+  .back-btn:focus:before {
+    opacity: .3; }
 
 footer {
   position: fixed;
