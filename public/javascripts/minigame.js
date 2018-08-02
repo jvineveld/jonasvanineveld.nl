@@ -29,9 +29,9 @@ var minigame = function(){
 	var stage = 1;
 	var avatar_hitcount = 0;
 	var avatar_hittarget = 4;
-	var num_astroids = 1;
+	var num_astroids = 10;
 	var astroids = [];
-	var astroid_speed = 2;
+	var astroid_speed = 12;
 	var keys = {
 		up: false,
 		down: false,
@@ -178,21 +178,36 @@ var minigame = function(){
 
 	function render_astroids(){
 		
+		astr_ctx.clearRect(0, 0, doc_width, doc_height);
 		for(var i=0; i<num_astroids; i++){
 			if(astroids.length - 1 < i){
 				astroids.push({
 					width: 200,
 					height: 100,
-					x: doc_width,
+					x: Math.round(doc_width + (i * doc_width / 2)),
 					y: Math.round(Math.random() * doc_height)
 				})
 			}
 			
-			var astroid = astroids[i];
-			astroids[i].x -= astroid_speed;
+			var astroid = astroids[i],
+				cur_astroid_speed = astroid_speed + (astroid_speed / 20 * i);
+			
+			if(astroid.x < 0)
+			{
+				astroids[i].x = doc_width;
+				astroids[i].y = Math.round(Math.random() * doc_height)
+			}
+			else
+			{
+				astroids[i].x -= cur_astroid_speed;
+			}
+
+			astr_ctx.restore();
 			astr_ctx.fillStyle = 'white';
 			astr_ctx.fillRect(astroid.x,astroid.y,astroid.width,astroid.height);
 			astr_ctx.setTransform(1, 0, 0, 1, 0, 0);
+			astr_ctx.save();
+
 		}
 
 		console.log(astroids, astr_ctx)
@@ -273,7 +288,6 @@ var minigame = function(){
 		rotate_angle = rotate_angle * drag;
 		can_ctx.rotate(rotate_angle * Math.PI / 180);
 		can_ctx.drawImage($quad, 0 - $quad.width / 2, 0 - $quad.height / 2);
-		
 		can_ctx.setTransform(1, 0, 0, 1, 0, 0);
 	}
 
