@@ -1,15 +1,21 @@
+/**
+ * JavaScript quadcopter minigame
+ * @author Jonas van Ineveld
+ */
+
 var minigame = function(){
 	var $body = document.getElementsByTagName('body')[0];
 	var $avatar = document.getElementById('avatar');
 	var $quad = new Image();
-	var quad_x, quad_y, quad_rot;
+	var quad_x, quad_y, quad_angle = 1, quad_move_angle = 0;
 	var doc_width, doc_height;
 	var $canvas;
 	var avatar_pos;
 	var can_ctx;
-	var momentum_x = 0;
-	var momentum_y = 0;
-	var drag = .5;
+	var momentum_x = 1;
+	var momentum_y = 1;
+	var gravity = 2.7;
+	var drag = .95;
 	var playing = false;
 	var keys = {
 		up: false,
@@ -47,35 +53,52 @@ var minigame = function(){
 	function checkInput(e){
 		e = e || window.event;
 
-		if (e.keyCode == '38') { keys.up = true; }
-		else if (e.keyCode == '40') { keys.down = true; }
-		else if (e.keyCode == '37') { keys.left = true; }
-		else if (e.keyCode == '39') { keys.right = true; }
-	}
+		var active =  e.type === 'keydown';
 
-	function uncheckInput(e){
-		e = e || window.event;
-
-		if (e.keyCode == '38') { keys.up = false; }
-		else if (e.keyCode == '40') { keys.down = false; }
-		else if (e.keyCode == '37') { keys.left = false; }
-		else if (e.keyCode == '39') { keys.right = false; }
+		if (e.keyCode == '38') { keys.up = active; }
+		else if (e.keyCode == '40') { keys.down = active; }
+		else if (e.keyCode == '37') { keys.left = active; }
+		else if (e.keyCode == '39') { keys.right = active; }
 	}
 
 	function check_key_directions(){
 		for(direction in keys){
-			console.log(direction)
+			if(keys[direction]){
+				switch(direction){
+					case "left": momentum_x -= 1;  break;
+					case "right": momentum_x += 1; break;
+					case "up": momentum_y -= 1; break;
+					case "down": momentum_y += 1; break;
+				}
+			}
 		}
+	}
+
+	function check_for_bounds(){
+		if(quad_x > doc_width)
+			quad_x = 0;
+		else if(quad_x < 0)
+			quad_x = doc_width;
+
+		if(quad_y > doc_height)
+			quad_y = 0;
+		else if(quad_y < 0)
+			quad_y = doc_height;
 	}
 
 	function loop(num){
 		if(playing){
 			check_key_directions();
 			can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
-			quad_x = quad_x;
+			momentum_x = momentum_x * drag;
+			momentum_y = momentum_y * drag;
+			quad_angle += quad_move_angle * Math.PI / 180;
+			quad_x += momentum_x * Math.sin(quad_angle);
+			quad_y += momentum_y * Math.cos(quad_angle) + gravity;
 			can_ctx.drawImage($quad, quad_x, quad_y);
-			console.log(num)
+			// console.log(num)
 			window.requestAnimationFrame(loop);
+			check_for_bounds()
 		}
 
 	}
@@ -90,8 +113,8 @@ var minigame = function(){
 		add_quad();
 
 		window.requestAnimationFrame(loop);
-		document.onkeydown = checkInput;
-		document.onkeyUp = uncheckInput;
+		document.addEventListener('keydown', checkInput);
+		document.addEventListener('keyup', checkInput);
 	}
 
 	init();
