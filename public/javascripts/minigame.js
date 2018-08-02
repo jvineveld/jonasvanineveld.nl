@@ -1,5 +1,7 @@
 /**
  * JavaScript quadcopter minigame
+ * 
+ * Created this just because drones are awesome.
  * @author Jonas van Ineveld
  */
 
@@ -9,13 +11,16 @@ var minigame = function(){
 	var $quad = new Image();
 	var quad_x, quad_y, quad_angle = 1, quad_move_angle = 0, quad_width = 30, quad_height = 20;
 	var doc_width, doc_height;
+	var canvases = [];
 	var $canvas;
+	var $astroid_canvas;
 	var avatar_pos;
 	var can_ctx;
+	var astr_ctx;
 	var rotate_angle = 0;
 	var momentum_x = 1;
 	var momentum_y = 1;
-	var gravity = 0;//2.7;
+	var gravity = 0;
 	var drag = .95;
 	var playing = true;
 	var going_down = false;
@@ -23,6 +28,9 @@ var minigame = function(){
 	var stage = 1;
 	var avatar_hitcount = 0;
 	var avatar_hittarget = 4;
+	var num_astroids = 10;
+	var astroids = [];
+	var astroid_speed = 2;
 	var keys = {
 		up: false,
 		down: false,
@@ -39,23 +47,36 @@ var minigame = function(){
 
 	var collision_boxes = []
 
+	function position_canvas($_canvas, z_index){
+		$_canvas.width = doc_width= document.body.clientWidth;
+		$_canvas.height = doc_height = document.body.clientHeight;
+		$_canvas.style.left = "0px";
+		$_canvas.style.top = "0px";
+		$_canvas.style.zIndex = z_index;
+		$_canvas.style.position = "absolute";
+	}
+
 	function set_size(){
-		$canvas.width = doc_width= document.body.clientWidth;
-		$canvas.height = doc_height = document.body.clientHeight;
-		$canvas.style.left = "0px";
-		$canvas.style.top = "0px";
-		$canvas.style.zIndex = 80;
-		$canvas.style.position = "absolute";
-
+		canvases.forEach(function(canvas){
+			position_canvas(canvas.$el, canvas.zindex);
+		})
+		
 		avatar_pos = $avatar.getBoundingClientRect()
-
-		set_collisions();
 	}
 
 	function set_canvas(){
 		$canvas = document.createElement('canvas');
 		document.body.appendChild($canvas);
 		can_ctx = $canvas.getContext('2d');
+
+		$astroid_canvas = document.createElement('canvas');
+		document.body.appendChild($astroid_canvas);
+		astr_ctx = $astroid_canvas.getContext('2d');
+
+		canvases.push({
+			$el: $canvas,
+			zindex: 60
+		})
 	}
 
 	function check_stage(){
@@ -151,6 +172,27 @@ var minigame = function(){
 		return has_collision;
 	}
 
+	function render_astroids(){
+		for(var i=0; i<num_astroids; i++){
+			if(astroids.length - 1 < i){
+				astroids.push({
+					width: 200,
+					height: 100,
+					x: doc_width,
+					y: Math.round(Math.random() * doc_height)
+				})
+			}
+			
+			var astroid = astroids[i];
+			astr_ctx.fillStyle = 'red';
+			astr_ctx.fillRect(astroid.x,astroid.y,astroid.width,astroid.heigth);
+			
+			astroids[i].x -= astroid_speed
+
+			console.log(astroids[i])
+		}
+	}
+
 	function add_quad(){
 		$quad.onload = function() {
 			quad_x = avatar_pos.x + 69;
@@ -230,11 +272,17 @@ var minigame = function(){
 
 	function loop(){
 		if(playing){
+			var down_force = gravity;
 			var active_keys = check_key_directions();
-			check_rotation(active_keys);
 			var collision = check_for_collision()
-			check_stage()
-			var down_force = gravity
+			
+			check_rotation(active_keys);
+
+			if(stage===4){
+				render_astroids();
+			}else{
+				check_stage()
+			}
 
 			if(collision){
 				momentum_x = momentum_x > 0 ? momentum_x : 0;
@@ -271,6 +319,7 @@ var minigame = function(){
 		set_canvas();
 		set_size();
 		add_quad();
+		set_collisions();
 
 		document.activeElement.blur()
 
@@ -287,8 +336,6 @@ var minigame = function(){
 var mg = false;
 function init_game(){ 
 	if(!mg) mg = minigame.apply({}) 
-
-	console.log('nu')
 }
 
 
