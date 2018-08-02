@@ -2,6 +2,7 @@
  * JavaScript quadcopter minigame
  * 
  * Created this just because drones are awesome.
+ * It all began so small, then i wanted to make it bigger..
  * @author Jonas van Ineveld
  */
 
@@ -28,7 +29,7 @@ var minigame = function(){
 	var stage = 1;
 	var avatar_hitcount = 0;
 	var avatar_hittarget = 4;
-	var num_astroids = 10;
+	var num_astroids = 1;
 	var astroids = [];
 	var astroid_speed = 2;
 	var keys = {
@@ -76,6 +77,9 @@ var minigame = function(){
 		canvases.push({
 			$el: $canvas,
 			zindex: 60
+		},{
+			$el: $astroid_canvas,
+			zindex: 62
 		})
 	}
 
@@ -173,6 +177,7 @@ var minigame = function(){
 	}
 
 	function render_astroids(){
+		
 		for(var i=0; i<num_astroids; i++){
 			if(astroids.length - 1 < i){
 				astroids.push({
@@ -184,13 +189,14 @@ var minigame = function(){
 			}
 			
 			var astroid = astroids[i];
-			astr_ctx.fillStyle = 'red';
-			astr_ctx.fillRect(astroid.x,astroid.y,astroid.width,astroid.heigth);
-			
-			astroids[i].x -= astroid_speed
-
-			console.log(astroids[i])
+			astroids[i].x -= astroid_speed;
+			astr_ctx.fillStyle = 'white';
+			astr_ctx.fillRect(astroid.x,astroid.y,astroid.width,astroid.height);
+			astr_ctx.setTransform(1, 0, 0, 1, 0, 0);
 		}
+
+		console.log(astroids, astr_ctx)
+		
 	}
 
 	function add_quad(){
@@ -267,6 +273,7 @@ var minigame = function(){
 		rotate_angle = rotate_angle * drag;
 		can_ctx.rotate(rotate_angle * Math.PI / 180);
 		can_ctx.drawImage($quad, 0 - $quad.width / 2, 0 - $quad.height / 2);
+		
 		can_ctx.setTransform(1, 0, 0, 1, 0, 0);
 	}
 
@@ -320,6 +327,7 @@ var minigame = function(){
 		set_size();
 		add_quad();
 		set_collisions();
+		enter_final_stage();
 
 		document.activeElement.blur()
 
