@@ -1,0 +1,47 @@
+#start-game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background: #232323;
+  z-index: 3;
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity .3s;
+  outline: none;
+  cursor: pointer; }
+  #start-game span {
+    display: none;
+    opacity: 0;
+    animation: game-btn-in 0.8s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  #start-game:before {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("/images/pattern.jpg");
+    background-size: 100% 100%;
+    border-radius: 50%;
+    opacity: .3;
+    animation: avatar-before 12s infinite linear;
+    animation-direction: reverse;
+    z-index: -1; }
+  #start-game img {
+    vertical-align: middle;
+    margin-left: 5px;
+    width: 4rem;
+    height: auto; }
+  #avatar:hover #start-game {
+    opacity: 1;
+    transition-duration: 1s; }
+    #avatar:hover #start-game span {
+      display: block;
+      animation-delay: .2s; }
+    #avatar:hover #start-game:before {
+      transform: scale(1); }

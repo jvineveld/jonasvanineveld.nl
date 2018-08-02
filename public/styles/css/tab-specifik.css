@@ -1,0 +1,91 @@
+#avatar {
+  opacity: 0;
+  animation: avatar-in .3s ease-out forwards;
+  animation-delay: .3s;
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  display: inline-block; }
+  #avatar .deco {
+    display: block;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all .4s;
+    width: 176px;
+    height: 176px;
+    position: absolute;
+    top: 0;
+    left: 0; }
+    #avatar .deco:before {
+      content: " ";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -101px 0 0 -100px;
+      height: 202px;
+      width: 200px;
+      background: url("/images/avatar-hover.png");
+      transform-origin: 50% 50%;
+      z-index: -1;
+      transition: all .4s; }
+    #avatar .deco:after {
+      content: " ";
+      position: absolute;
+      left: 50%;
+      top: -40px;
+      margin-left: -18px;
+      height: 17px;
+      width: 36px;
+      background: url("/images/quadcopter.svg") no-repeat center center;
+      background-size: 36px auto;
+      z-index: -1;
+      border-radius: 50%;
+      transition: all .4s; }
+  #avatar:hover .deco {
+    opacity: 1;
+    transform: scale(1); }
+    #avatar:hover .deco:before {
+      animation: avatar-before 5s infinite linear; }
+    #avatar:hover .deco:after {
+      animation: avatar-after 5s infinite linear; }
+  #avatar img {
+    max-width: 100%;
+    position: relative;
+    z-index: 2; }
+
+#tab-intro {
+  color: #fff;
+  text-align: center; }
+
+#main.contact {
+  flex: 0 0 100%; }
+  #main.contact + aside {
+    display: none; }
+  #main.contact article {
+    max-width: 600px; }
+  #main.contact .back-btn {
+    right: 0; }
+
+[data-trans-to="contact"] + aside .social a {
+  animation: aside-social-out .3s ease-in forwards;
+  opacity: 1; }
+  [data-trans-to="contact"] + aside .social a:nth-child(1) {
+    animation-delay: 0.05s; }
+  [data-trans-to="contact"] + aside .social a:nth-child(2) {
+    animation-delay: 0.1s; }
+
+[data-trans-to="contact"] + aside button {
+  animation: aside-btn-out .3s ease-in forwards;
+  opacity: 1; }
+  [data-trans-to="contact"] + aside button:nth-child(1) {
+    animation-delay: 0.05s; }
+  [data-trans-to="contact"] + aside button:nth-child(2) {
+    animation-delay: 0.1s; }
+  [data-trans-to="contact"] + aside button:nth-child(3) {
+    animation-delay: 0.15s; }
+  [data-trans-to="contact"] + aside button:nth-child(4) {
+    animation-delay: 0.2s; }
+  [data-trans-to="contact"] + aside button:nth-child(5) {
+    animation-delay: 0.25s; }
+  [data-trans-to="contact"] + aside button:nth-child(6) {
+    animation-delay: 0.3s; }

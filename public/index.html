@@ -16,7 +16,9 @@
 			<article id=tab-intro data-active>
 				<div id=avatar>
 					<span class=deco></span>
-					<button id=start-game>Start <img src=/images/gamepad.svg></button>
+					<button id=start-game onclick="new minigame()">
+						<span><img width="60px" src=/images/gamepad.svg></span>
+					</button>
 					<img src=/images/avatar.png alt='Jonas van Ineveld' width=176 height=176 />
 				</div>
 
@@ -192,6 +194,7 @@
 		</div>
 	</div>
 
+	<script src="/javascripts/minigame.js"></script>
 	<script>
 		var out_animation_time = 500;
 		var $prev_tab = document.getElementById('tab-intro');
