@@ -54,12 +54,6 @@ article
 {
 	text-align: left;
 
-	&:after{
-		content: "";
-		display: table-cell;
-		clear: both;
-	}
-
 	svg
 	{
 		max-width: 83px;
@@ -69,8 +63,7 @@ article
 	{
 		position: relative;
 		vertical-align: middle;
-		display: block;
-		float: left; // need to float for nice animation in the mini game
+		display: inline-block !important;
 		line-height: 0;
 		background: transparent;
 

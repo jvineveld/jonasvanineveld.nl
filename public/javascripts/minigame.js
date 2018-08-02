@@ -7,16 +7,17 @@ var minigame = function(){
 	var $body = document.getElementsByTagName('body')[0];
 	var $avatar = document.getElementById('avatar');
 	var $quad = new Image();
-	var quad_x, quad_y, quad_angle = 1, quad_move_angle = 0, quad_width = 30, quad_height = 20;
+	var quad_x, quad_y, quad_rotation = 'up', quad_angle = 1, quad_move_angle = 0, quad_width = 30, quad_height = 20;
 	var doc_width, doc_height;
 	var $canvas;
 	var avatar_pos;
 	var can_ctx;
+	var rotate_angle = 0;
 	var momentum_x = 1;
 	var momentum_y = 1;
 	var gravity = 2.7;
 	var drag = .95;
-	var playing = false;
+	var playing = true;
 	var going_down = false;
 	var prev_pos_y = 0;
 	var keys = {
@@ -84,7 +85,6 @@ var minigame = function(){
 			if (compare.within_box_x_right && compare.within_box_x_left && compare.within_box_y_bottom && compare.within_box_y_top) {
 					has_collision = true;
 
-					console.log(going_down)
 					if(!going_down){ // touching from bottom?
 						box.$el.setAttribute('touched', true)
 						var bottomTransform = doc_height - bounds.y - 100;
@@ -101,7 +101,8 @@ var minigame = function(){
 		$quad.onload = function() {
 			quad_x = avatar_pos.x + 69;
 			quad_y = avatar_pos.y - 40;
-			can_ctx.drawImage($quad, quad_x, quad_y);
+			
+			draw();
 		}
 		$quad.src = "/images/quadcopter.svg";
 	}
@@ -115,9 +116,12 @@ var minigame = function(){
 		else if (e.keyCode == '40') { keys.down = active; }
 		else if (e.keyCode == '37') { keys.left = active; }
 		else if (e.keyCode == '39') { keys.right = active; }
+
+		if(active && !playing) play_pause()
 	}
 
 	function check_key_directions(){
+		let active_keys = [];
 		for(direction in keys){
 			if(keys[direction]){
 				switch(direction){
@@ -126,7 +130,20 @@ var minigame = function(){
 					case "up": momentum_y -= 1; break;
 					case "down": momentum_y += 1; break;
 				}
+
+				active_keys.push(direction)
 			}
+		}
+
+		return active_keys;
+	}
+
+	function check_rotation(active_keys){
+		if(active_keys.includes('left')){
+			rotate_angle -= 4
+		}
+		if(active_keys.includes('right')){
+			rotate_angle += 4
 		}
 	}
 
@@ -142,9 +159,19 @@ var minigame = function(){
 			quad_y = doc_height;
 	}
 
+	function draw(){
+		can_ctx.clearRect(0, 0, doc_width, doc_height);
+		can_ctx.translate(Math.round(quad_x + $quad.width / 2), Math.round(quad_y + $quad.height / 2));
+		rotate_angle = rotate_angle * drag;
+		can_ctx.rotate(rotate_angle * Math.PI / 180);
+		can_ctx.drawImage($quad, 0 - $quad.width / 2, 0 - $quad.height / 2);
+		can_ctx.setTransform(1, 0, 0, 1, 0, 0);
+	}
+
 	function loop(num){
 		if(playing){
-			check_key_directions();
+			var active_keys = check_key_directions();
+			check_rotation(active_keys);
 			var collision = check_for_collision()
 			var down_force = gravity
 
@@ -154,7 +181,7 @@ var minigame = function(){
 				down_force = 0;
 			} 
 
-			can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
+			// can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
 			momentum_x = momentum_x * drag;
 			momentum_y = momentum_y * drag;
 			quad_angle += quad_move_angle * Math.PI / 180;
@@ -166,7 +193,7 @@ var minigame = function(){
 
 			console.log('going down', going_down)
 
-			can_ctx.drawImage($quad, quad_x, quad_y);
+			draw();
 			// console.log(num)
 			window.requestAnimationFrame(loop);
 			check_for_bounds()

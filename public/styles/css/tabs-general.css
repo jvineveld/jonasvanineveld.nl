@@ -31,17 +31,12 @@ article {
 
 .social {
   text-align: left; }
-  .social:after {
-    content: "";
-    display: table-cell;
-    clear: both; }
   .social svg {
     max-width: 83px; }
   .social a {
     position: relative;
     vertical-align: middle;
-    display: block;
-    float: left;
+    display: inline-block !important;
     line-height: 0;
     background: transparent; }
     .social a + a {
