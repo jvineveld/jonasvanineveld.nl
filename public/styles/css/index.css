@@ -411,17 +411,17 @@ li:nth-child(10) {
   5% {
     transform: translate(0px, 5px); }
   13% {
-    transform: translate(0px, -5px); }
+    transform: translate(0px, -5px) rotate(-10deg); }
   15% {
-    transform: translate(0px, 2px); }
+    transform: translate(0px, 2px) rotate(-5deg); }
   35% {
-    transform: translate(0px, 8px); }
+    transform: translate(0px, 8px) rotate(10deg); }
   40% {
     transform: translate(0px, -10px); }
   45% {
-    transform: translate(0px, 0px); }
+    transform: translate(0px, 0px) rotate(-10deg); }
   55% {
-    transform: translate(0px, -3px); }
+    transform: translate(0px, -3px) rotate(10deg); }
   70% {
     transform: translate(0px, 5px); }
   80% {

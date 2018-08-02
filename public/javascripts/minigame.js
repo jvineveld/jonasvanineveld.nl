@@ -168,7 +168,7 @@ var minigame = function(){
 		can_ctx.setTransform(1, 0, 0, 1, 0, 0);
 	}
 
-	function loop(num){
+	function loop(){
 		if(playing){
 			var active_keys = check_key_directions();
 			check_rotation(active_keys);
