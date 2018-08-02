@@ -596,6 +596,8 @@ select:-webkit-autofill:focus {
     #avatar:hover .deco:after,
     [game-active="true"] #avatar .deco:after {
       animation: avatar-after 5s infinite linear; }
+  [game-active="true"] #avatar .deco:after {
+    display: none; }
   #avatar img {
     max-width: 100%;
     position: relative;

@@ -68,6 +68,11 @@
 		}	
 	}
 
+	[game-active="true"] &
+	{
+		.deco:after{display: none;}
+	}
+
 	img
 	{
 		max-width: 100%;
