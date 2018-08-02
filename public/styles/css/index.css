@@ -663,6 +663,13 @@ select:-webkit-autofill:focus {
 [game-active="true"] #background-video-wrapper {
   display: none; }
 
+[game-active="true"] [collision-object] {
+  display: block;
+  animation: none;
+  animation-delay: 0;
+  opacity: 1 !important;
+  transition: all 1s ease-in; }
+
 #background-video-wrapper {
   position: fixed;
   top: 0;
@@ -722,12 +729,17 @@ article {
 
 .social {
   text-align: left; }
+  .social:after {
+    content: "";
+    display: table-cell;
+    clear: both; }
   .social svg {
     max-width: 83px; }
   .social a {
     position: relative;
     vertical-align: middle;
-    display: inline-block;
+    display: block;
+    float: left;
     line-height: 0;
     background: transparent; }
     .social a + a {

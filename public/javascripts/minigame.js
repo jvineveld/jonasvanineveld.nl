@@ -7,7 +7,7 @@ var minigame = function(){
 	var $body = document.getElementsByTagName('body')[0];
 	var $avatar = document.getElementById('avatar');
 	var $quad = new Image();
-	var quad_x, quad_y, quad_angle = 1, quad_move_angle = 0;
+	var quad_x, quad_y, quad_angle = 1, quad_move_angle = 0, quad_width = 30, quad_height = 20;
 	var doc_width, doc_height;
 	var $canvas;
 	var avatar_pos;
@@ -17,12 +17,23 @@ var minigame = function(){
 	var gravity = 2.7;
 	var drag = .95;
 	var playing = false;
+	var going_down = false;
+	var prev_pos_y = 0;
 	var keys = {
 		up: false,
 		down: false,
 		left: false,
 		right: false
 	}
+
+	var collision_elements = [
+		'h1', 
+		'#tab-intro p', 
+		'.social a',  
+		'aside nav button'
+	];
+
+	var collision_boxes = []
 
 	function set_size(){
 		$canvas.width = doc_width= document.body.clientWidth;
@@ -33,12 +44,57 @@ var minigame = function(){
 		$canvas.style.position = "absolute";
 
 		avatar_pos = $avatar.getBoundingClientRect()
+
+		set_collisions();
 	}
 
 	function set_canvas(){
 		$canvas = document.createElement('canvas');
 		document.body.appendChild($canvas);
 		can_ctx = $canvas.getContext('2d');
+	}
+
+	function set_collisions(){
+		collision_elements.forEach(function(element){
+			let $elements = document.querySelectorAll(element);
+			for(var i=0; i<$elements.length; i++){
+				let $element = $elements[i];
+				$element.setAttribute('collision-object', true)
+				collision_boxes.push({
+					$el: $element,
+					bounds: $element.getBoundingClientRect()
+				})
+			}
+		})
+
+		console.log('collision boxes', collision_boxes)
+	}
+
+	function check_for_collision(){
+		var has_collision = false;
+		var margin = 20;
+		collision_boxes.forEach(function(box, index){
+			var bounds = box.bounds;
+			var compare = {
+				within_box_x_right: quad_x < bounds.x + bounds.width,
+				within_box_x_left: quad_x + quad_width > bounds.x,
+				within_box_y_bottom: (quad_y - margin) < bounds.y + bounds.height ,
+				within_box_y_top: quad_height + quad_y - margin > bounds.y
+			}
+			if (compare.within_box_x_right && compare.within_box_x_left && compare.within_box_y_bottom && compare.within_box_y_top) {
+					has_collision = true;
+
+					console.log(going_down)
+					if(!going_down){ // touching from bottom?
+						box.$el.setAttribute('touched', true)
+						var bottomTransform = doc_height - bounds.y - 100;
+						box.$el.style.transform = 'translate(0, '+bottomTransform+'px)';
+						delete collision_boxes[index];
+					}
+			 }
+		});
+
+		return has_collision;
 	}
 
 	function add_quad(){
@@ -89,12 +145,27 @@ var minigame = function(){
 	function loop(num){
 		if(playing){
 			check_key_directions();
+			var collision = check_for_collision()
+			var down_force = gravity
+
+			if(collision){
+				momentum_x = momentum_x > 0 ? momentum_x : 0;
+				momentum_y = momentum_y < 0 ? momentum_y : 0;
+				down_force = 0;
+			} 
+
 			can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
 			momentum_x = momentum_x * drag;
 			momentum_y = momentum_y * drag;
 			quad_angle += quad_move_angle * Math.PI / 180;
 			quad_x += momentum_x * Math.sin(quad_angle);
-			quad_y += momentum_y * Math.cos(quad_angle) + gravity;
+			quad_y += momentum_y * Math.cos(quad_angle) + down_force;
+
+			going_down = momentum_y > prev_pos_y;
+			prev_pos_y = momentum_y;
+
+			console.log('going down', going_down)
+
 			can_ctx.drawImage($quad, quad_x, quad_y);
 			// console.log(num)
 			window.requestAnimationFrame(loop);
@@ -103,18 +174,22 @@ var minigame = function(){
 
 	}
 
-	function init(){
-		playing = true;
+	function play_pause(){ 
+		playing = !playing; 
 
+		if(playing) window.requestAnimationFrame(loop);
+	}
+
+	function init(){
 		$body.setAttribute('game-active', true);
 
 		set_canvas();
 		set_size();
 		add_quad();
 
-		window.requestAnimationFrame(loop);
 		document.addEventListener('keydown', checkInput);
 		document.addEventListener('keyup', checkInput);
+		document.addEventListener('click', play_pause);
 	}
 
 	init();

@@ -155,4 +155,15 @@
 
 [game-active="true"]{
 	#background-video-wrapper{ display: none; }
+
+	[collision-object]{
+		display: block;
+		animation: none;
+		animation-delay: 0;
+		opacity: 1 !important;
+		transition: all 1s ease-in;
+	}
+
+	[touched]{
+	}
 }

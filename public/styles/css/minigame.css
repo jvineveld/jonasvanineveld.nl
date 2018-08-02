@@ -117,3 +117,10 @@
 
 [game-active="true"] #background-video-wrapper {
   display: none; }
+
+[game-active="true"] [collision-object] {
+  display: block;
+  animation: none;
+  animation-delay: 0;
+  opacity: 1 !important;
+  transition: all 1s ease-in; }
