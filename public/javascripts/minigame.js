@@ -7,7 +7,7 @@ var minigame = function(){
 	var $body = document.getElementsByTagName('body')[0];
 	var $avatar = document.getElementById('avatar');
 	var $quad = new Image();
-	var quad_x, quad_y, quad_rotation = 'up', quad_angle = 1, quad_move_angle = 0, quad_width = 30, quad_height = 20;
+	var quad_x, quad_y, quad_angle = 1, quad_move_angle = 0, quad_width = 30, quad_height = 20;
 	var doc_width, doc_height;
 	var $canvas;
 	var avatar_pos;
@@ -15,11 +15,14 @@ var minigame = function(){
 	var rotate_angle = 0;
 	var momentum_x = 1;
 	var momentum_y = 1;
-	var gravity = 2.7;
+	var gravity = 0;//2.7;
 	var drag = .95;
 	var playing = true;
 	var going_down = false;
 	var prev_pos_y = 0;
+	var stage = 1;
+	var avatar_hitcount = 0;
+	var avatar_hittarget = 4;
 	var keys = {
 		up: false,
 		down: false,
@@ -55,6 +58,31 @@ var minigame = function(){
 		can_ctx = $canvas.getContext('2d');
 	}
 
+	function check_stage(){
+		if(stage===4) return;
+
+		if(avatar_hitcount === Math.round(avatar_hittarget / 2) && stage!==2){
+			stage = 2;
+			var $body = document.getElementsByTagName('body')[0];
+			$body.setAttribute('stage', 'getting-hit')
+		}
+		if(avatar_hitcount === avatar_hittarget - 1 && stage!==3){
+			stage = 3;
+			var $body = document.getElementsByTagName('body')[0];
+			$body.setAttribute('stage', 'target_broke')
+		}
+		if(avatar_hitcount === avatar_hittarget){
+			enter_final_stage();
+		}
+	}
+
+	function enter_final_stage(){
+		stage = 4;
+		gravity = 3;
+		var $body = document.getElementsByTagName('body')[0];
+		$body.setAttribute('stage', 'final')
+	}
+
 	function set_collisions(){
 		collision_elements.forEach(function(element){
 			let $elements = document.querySelectorAll(element);
@@ -63,9 +91,17 @@ var minigame = function(){
 				$element.setAttribute('collision-object', true)
 				collision_boxes.push({
 					$el: $element,
-					bounds: $element.getBoundingClientRect()
+					bounds: $element.getBoundingClientRect(),
+					type: 'rect'
 				})
 			}
+		})
+
+		// add avatar
+		collision_boxes.push({
+			$el: $avatar,
+			bounds: $avatar.getBoundingClientRect(),
+			type: 'avatar'
 		})
 
 		console.log('collision boxes', collision_boxes)
@@ -76,22 +112,40 @@ var minigame = function(){
 		var margin = 20;
 		collision_boxes.forEach(function(box, index){
 			var bounds = box.bounds;
-			var compare = {
-				within_box_x_right: quad_x < bounds.x + bounds.width,
-				within_box_x_left: quad_x + quad_width > bounds.x,
-				within_box_y_bottom: (quad_y - margin) < bounds.y + bounds.height ,
-				within_box_y_top: quad_height + quad_y - margin > bounds.y
-			}
-			if (compare.within_box_x_right && compare.within_box_x_left && compare.within_box_y_bottom && compare.within_box_y_top) {
-					has_collision = true;
-
-					if(!going_down){ // touching from bottom?
+			if(box.type === 'rect'){
+				var compare = {
+					within_box_x_right: quad_x < bounds.x + bounds.width,
+					within_box_x_left: quad_x + quad_width > bounds.x,
+					within_box_y_bottom: (quad_y - margin) < bounds.y + bounds.height ,
+					within_box_y_top: quad_height + quad_y - margin > bounds.y
+				}
+				if (compare.within_box_x_right && compare.within_box_x_left && compare.within_box_y_bottom && compare.within_box_y_top) {
+						has_collision = true;
+	
 						box.$el.setAttribute('touched', true)
 						var bottomTransform = doc_height - bounds.y - 100;
 						box.$el.style.transform = 'translate(0, '+bottomTransform+'px)';
-						delete collision_boxes[index];
-					}
-			 }
+						// delete collision_boxes[index];
+						collision_boxes.splice(index,1);
+				 }
+			}else if(box.type === 'avatar'){
+				var circle1 = {radius: box.bounds.width / 2, c_x: (box.bounds.width / 2) + box.bounds.x, c_y: (box.bounds.height / 2) + box.bounds.y};
+				var circle2 = {radius: quad_width / 2, c_x: (quad_width / 2) + quad_x, c_y: (quad_height / 2) + quad_y};
+				
+				var dx = circle1.c_x - circle2.c_x;
+				var dy = circle1.c_y - circle2.c_y;
+				var distance = Math.sqrt(dx * dx + dy * dy);
+
+				if (distance < circle1.radius + circle2.radius) {
+					momentum_y -= momentum_y * 2;
+					momentum_x -= momentum_x * 2;
+
+					avatar_hitcount += 1;
+
+					if(avatar_hitcount === avatar_hittarget)
+						collision_boxes.splice(index,1);
+				}
+			}
 		});
 
 		return has_collision;
@@ -111,11 +165,17 @@ var minigame = function(){
 		e = e || window.event;
 
 		var active =  e.type === 'keydown';
-
-		if (e.keyCode == '38') { keys.up = active; }
-		else if (e.keyCode == '40') { keys.down = active; }
-		else if (e.keyCode == '37') { keys.left = active; }
-		else if (e.keyCode == '39') { keys.right = active; }
+		
+		switch(e.keyCode){
+			case 38: 
+			case 87: keys.up = active; break;
+			case 40: 
+			case 83: keys.down = active; break;
+			case 37: 
+			case 65: keys.left = active; break;
+			case 39: 
+			case 68: keys.right = active; break;
+		}
 
 		if(active && !playing) play_pause()
 	}
@@ -173,6 +233,7 @@ var minigame = function(){
 			var active_keys = check_key_directions();
 			check_rotation(active_keys);
 			var collision = check_for_collision()
+			check_stage()
 			var down_force = gravity
 
 			if(collision){
@@ -191,10 +252,7 @@ var minigame = function(){
 			going_down = momentum_y > prev_pos_y;
 			prev_pos_y = momentum_y;
 
-			console.log('going down', going_down)
-
 			draw();
-			// console.log(num)
 			window.requestAnimationFrame(loop);
 			check_for_bounds()
 		}
@@ -214,12 +272,16 @@ var minigame = function(){
 		set_size();
 		add_quad();
 
+		document.activeElement.blur()
+
 		document.addEventListener('keydown', checkInput);
 		document.addEventListener('keyup', checkInput);
 		document.addEventListener('click', play_pause);
 	}
 
 	init();
+
+	return this;
 }
 
 var mg = false;

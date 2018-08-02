@@ -556,19 +556,20 @@ select:-webkit-autofill:focus {
     opacity: 0;
     transform: scale(0.8);
     transition: all .4s;
-    width: 176px;
-    height: 176px;
+    width: 207px;
+    height: 204px;
     position: absolute;
-    top: 0;
-    left: 0; }
+    top: -14px;
+    left: -15px; }
     #avatar .deco:before {
       content: " ";
       position: absolute;
       left: 50%;
       top: 50%;
-      margin: -101px 0 0 -100px;
-      height: 202px;
-      width: 200px;
+      margin-top: -102px;
+      margin-left: -103.5px;
+      height: 204px;
+      width: 207px;
       background: url("/images/avatar-hover.png");
       transform-origin: 50% 50%;
       z-index: -1;
@@ -577,7 +578,7 @@ select:-webkit-autofill:focus {
       content: " ";
       position: absolute;
       left: 50%;
-      top: -40px;
+      top: -34px;
       margin-left: -18px;
       height: 17px;
       width: 36px;
@@ -611,6 +612,7 @@ select:-webkit-autofill:focus {
   height: 100%;
   color: #fff;
   background: #232323;
+  border: 2px solid #31988f;
   z-index: 3;
   font-size: 1.6rem;
   font-weight: bold;
@@ -646,8 +648,8 @@ select:-webkit-autofill:focus {
   [game-active="true"] #start-game {
     opacity: 1;
     transition-duration: 1s; }
-    #avatar:hover #start-game span,
-    [game-active="true"] #start-game span {
+    #avatar:hover #start-game .start,
+    [game-active="true"] #start-game .start {
       display: block;
       animation-delay: .2s; }
     #avatar:hover #start-game:before,
@@ -657,8 +659,37 @@ select:-webkit-autofill:focus {
     opacity: 1;
     background-color: #fff;
     transition: background .3s; }
+    [game-active="true"] #start-game .start {
+      display: none; }
+    [game-active="true"] #start-game .intro {
+      display: block;
+      transition: all .4s; }
+      [game-active="true"] #start-game .intro:before {
+        content: "niet doen";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -32px;
+        width: 64px;
+        height: 12px;
+        border-radius: 2px;
+        border: 4px solid #232323;
+        opacity: 0;
+        transform: translate(0, 10px);
+        transition: all .4s;
+        transition-delay: .1s; }
     [game-active="true"] #start-game:before {
       display: none; }
+  [stage="getting-hit"] #start-game .intro {
+    position: relative;
+    transform: translate(0, -18px);
+    animation: none;
+    opacity: 1; }
+    [stage="getting-hit"] #start-game .intro:before {
+      opacity: 1;
+      transform: translate(0, 0); }
+  [stage="final"] #start-game {
+    display: none; }
 
 [game-active="true"]:before {
   content: " ";
@@ -679,6 +710,11 @@ select:-webkit-autofill:focus {
   animation-delay: 0;
   opacity: 1 !important;
   transition: all 1s ease-in; }
+
+[stage="final"] #avatar {
+  opacity: 0;
+  transition: opacity .4s;
+  animation: none; }
 
 #background-video-wrapper {
   position: fixed;

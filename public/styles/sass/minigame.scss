@@ -12,23 +12,27 @@
 	display: inline-block;
 
 	.deco{
+		$width: 207px;
+		$height: 204px;
 		display: block;
 		opacity: 0;
 		transform: scale(.8);
 		transition: all .4s;
-		width: 176px;
-		height: 176px;
+		width: $width;
+		height: $height;
 		position: absolute;
-		top:0; left:0;
+		top: -14px;
+		left: -15px;
 
 		&:before{
 			content:" ";
 			position: absolute;
 			left: 50%;
 			top: 50%;
-			margin:-101px 0 0 -100px;
-			height: 202px;
-			width: 200px;
+			margin-top:-($height/2);
+			margin-left: -($width/2);
+			height: $height;
+			width: $width;
 			background: url('/images/avatar-hover.png');
 	
 			transform-origin: 50% 50%;
@@ -41,7 +45,7 @@
 			content:" ";
 			position: absolute;
 			left: 50%;
-			top: -40px;
+			top: -34px;
 			margin-left:-18px;
 			height: 17px;
 			width: 36px;
@@ -87,6 +91,7 @@
 	top:0; left:0; width: 100%; height: 100%;
 	color: #fff;
 	background: #232323;
+	border:2px solid #31988f;
 
 	z-index: 3;
 	font-size: 1.6rem;
@@ -135,7 +140,7 @@
 		opacity: 1;
 		transition-duration: 1s;
 
-		span{ display: block; animation-delay: .2s; }
+		.start{ display: block; animation-delay: .2s; }
 		
 		&:before{
 			transform: scale(1);
@@ -147,9 +152,53 @@
 		background-color: #fff;
 		transition: background .3s;
 
+		.start{ display: none;}
+
+		.intro
+		{
+			display: block;
+			transition: all .4s;
+
+			&:before{
+				content: "niet doen";
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				margin-left: -32px;
+				width: 64px;
+				height: 12px;
+				border-radius: 2px;
+				border: 4px solid #232323;
+
+				opacity: 0;
+				transform: translate(0, 10px);
+				transition: all .4s;
+				transition-delay: .1s;
+			}
+		}
+
 		&:before{
 			display: none;
 		}
+	}
+
+	[stage="getting-hit"] &{
+		.intro
+		{
+			position: relative;
+			transform: translate(0, -18px);
+			animation: none;
+			opacity: 1;
+
+			&:before{
+				opacity: 1;
+				transform: translate(0, 0);
+			}
+		}
+	}
+
+	[stage="final"] &{
+		display: none;
 	}
 }
 
@@ -177,5 +226,13 @@
 	}
 
 	[touched]{
+	}
+}
+
+[stage="final"]{
+	#avatar{
+		 opacity: 0; 
+		 transition: opacity .4s;
+		 animation: none;
 	}
 }
