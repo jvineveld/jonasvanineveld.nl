@@ -2,7 +2,7 @@
  * JavaScript quadcopter minigame
  * 
  * Created this just because drones are awesome.
- * It all began so small, then i wanted to make it bigger..
+ * It all began so small and simple, then i wanted to make it more fun..
  * @author Jonas van Ineveld
  */
 
@@ -41,6 +41,11 @@ var minigame = function(){
 		right: false
 	}
 	var astroid_types = {
+		points: [{
+			img: "/images/targets/star-134-120.png",
+			width: 134,
+			height: 120,
+		}],
 		solids: [
 			{
 				img: "/images/targets/aircraft-280-122.png",
@@ -265,12 +270,17 @@ var minigame = function(){
 				}, box)){
 	
 					has_collision = 'astroid'
-					if(!box.solid){
-						// delete collision_boxes[index];
-						collision_boxes.splice(index,1);
-					}else{
-						momentum_x -= astroid_speed + 10;
-					}	
+
+					switch(box.type){
+						case 'solid':
+							momentum_x -= astroid_speed + 10;
+						break;
+						case 'point':
+							collision_boxes.splice(index,1);
+						break;
+						case 'flythrough':
+						break;
+					}
 				}
 			})
 		}
@@ -284,8 +294,10 @@ var minigame = function(){
 		for(var i=0; i<num_astroids; i++){
 			if(astroids.length - 1 < i){
 				var $img = new Image(),
-					solid = (i%2===0 && i!==0),
-					astr = pick_astroid(solid ? 'solid' : '');
+					solid = (i%2===0 && i!==0), // in 1 2 is a solid
+					point = (i%5===0 && i!==0), // in 1 5 is a point
+					type = point ? 'point' : solid ? 'solid' : 'flythrough';
+					astr = pick_astroid(type);
 
 				$img.onload = function() {
 					draw();
@@ -299,6 +311,7 @@ var minigame = function(){
 					x: Math.round(doc_width + (i * doc_width / 2)),
 					y: Math.round(Math.random() * doc_height),
 					solid: solid,
+					type: type,
 					$img: $img
 				})
 			}
@@ -330,6 +343,9 @@ var minigame = function(){
 
 		if(type==='solid')
 			types = astroid_types['solids']
+
+		if(type==='point')
+			types = astroid_types['points']
 
 		return types[Math.floor(Math.random() * types.length)];
 	}
