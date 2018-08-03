@@ -7,6 +7,7 @@
  */
 var notices = function(){
 	var $body = document.getElementsByTagName('body')[0],
+		$soundWrap = document.getElementById('mingame-sounds'),
 		last_type = false,
 		animation_duration = 1500,
 		last_time = 0;
@@ -59,15 +60,17 @@ var notices = function(){
 	}
 
 	function play_sound(type){
-		$sound = sounds[type].cloneNode(true);
-		$body.appendChild($sound);
+		var $sound = sounds[type].cloneNode(true);
+		var sound_id = guidGenerator();
+		$sound.id = sound_id;
+		$soundWrap.appendChild($sound);
 		$sound.volume = 0.3;
 		$sound.play();
 
-		setTimeout(function(){
-			$sound.parentNode.removeChild($sound);
+		setTimeout(function(_sound_id){
+			$soundWrap.removeChild(document.getElementById(_sound_id));
 			console.log('sound removed')
-		}, 500);
+		}.bind(null, sound_id), 500);
 	}
 
 	function render_notice(msg){
@@ -98,5 +101,13 @@ var notices = function(){
 			last_time = Date.now();
 		}
 		play_sound(type)
+	}
+	
+	// from https://stackoverflow.com/a/6860916
+	function guidGenerator() {
+		var S4 = function() {
+		   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+		};
+		return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 	}
 }

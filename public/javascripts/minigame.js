@@ -30,11 +30,8 @@ var minigame = function(){
 	var stage = 1;
 	var avatar_hitcount = 0;
 	var avatar_hittarget = 4;
-	var num_astroids = 4;
-	var astroids = [];
-	var astroid_speed = 8;
 	var start_time = 0;
-	var keys = {
+	var active_keys = {
 		up: false,
 		down: false,
 		left: false,
@@ -42,83 +39,88 @@ var minigame = function(){
 	}
 	var notices = this.notices;
 	var stats = this.stats;
-	var astroid_types = {
-		points: [{
-			img: "/images/targets/star-134-120.png",
-			width: 134,
-			height: 120,
-		}],
-		solids: [
-			{
-				img: "/images/targets/aircraft-280-122.png",
-				width: 280,
-				height: 122,
-			},
-			{
-				img: "/images/targets/shark-500-159.png",
-				width: 500,
-				height: 159,
-			},
-			{
-				img: "/images/targets/chair-200-285.png",
-				width: 200,
-				height: 285,
-			},
-		],
-		flythroughs: [
-			{
-				img: "/images/clouds/cloud-300-146.png",
-				width: 300,
-				height: 146,
-			},
-			{
-				img: "/images/clouds/cloud-300-176.png",
-				width: 300,
-				height: 176,
-			},
-			{
-				img: "/images/clouds/cloud-300-182.png",
-				width: 300,
-				height: 182,
-			},
-			{
-				img: "/images/clouds/cloud-300-184.png",
-				width: 300,
-				height: 184,
-			},
-			{
-				img: "/images/clouds/cloud-300-189.png",
-				width: 300,
-				height: 189,
-			},
-			{
-				img: "/images/clouds/cloud-300-240.png",
-				width: 300,
-				height: 240,
-			}
-		]	
+
+	var astroids = {
+		objects: [],
+		speed: 8,
+		count: {
+			solid: 0,
+			clouds: 4,
+			points: 0,
+		},
+		types: {
+			points: [{
+				img: "/images/targets/star-134-120.png",
+				width: 134,
+				height: 120,
+			}],
+			solids: [
+				{
+					img: "/images/targets/aircraft-280-122.png",
+					width: 280,
+					height: 122,
+				},
+				{
+					img: "/images/targets/shark-500-159.png",
+					width: 500,
+					height: 159,
+				},
+				{
+					img: "/images/targets/chair-200-285.png",
+					width: 200,
+					height: 285,
+				},
+			],
+			flythroughs: [
+				{
+					img: "/images/clouds/cloud-300-146.png",
+					width: 300,
+					height: 146,
+				},
+				{
+					img: "/images/clouds/cloud-300-176.png",
+					width: 300,
+					height: 176,
+				},
+				{
+					img: "/images/clouds/cloud-300-182.png",
+					width: 300,
+					height: 182,
+				},
+				{
+					img: "/images/clouds/cloud-300-184.png",
+					width: 300,
+					height: 184,
+				},
+				{
+					img: "/images/clouds/cloud-300-189.png",
+					width: 300,
+					height: 189,
+				},
+				{
+					img: "/images/clouds/cloud-300-240.png",
+					width: 300,
+					height: 240,
+				}
+			]	
+		}
 	}
 
 	var sec_stages = {
+		10: {
+			count: {
+				solid: 1,
+				clouds: 4,
+				points: 2
+			}
+		},
 		20: {
-			num_astroids: 7,
-			astroid_speed: 8,
-			key_increase: 1
-		},
-		40: {
-			num_astroids: 12,
-			astroid_speed: 9,
-			key_increase: 1
-		},
-		60: {
-			num_astroids: 14,
-			astroid_speed: 10,
-			key_increase: 2
-		},
-		80: {
-			num_astroids: 18,
-			astroid_speed: 12,
-			key_increase: 3
+			speed: 9,
+			count: {
+				solid: 2,
+				clouds: 6,
+				points: 2
+			}
 		}
 	}
 
@@ -279,9 +281,9 @@ var minigame = function(){
 				}
 			}
 		});
-		if(astroids.length){
+		if(astroids.objects.length){
 
-			astroids.forEach(function(box, index){
+			astroids.objects.forEach(function(box, index){
 				if(box_collision({
 					x: quad_x,
 					y: quad_y,
@@ -313,53 +315,63 @@ var minigame = function(){
 
 	function render_astroids(){
 		astr_ctx.clearRect(0, 0, doc_width, doc_height);
-		for(var i=0; i<num_astroids; i++){
-			if(astroids.length - 1 < i){
-				var $img = new Image(),
-					solid = (i%5===0 && i!==0), // in 1 2 is a solid
-					point = (i%2===0 && i!==0), // in 1 5 is a point
-					type =  solid ? 'solid' : point ? 'point' : 'flythrough';
-					astr = pick_astroid(type);
 
-				console.log('adding astroid', type)
+		var num_solid = astroid_config.cound.solid,
+			num_clouds = astroid_config.cound.clouds,
+			num_points = astroid_config.cound.points;
 
-				$img.onload = function() {
-					draw();
-				}
-
-				$img.src = astr.img;
-
-				astroids.push({
-					width: astr.width,
-					height: astr.height,
-					x: Math.round(doc_width + (i * doc_width / 2)),
-					y: Math.round(Math.random() * doc_height),
-					solid: solid,
-					type: type,
-					$img: $img
-				})
-			}
-			
-			var astroid = astroids[i],
-				cur_astroid_speed = astroid_speed + (astroid_speed / 20 * i);
-			
-			if(astroid.x + astroid.width < 0)
-			{
-				astroids[i].x = doc_width;
-				astroids[i].y = Math.round(Math.random() * doc_height)
-			}
-			else
-			{
-				astroids[i].x -= cur_astroid_speed;
-			}
-
-			astr_ctx.restore();
-			astr_ctx.drawImage(astroid.$img,astroid.x,astroid.y,astroid.width,astroid.height);
-			astr_ctx.setTransform(1, 0, 0, 1, 0, 0);
-			astr_ctx.save();
-
+		for(var i=0; i<num_solid; i++){
+			add_astroid('solid')
 		}
+
+		// {
+		// 	if(astroids.length - 1 < i){
+				
+		// 	}
+			
+		// 	var astroid = astroids[i],
+		// 		cur_astroid_speed = astroid_speed + (astroid_speed / 20 * i);
+			
+		// 	if(astroid.x + astroid.width < 0)
+		// 	{
+		// 		astroids[i].x = doc_width;
+		// 		astroids[i].y = Math.round(Math.random() * doc_height)
+		// 	}
+		// 	else
+		// 	{
+		// 		astroids[i].x -= cur_astroid_speed;
+		// 	}
+
+		// 	astr_ctx.restore();
+		// 	astr_ctx.drawImage(astroid.$img,astroid.x,astroid.y,astroid.width,astroid.height);
+		// 	astr_ctx.setTransform(1, 0, 0, 1, 0, 0);
+		// 	astr_ctx.save();
+
+		// }
 		
+	}
+
+	function add_astroid(type){ // solid || point || flythrough
+		var $img = new Image(),
+			astr = pick_astroid(type);
+
+		console.log('adding astroid', type)
+
+		$img.onload = function() {
+			draw();
+		}
+
+		$img.src = astr.img;
+
+		astroids.push({
+			width: astr.width,
+			height: astr.height,
+			x: Math.round(doc_width + (i * doc_width / 2)),
+			y: Math.round(Math.random() * doc_height),
+			solid: solid,
+			type: type,
+			$img: $img
+		})
 	}
 
 	function pick_astroid(type){
@@ -391,22 +403,22 @@ var minigame = function(){
 		
 		switch(e.keyCode){
 			case 38: 
-			case 87: keys.up = active; break;
+			case 87: active_keys.up = active; break;
 			case 40: 
-			case 83: keys.down = active; break;
+			case 83: active_keys.down = active; break;
 			case 37: 
-			case 65: keys.left = active; break;
+			case 65: active_keys.left = active; break;
 			case 39: 
-			case 68: keys.right = active; break;
+			case 68: active_keys.right = active; break;
 		}
 
 		if(active && !playing) play_pause()
 	}
 
 	function check_key_directions(){
-		let active_keys = [];
-		for(direction in keys){
-			if(keys[direction]){
+		let keys = [];
+		for(direction in active_keys){
+			if(active_keys[direction]){
 				switch(direction){
 					case "left": momentum_x -= key_increase;  break;
 					case "right": momentum_x += key_increase; break;
@@ -418,10 +430,10 @@ var minigame = function(){
 			}
 		}
 
-		return active_keys;
+		return keys;
 	}
 
-	function check_rotation(active_keys){
+	function check_rotation(){
 		if(active_keys.includes('left')){
 			rotate_angle -= 4
 		}
@@ -454,9 +466,9 @@ var minigame = function(){
 	function loop(){
 		if(playing){
 			var down_force = gravity;
-			var active_keys = check_key_directions();
-			var collision = check_for_collision()
-			
+
+			check_key_directions();
+			check_for_collision()
 			check_rotation(active_keys);
 
 			if(stage===4){
@@ -464,18 +476,6 @@ var minigame = function(){
 			}
 
 			check_stage()
-
-			if(collision && collision!=='astroid'){
-				momentum_x = momentum_x > 0 ? momentum_x : 0;
-				momentum_y = momentum_y < 0 ? momentum_y : 0;
-				down_force = 0;
-
-				
-			} 
-
-			if(collision==='astroid'){
-				
-			}
 
 			// can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
 			momentum_x = momentum_x * drag;
