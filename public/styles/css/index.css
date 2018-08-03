@@ -469,6 +469,20 @@ li:nth-child(10) {
     transform: scale(1);
     opacity: 1; } }
 
+@keyframes notice-in {
+  0% {
+    opacity: 0;
+    transform: translate(0, -30px); }
+  10% {
+    transform: scale(1);
+    opacity: 1; }
+  90% {
+    transform: scale(1);
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    transform: translate(0, 30px); } }
+
 form ul {
   list-style-type: none;
   padding: 0;
@@ -690,6 +704,17 @@ select:-webkit-autofill:focus {
       transform: translate(0, 0); }
   [stage="final"] #start-game {
     display: none; }
+
+#notice {
+  position: absolute;
+  top: 80%;
+  left: 0;
+  width: 100%;
+  font-size: 26px;
+  opacity: 0;
+  animation: notice-in 1.5s ease-out forwards;
+  z-index: 70;
+  font-family: 'Press Start 2P', cursive; }
 
 [game-active="true"]:before {
   content: " ";

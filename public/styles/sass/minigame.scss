@@ -202,6 +202,20 @@
 	}
 }
 
+#notice
+{
+	position: absolute;
+	top:80%;
+	left:0; width: 100%;
+	font-size: 26px;
+	opacity: 0;
+	animation: notice-in 1.5s ease-out forwards;
+
+	z-index: 70;
+
+	font-family: 'Press Start 2P', cursive;
+}
+
 [game-active="true"]{
 
 	&:before{

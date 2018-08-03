@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Jonas van ineveld</title>
 
-	<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700" rel="stylesheet">
 	<link rel="stylesheet" href="/styles/css/index.css">
 </head>
 <body class="no-js"><script>document.getElementsByTagName('body')[0].className = ''</script>
@@ -196,7 +196,6 @@
 		</div>
 	</div>
 
-	<script src="/javascripts/minigame.js"></script>
 	<script>
 		var out_animation_time = 500;
 		var $prev_tab = document.getElementById('tab-intro');
@@ -378,5 +377,30 @@
 		add_sounds()
 	</script>
 
+	<script>
+	/**
+	 * A minigame i wrote just for you, find it and have some fun! ;-)
+	 **/
+	</script>
+	<div class="sounds minigame">
+		<audio controls preload="true" id="sound_lvlup" volume="0.1">
+			<source src="/sounds/minigame/lvlup.mp3"></source>
+		</audio>
+		<audio controls preload="true" id="sound_coin" volume="0.1">
+			<source src="/sounds/minigame/coin.mp3"></source>
+		</audio>	
+		<audio controls preload="true" id="sound_error" volume="0.1">
+			<source src="/sounds/minigame/error.mp3"></source>
+		</audio>	
+		<audio controls preload="true" id="sound_fail" volume="0.1">
+			<source src="/sounds/minigame/fail.mp3"></source>
+		</audio>
+		<audio controls preload="true" id="sound_avatar_destroy" volume="0.1">
+			<source src="/sounds/minigame/avatar_destroy.mp3"></source>
+		</audio>
+	</div>
+	<script src="/javascripts/minigame-notices.js"></script>
+	<script src="/javascripts/minigame-stats.js"></script>
+	<script src="/javascripts/minigame.js"></script>
 </body>
 </html>

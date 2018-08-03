@@ -171,3 +171,22 @@
 		opacity: 1;
 	}
 }
+
+@keyframes notice-in {
+	0%{
+		opacity: 0;
+		transform: translate(0, -30px);
+	}
+	10%{
+		transform: scale(1);
+		opacity: 1;
+	}
+	90%{
+		transform: scale(1);
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+		transform:translate(0, 30px);
+	}
+}

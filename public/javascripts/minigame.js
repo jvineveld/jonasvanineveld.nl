@@ -40,6 +40,8 @@ var minigame = function(){
 		left: false,
 		right: false
 	}
+	var notices = this.notices;
+	var stats = this.stats;
 	var astroid_types = {
 		points: [{
 			img: "/images/targets/star-134-120.png",
@@ -53,15 +55,15 @@ var minigame = function(){
 				height: 122,
 			},
 			{
+				img: "/images/targets/shark-500-159.png",
+				width: 500,
+				height: 159,
+			},
+			{
 				img: "/images/targets/chair-200-285.png",
 				width: 200,
 				height: 285,
 			},
-			{
-				img: "/images/targets/shark-500-159.png",
-				width: 500,
-				height: 159,
-			}
 		],
 		flythroughs: [
 			{
@@ -97,6 +99,29 @@ var minigame = function(){
 		]	
 	}
 
+	var sec_stages = {
+		20: {
+			num_astroids: 7,
+			astroid_speed: 8,
+			key_increase: 1
+		},
+		40: {
+			num_astroids: 12,
+			astroid_speed: 9,
+			key_increase: 1
+		},
+		60: {
+			num_astroids: 14,
+			astroid_speed: 10,
+			key_increase: 2
+		},
+		80: {
+			num_astroids: 18,
+			astroid_speed: 12,
+			key_increase: 3
+		}
+	}
+
 	var collision_elements = [
 		'h1', 
 		'#tab-intro p', 
@@ -125,11 +150,11 @@ var minigame = function(){
 
 	function set_canvas(){
 		$canvas = document.createElement('canvas');
-		document.body.appendChild($canvas);
+		$body.appendChild($canvas);
 		can_ctx = $canvas.getContext('2d');
 
 		$astroid_canvas = document.createElement('canvas');
-		document.body.appendChild($astroid_canvas);
+		$body.appendChild($astroid_canvas);
 		astr_ctx = $astroid_canvas.getContext('2d');
 
 		canvases.push({
@@ -146,42 +171,37 @@ var minigame = function(){
 			cur_time = Date.now();
 			sec_in = (cur_time - start_time) / 1000;
 
-			if(sec_in > 30 && num_astroids < 7){
-				num_astroids = 7;
-				astroid_speed = 12;
-				key_increase = 2;
-			} else if(sec_in > 60 && num_astroids < 12){
-				num_astroids = 12;
-				astroid_speed = 13;
-				key_increase = 3;
-			} else if(sec_in > 60 && num_astroids < 12 && astroid_speed !==14){
-				num_astroids = 12;
-				astroid_speed = 14;
-				key_increase = 5;
+			if(sec_stages[sec_in] && sec_stages[sec_in].num_astroids !== num_astroids){
+				num_astroids =sec_stages[sec_in].num_astroids;
+				astroid_speed = sec_stages[sec_in].astroid_speed;
+				key_increase =sec_stages[sec_in].key_increase;
 			}
-			console.log(sec_in)
 			return;
 		}
 
+		if(avatar_hitcount === 1 && stage!==1.5){
+			stage = 1.5;
+			notices.show_notice('avatar')
+		}
 		if(avatar_hitcount === Math.round(avatar_hittarget / 2) && stage!==2){
 			stage = 2;
-			var $body = document.getElementsByTagName('body')[0];
 			$body.setAttribute('stage', 'getting-hit')
+			notices.show_notice('avatar')
 		}
 		if(avatar_hitcount === avatar_hittarget - 1 && stage!==3){
 			stage = 3;
-			var $body = document.getElementsByTagName('body')[0];
 			$body.setAttribute('stage', 'target_broke')
+			notices.show_notice('avatar')
 		}
 		if(avatar_hitcount === avatar_hittarget){
 			enter_final_stage();
+			notices.show_notice('avatar_success')
 		}
 	}
 
 	function enter_final_stage(){
 		stage = 4;
 		gravity = 3;
-		var $body = document.getElementsByTagName('body')[0];
 		$body.setAttribute('stage', 'final')
 	}
 
@@ -206,7 +226,7 @@ var minigame = function(){
 			type: 'avatar'
 		})
 
-		console.log('collision boxes', collision_boxes)
+		// console.log('collision boxes', collision_boxes)
 	}
 
 	function box_collision(obj_1, obj_2){
@@ -233,9 +253,9 @@ var minigame = function(){
 					height: quad_height
 				}, bounds)){
 					var bottomTransform = doc_height - bounds.y - 100;
-
+					notices.show_notice('destroyer')
 					has_collision = true;
-
+					
 					box.$el.setAttribute('touched', true)
 					box.$el.style.transform = 'translate(0, '+bottomTransform+'px)';
 					collision_boxes.splice(index,1);
@@ -274,9 +294,11 @@ var minigame = function(){
 					switch(box.type){
 						case 'solid':
 							momentum_x -= astroid_speed + 10;
+							notices.show_notice('solid_astroid')
 						break;
 						case 'point':
-							collision_boxes.splice(index,1);
+							astroids.splice(index,1);
+							notices.show_notice('point')
 						break;
 						case 'flythrough':
 						break;
@@ -294,10 +316,12 @@ var minigame = function(){
 		for(var i=0; i<num_astroids; i++){
 			if(astroids.length - 1 < i){
 				var $img = new Image(),
-					solid = (i%2===0 && i!==0), // in 1 2 is a solid
-					point = (i%5===0 && i!==0), // in 1 5 is a point
-					type = point ? 'point' : solid ? 'solid' : 'flythrough';
+					solid = (i%5===0 && i!==0), // in 1 2 is a solid
+					point = (i%2===0 && i!==0), // in 1 5 is a point
+					type =  solid ? 'solid' : point ? 'point' : 'flythrough';
 					astr = pick_astroid(type);
+
+				console.log('adding astroid', type)
 
 				$img.onload = function() {
 					draw();
@@ -445,10 +469,12 @@ var minigame = function(){
 				momentum_x = momentum_x > 0 ? momentum_x : 0;
 				momentum_y = momentum_y < 0 ? momentum_y : 0;
 				down_force = 0;
+
+				
 			} 
 
 			if(collision==='astroid'){
-				console.log('bam!')
+				
 			}
 
 			// can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
@@ -499,7 +525,10 @@ var minigame = function(){
 
 var mg = false;
 function init_game(){ 
-	if(!mg) mg = minigame.apply({}) 
+	if(!mg) mg = minigame.apply({
+		stats: new statKeeper(),
+		notices: new notices()
+	}) 
 }
 
 
