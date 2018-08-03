@@ -21,6 +21,7 @@ var minigame = function(){
 	var rotate_angle = 0;
 	var momentum_x = 1;
 	var momentum_y = 1;
+	var key_increase = 1;
 	var gravity = 0;
 	var drag = .95;
 	var playing = true;
@@ -161,6 +162,7 @@ var minigame = function(){
 
 					box.$el.setAttribute('touched', true)
 					box.$el.style.transform = 'translate(0, '+bottomTransform+'px)';
+					collision_boxes.splice(index,1);
 				}
 			}else if(box.type === 'avatar'){
 				var circle1 = {radius: box.bounds.width / 2, c_x: (box.bounds.width / 2) + box.bounds.x, c_y: (box.bounds.height / 2) + box.bounds.y};
@@ -181,24 +183,26 @@ var minigame = function(){
 				}
 			}
 		});
+		if(astroids.length){
 
-		astroids.forEach(function(box, index){
-			if(box_collision({
-				x: quad_x,
-				y: quad_y,
-				width: quad_width,
-				height: quad_height
-			}, box)){
-
-				has_collision = 'astroid'
-				if(!box.solid){
-					// delete collision_boxes[index];
-					collision_boxes.splice(index,1);
-				}else{
-					momentum_x -= astroid_speed + 10;
-				}	
-			}
-		})
+			astroids.forEach(function(box, index){
+				if(box_collision({
+					x: quad_x,
+					y: quad_y,
+					width: quad_width,
+					height: quad_height
+				}, box)){
+	
+					has_collision = 'astroid'
+					if(!box.solid){
+						// delete collision_boxes[index];
+						collision_boxes.splice(index,1);
+					}else{
+						momentum_x -= astroid_speed + 10;
+					}	
+				}
+			})
+		}
 		
 
 		return has_collision;
@@ -274,10 +278,10 @@ var minigame = function(){
 		for(direction in keys){
 			if(keys[direction]){
 				switch(direction){
-					case "left": momentum_x -= 1;  break;
-					case "right": momentum_x += 1; break;
-					case "up": momentum_y -= 1; break;
-					case "down": momentum_y += 1; break;
+					case "left": momentum_x -= key_increase;  break;
+					case "right": momentum_x += key_increase; break;
+					case "up": momentum_y -= key_increase; break;
+					case "down": momentum_y += key_increase; break;
 				}
 
 				active_keys.push(direction)
@@ -371,7 +375,7 @@ var minigame = function(){
 		set_size();
 		add_quad();
 		set_collisions();
-		enter_final_stage();
+		// enter_final_stage();
 
 		document.activeElement.blur()
 
