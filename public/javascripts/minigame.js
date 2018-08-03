@@ -1,6 +1,8 @@
 /**
  * JavaScript quadcopter minigame
  * 
+ * In my spare time i fly with a 5" FPV quadcopter
+ * 
  * Created this just because drones are awesome.
  * It all began so small and simple, then i wanted to make it more fun..
  * @author Jonas van Ineveld
@@ -41,20 +43,24 @@ var minigame = function(){
 	var stats = this.stats;
 
 	var astroids = {
-		objects: [],
+		objects: {
+			solid: [],
+			cloud: [],
+			point: []
+		},
 		speed: 8,
 		count: {
 			solid: 0,
-			clouds: 4,
-			points: 0,
+			cloud: 4,
+			point: 0,
 		},
 		types: {
-			points: [{
+			point: [{
 				img: "/images/targets/star-134-120.png",
 				width: 134,
 				height: 120,
 			}],
-			solids: [
+			solid: [
 				{
 					img: "/images/targets/aircraft-280-122.png",
 					width: 280,
@@ -71,7 +77,7 @@ var minigame = function(){
 					height: 285,
 				},
 			],
-			flythroughs: [
+			cloud: [
 				{
 					img: "/images/clouds/cloud-300-146.png",
 					width: 300,
@@ -110,16 +116,16 @@ var minigame = function(){
 		10: {
 			count: {
 				solid: 1,
-				clouds: 4,
-				points: 2
+				cloud: 4,
+				point: 2
 			}
 		},
 		20: {
 			speed: 9,
 			count: {
 				solid: 2,
-				clouds: 6,
-				points: 2
+				cloud: 6,
+				point: 2
 			}
 		}
 	}
@@ -171,12 +177,13 @@ var minigame = function(){
 	function check_stage(){
 		if(stage===4) {
 			cur_time = Date.now();
-			sec_in = (cur_time - start_time) / 1000;
+			sec_in = Math.floor((cur_time - start_time) / 1000);
 
-			if(sec_stages[sec_in] && sec_stages[sec_in].num_astroids !== num_astroids){
-				num_astroids =sec_stages[sec_in].num_astroids;
-				astroid_speed = sec_stages[sec_in].astroid_speed;
-				key_increase =sec_stages[sec_in].key_increase;
+			console.log('sec in', sec_in, sec_stages[sec_in])
+			if(sec_stages[sec_in] && !sec_stages[sec_in].activated){
+				sec_stages[sec_in].activated = true;
+				astroids = Object.assign(astroids, sec_stages[sec_in]);
+				console.log('new astroids object', astroids);
 			}
 			return;
 		}
@@ -281,34 +288,38 @@ var minigame = function(){
 				}
 			}
 		});
-		if(astroids.objects.length){
 
-			astroids.objects.forEach(function(box, index){
+		var types = Object.keys(astroids.objects);
+
+		for(var i=0; i<types.length; i++){
+			var type = types[i];
+			var astrds = astroids.objects[type]
+
+			astrds.forEach(function(astr, index){
 				if(box_collision({
 					x: quad_x,
 					y: quad_y,
 					width: quad_width,
 					height: quad_height
-				}, box)){
+				}, astr)){
 	
 					has_collision = 'astroid'
 
-					switch(box.type){
+					switch(type){
 						case 'solid':
-							momentum_x -= astroid_speed + 10;
+							momentum_x -= astroids.speed + 10;
 							notices.show_notice('solid_astroid')
 						break;
 						case 'point':
-							astroids.splice(index,1);
+							astroids.objects[type].splice(index,1);
 							notices.show_notice('point')
 						break;
-						case 'flythrough':
+						case 'cloud':
 						break;
 					}
 				}
 			})
-		}
-		
+		}		
 
 		return has_collision;
 	}
@@ -316,46 +327,47 @@ var minigame = function(){
 	function render_astroids(){
 		astr_ctx.clearRect(0, 0, doc_width, doc_height);
 
-		var num_solid = astroid_config.cound.solid,
-			num_clouds = astroid_config.cound.clouds,
-			num_points = astroid_config.cound.points;
+		var types = Object.keys(astroids.count);
 
-		for(var i=0; i<num_solid; i++){
-			add_astroid('solid')
+		astr_ctx.restore();
+
+		for(var i=0; i<types.length; i++){
+			var type = types[i];
+			var num = astroids.count[type]
+
+			for(var x=0; x<num; x++){
+				add_astroid(type, x)
+				update_astroid(type, x)
+			}
 		}
 
-		// {
-		// 	if(astroids.length - 1 < i){
-				
-		// 	}
-			
-		// 	var astroid = astroids[i],
-		// 		cur_astroid_speed = astroid_speed + (astroid_speed / 20 * i);
-			
-		// 	if(astroid.x + astroid.width < 0)
-		// 	{
-		// 		astroids[i].x = doc_width;
-		// 		astroids[i].y = Math.round(Math.random() * doc_height)
-		// 	}
-		// 	else
-		// 	{
-		// 		astroids[i].x -= cur_astroid_speed;
-		// 	}
-
-		// 	astr_ctx.restore();
-		// 	astr_ctx.drawImage(astroid.$img,astroid.x,astroid.y,astroid.width,astroid.height);
-		// 	astr_ctx.setTransform(1, 0, 0, 1, 0, 0);
-		// 	astr_ctx.save();
-
-		// }
-		
+		astr_ctx.setTransform(1, 0, 0, 1, 0, 0);
+		astr_ctx.save();		
 	}
 
-	function add_astroid(type){ // solid || point || flythrough
+	function update_astroid(type, index){
+		var astroid = astroids.objects[type][index],
+			cur_astroid_speed = astroids.speed + (astroids.speed / 20 * index);
+
+		if(astroid.x + astroid.width < 0)
+		{
+			astroids.objects[type][index].x = doc_width;
+			astroids.objects[type][index].y = Math.round(Math.random() * doc_height)
+		}
+		else
+		{
+			astroids.objects[type][index].x -= cur_astroid_speed;
+		}
+
+		astr_ctx.drawImage(astroid.$img,astroid.x,astroid.y,astroid.width,astroid.height);
+	}
+
+	function add_astroid(type, index){ // solid || point || cloud
+		if(astroids.objects[type].length > index) // already exists?
+			return;
+
 		var $img = new Image(),
 			astr = pick_astroid(type);
-
-		console.log('adding astroid', type)
 
 		$img.onload = function() {
 			draw();
@@ -363,25 +375,19 @@ var minigame = function(){
 
 		$img.src = astr.img;
 
-		astroids.push({
+		astroids.objects[type].push({
 			width: astr.width,
 			height: astr.height,
-			x: Math.round(doc_width + (i * doc_width / 2)),
+			x: Math.round(doc_width + (index * doc_width / 2)),
 			y: Math.round(Math.random() * doc_height),
-			solid: solid,
 			type: type,
 			$img: $img
 		})
 	}
 
 	function pick_astroid(type){
-		let types = astroid_types['flythroughs']
-
-		if(type==='solid')
-			types = astroid_types['solids']
-
-		if(type==='point')
-			types = astroid_types['points']
+		console.log(type, astroids.types)
+		let types = astroids.types[type]
 
 		return types[Math.floor(Math.random() * types.length)];
 	}
@@ -426,18 +432,18 @@ var minigame = function(){
 					case "down": momentum_y += key_increase; break;
 				}
 
-				active_keys.push(direction)
+				keys.push(direction)
 			}
 		}
 
 		return keys;
 	}
 
-	function check_rotation(){
-		if(active_keys.includes('left')){
+	function check_rotation(keys){
+		if(keys.includes('left')){
 			rotate_angle -= 4
 		}
-		if(active_keys.includes('right')){
+		if(keys.includes('right')){
 			rotate_angle += 4
 		}
 	}
@@ -467,9 +473,9 @@ var minigame = function(){
 		if(playing){
 			var down_force = gravity;
 
-			check_key_directions();
+			var keys = check_key_directions();
 			check_for_collision()
-			check_rotation(active_keys);
+			check_rotation(keys);
 
 			if(stage===4){
 				render_astroids();
