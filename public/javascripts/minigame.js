@@ -40,6 +40,57 @@ var minigame = function(){
 		left: false,
 		right: false
 	}
+	var astroid_types = {
+		solids: [
+			{
+				img: "/images/targets/aircraft-280-122.png",
+				width: 280,
+				height: 122,
+			},
+			{
+				img: "/images/targets/chair-200-285.png",
+				width: 200,
+				height: 285,
+			},
+			{
+				img: "/images/targets/shark-500-159.png",
+				width: 500,
+				height: 159,
+			}
+		],
+		flythroughs: [
+			{
+				img: "/images/clouds/cloud-300-146.png",
+				width: 300,
+				height: 146,
+			},
+			{
+				img: "/images/clouds/cloud-300-176.png",
+				width: 300,
+				height: 176,
+			},
+			{
+				img: "/images/clouds/cloud-300-182.png",
+				width: 300,
+				height: 182,
+			},
+			{
+				img: "/images/clouds/cloud-300-184.png",
+				width: 300,
+				height: 184,
+			},
+			{
+				img: "/images/clouds/cloud-300-189.png",
+				width: 300,
+				height: 189,
+			},
+			{
+				img: "/images/clouds/cloud-300-240.png",
+				width: 300,
+				height: 240,
+			}
+		]	
+	}
 
 	var collision_elements = [
 		'h1', 
@@ -232,12 +283,23 @@ var minigame = function(){
 		astr_ctx.clearRect(0, 0, doc_width, doc_height);
 		for(var i=0; i<num_astroids; i++){
 			if(astroids.length - 1 < i){
+				var $img = new Image(),
+					solid = (i%2===0 && i!==0),
+					astr = pick_astroid(solid ? 'solid' : '');
+
+				$img.onload = function() {
+					draw();
+				}
+
+				$img.src = astr.img;
+
 				astroids.push({
-					width: Math.round(Math.random() * 300)+100,
-					height: Math.round(Math.random() * 100)+30,
+					width: astr.width,
+					height: astr.height,
 					x: Math.round(doc_width + (i * doc_width / 2)),
 					y: Math.round(Math.random() * doc_height),
-					solid: (i%2===0 && i!==0)
+					solid: solid,
+					$img: $img
 				})
 			}
 			
@@ -255,13 +317,21 @@ var minigame = function(){
 			}
 
 			astr_ctx.restore();
-			astr_ctx.fillStyle = astroid.solid ? 'red' : 'white';
-			astr_ctx.fillRect(astroid.x,astroid.y,astroid.width,astroid.height);
+			astr_ctx.drawImage(astroid.$img,astroid.x,astroid.y,astroid.width,astroid.height);
 			astr_ctx.setTransform(1, 0, 0, 1, 0, 0);
 			astr_ctx.save();
 
 		}
 		
+	}
+
+	function pick_astroid(type){
+		let types = astroid_types['flythroughs']
+
+		if(type==='solid')
+			types = astroid_types['solids']
+
+		return types[Math.floor(Math.random() * types.length)];
 	}
 
 	function add_quad(){
