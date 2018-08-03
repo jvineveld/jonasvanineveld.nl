@@ -575,19 +575,8 @@ select:-webkit-autofill:focus {
     position: absolute;
     top: -14px;
     left: -15px; }
-    #avatar .deco:before {
-      content: " ";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-top: -102px;
-      margin-left: -103.5px;
-      height: 204px;
-      width: 207px;
-      background: url("/images/avatar-hover.png");
-      transform-origin: 50% 50%;
-      z-index: -1;
-      transition: all .4s; }
+    #avatar .deco svg {
+      overflow: visible; }
     #avatar .deco:after {
       content: " ";
       position: absolute;
@@ -601,6 +590,11 @@ select:-webkit-autofill:focus {
       z-index: -1;
       border-radius: 50%;
       transition: all .4s; }
+  #avatar #shard_1,
+  #avatar #shard_2,
+  #avatar #shard_3,
+  #avatar #shard_4 {
+    display: none; }
   #avatar:hover .deco,
   [game-active="true"] #avatar .deco {
     opacity: 1;
@@ -611,12 +605,25 @@ select:-webkit-autofill:focus {
     #avatar:hover .deco:after,
     [game-active="true"] #avatar .deco:after {
       animation: avatar-after 5s infinite linear; }
-  [game-active="true"] #avatar .deco:after {
+  [game-active="true"] #avatar .deco:after,
+  [game-active="true"] #avatar > img {
     display: none; }
   #avatar img {
     max-width: 100%;
     position: relative;
     z-index: 2; }
+  [stage="hit"] #avatar #shard_1 {
+    display: block; }
+  [stage="getting-hit"] #avatar #shard_1 {
+    display: block; }
+  [stage="getting-hit"] #avatar #shard_2 {
+    display: block; }
+  [stage="target_broke"] #avatar #shard_1 {
+    display: block; }
+  [stage="target_broke"] #avatar #shard_2 {
+    display: block; }
+  [stage="target_broke"] #avatar #shard_3 {
+    display: block; }
 
 #start-game {
   position: absolute;
@@ -627,7 +634,7 @@ select:-webkit-autofill:focus {
   color: #fff;
   background: #232323;
   border: 2px solid #31988f;
-  z-index: 3;
+  z-index: 6;
   font-size: 1.6rem;
   font-weight: bold;
   border-radius: 50%;
@@ -671,7 +678,7 @@ select:-webkit-autofill:focus {
       transform: scale(1); }
   [game-active="true"] #start-game {
     opacity: 1;
-    background-color: #fff;
+    background-color: transparent;
     transition: background .3s; }
     [game-active="true"] #start-game .start {
       display: none; }
@@ -694,14 +701,6 @@ select:-webkit-autofill:focus {
         transition-delay: .1s; }
     [game-active="true"] #start-game:before {
       display: none; }
-  [stage="getting-hit"] #start-game .intro {
-    position: relative;
-    transform: translate(0, -18px);
-    animation: none;
-    opacity: 1; }
-    [stage="getting-hit"] #start-game .intro:before {
-      opacity: 1;
-      transform: translate(0, 0); }
   [stage="final"] #start-game {
     display: none; }
 

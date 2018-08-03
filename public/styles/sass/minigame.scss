@@ -24,21 +24,25 @@
 		top: -14px;
 		left: -15px;
 
-		&:before{
-			content:" ";
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			margin-top:-($height/2);
-			margin-left: -($width/2);
-			height: $height;
-			width: $width;
-			background: url('/images/avatar-hover.png');
+		// &:before{
+		// 	content:" ";
+		// 	position: absolute;
+		// 	left: 50%;
+		// 	top: 50%;
+		// 	margin-top:-($height/2);
+		// 	margin-left: -($width/2);
+		// 	height: $height;
+		// 	width: $width;
+		// 	background: url('/images/avatar-hover.png');
 	
-			transform-origin: 50% 50%;
+		// 	transform-origin: 50% 50%;
 	
-			z-index: -1;
-			transition: all .4s;
+		// 	z-index: -1;
+		// 	transition: all .4s;
+		// }
+
+		svg{
+			overflow: visible;
 		}
 	
 		&:after{
@@ -60,6 +64,14 @@
 		}
 	}
 
+
+	#shard_1,
+	#shard_2,
+	#shard_3,
+	#shard_4{
+		display: none;
+	}
+
 	&:hover,
 	[game-active="true"] &
 	{
@@ -74,7 +86,8 @@
 
 	[game-active="true"] &
 	{
-		.deco:after{display: none;}
+		.deco:after,
+		> img{display: none;}
 	}
 
 	img
@@ -82,6 +95,21 @@
 		max-width: 100%;
 		position: relative;
 		z-index: 2;
+	}
+
+	[stage="hit"] &{
+		#shard_1{ display: block; }
+	}
+
+	[stage="getting-hit"] &{
+		#shard_1{ display: block; }
+		#shard_2{ display: block; }
+	}
+
+	[stage="target_broke"] &{
+		#shard_1{ display: block; }
+		#shard_2{ display: block; }
+		#shard_3{ display: block; }
 	}
 }
 
@@ -93,7 +121,7 @@
 	background: #232323;
 	border:2px solid #31988f;
 
-	z-index: 3;
+	z-index: 6;
 	font-size: 1.6rem;
 	font-weight: bold;
 	border-radius: 50%;
@@ -149,7 +177,7 @@
 
 	[game-active="true"] &{
 		opacity: 1;
-		background-color: #fff;
+		background-color: transparent;
 		transition: background .3s;
 
 		.start{ display: none;}
@@ -179,21 +207,6 @@
 
 		&:before{
 			display: none;
-		}
-	}
-
-	[stage="getting-hit"] &{
-		.intro
-		{
-			position: relative;
-			transform: translate(0, -18px);
-			animation: none;
-			opacity: 1;
-
-			&:before{
-				opacity: 1;
-				transform: translate(0, 0);
-			}
 		}
 	}
 

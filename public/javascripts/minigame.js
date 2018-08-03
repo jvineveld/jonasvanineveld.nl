@@ -190,6 +190,7 @@ var minigame = function(){
 
 		if(avatar_hitcount === 1 && stage!==1.5){
 			stage = 1.5;
+			$body.setAttribute('stage', 'hit')
 			notices.show_notice('avatar')
 		}
 		if(avatar_hitcount === Math.round(avatar_hittarget / 2) && stage!==2){
