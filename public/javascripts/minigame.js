@@ -30,9 +30,10 @@ var minigame = function(){
 	var stage = 1;
 	var avatar_hitcount = 0;
 	var avatar_hittarget = 4;
-	var num_astroids = 10;
+	var num_astroids = 4;
 	var astroids = [];
-	var astroid_speed = 12;
+	var astroid_speed = 8;
+	var start_time = 0;
 	var keys = {
 		up: false,
 		down: false,
@@ -85,7 +86,26 @@ var minigame = function(){
 	}
 
 	function check_stage(){
-		if(stage===4) return;
+		if(stage===4) {
+			cur_time = Date.now();
+			sec_in = (cur_time - start_time) / 1000;
+
+			if(sec_in > 30 && num_astroids < 7){
+				num_astroids = 7;
+				astroid_speed = 12;
+				key_increase = 2;
+			} else if(sec_in > 60 && num_astroids < 12){
+				num_astroids = 12;
+				astroid_speed = 13;
+				key_increase = 3;
+			} else if(sec_in > 60 && num_astroids < 12 && astroid_speed !==14){
+				num_astroids = 12;
+				astroid_speed = 14;
+				key_increase = 5;
+			}
+			console.log(sec_in)
+			return;
+		}
 
 		if(avatar_hitcount === Math.round(avatar_hittarget / 2) && stage!==2){
 			stage = 2;
@@ -331,9 +351,9 @@ var minigame = function(){
 
 			if(stage===4){
 				render_astroids();
-			}else{
-				check_stage()
 			}
+
+			check_stage()
 
 			if(collision && collision!=='astroid'){
 				momentum_x = momentum_x > 0 ? momentum_x : 0;
@@ -342,7 +362,7 @@ var minigame = function(){
 			} 
 
 			if(collision==='astroid'){
-
+				console.log('bam!')
 			}
 
 			// can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
@@ -370,6 +390,8 @@ var minigame = function(){
 
 	function init(){
 		$body.setAttribute('game-active', true);
+
+		start_time = Date.now();
 
 		set_canvas();
 		set_size();
