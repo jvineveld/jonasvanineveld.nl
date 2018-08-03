@@ -132,27 +132,36 @@ var minigame = function(){
 		console.log('collision boxes', collision_boxes)
 	}
 
+	function box_collision(obj_1, obj_2){
+		var compare = {
+			within_box_x_right: obj_1.x < obj_2.x + obj_2.width,
+			within_box_x_left: obj_1.x + obj_1.width > obj_2.x,
+			within_box_y_bottom: obj_1.y < obj_2.y + obj_2.height,
+			within_box_y_top: obj_1.height + obj_1.y > obj_2.y
+		}
+
+		return (compare.within_box_x_right && compare.within_box_x_left && compare.within_box_y_bottom && compare.within_box_y_top);
+	}
+
 	function check_for_collision(){
 		var has_collision = false;
 		var margin = 20;
 		collision_boxes.forEach(function(box, index){
 			var bounds = box.bounds;
 			if(box.type === 'rect'){
-				var compare = {
-					within_box_x_right: quad_x < bounds.x + bounds.width,
-					within_box_x_left: quad_x + quad_width > bounds.x,
-					within_box_y_bottom: (quad_y - margin) < bounds.y + bounds.height ,
-					within_box_y_top: quad_height + quad_y - margin > bounds.y
+				if(box_collision({
+					x: quad_x,
+					y: quad_y,
+					width: quad_width,
+					height: quad_height
+				}, bounds)){
+					var bottomTransform = doc_height - bounds.y - 100;
+
+					has_collision = true;
+
+					box.$el.setAttribute('touched', true)
+					box.$el.style.transform = 'translate(0, '+bottomTransform+'px)';
 				}
-				if (compare.within_box_x_right && compare.within_box_x_left && compare.within_box_y_bottom && compare.within_box_y_top) {
-						has_collision = true;
-	
-						box.$el.setAttribute('touched', true)
-						var bottomTransform = doc_height - bounds.y - 100;
-						box.$el.style.transform = 'translate(0, '+bottomTransform+'px)';
-						// delete collision_boxes[index];
-						collision_boxes.splice(index,1);
-				 }
 			}else if(box.type === 'avatar'){
 				var circle1 = {radius: box.bounds.width / 2, c_x: (box.bounds.width / 2) + box.bounds.x, c_y: (box.bounds.height / 2) + box.bounds.y};
 				var circle2 = {radius: quad_width / 2, c_x: (quad_width / 2) + quad_x, c_y: (quad_height / 2) + quad_y};
@@ -173,26 +182,45 @@ var minigame = function(){
 			}
 		});
 
+		astroids.forEach(function(box, index){
+			if(box_collision({
+				x: quad_x,
+				y: quad_y,
+				width: quad_width,
+				height: quad_height
+			}, box)){
+
+				has_collision = 'astroid'
+				if(!box.solid){
+					// delete collision_boxes[index];
+					collision_boxes.splice(index,1);
+				}else{
+					momentum_x -= astroid_speed + 10;
+				}	
+			}
+		})
+		
+
 		return has_collision;
 	}
 
 	function render_astroids(){
-		
 		astr_ctx.clearRect(0, 0, doc_width, doc_height);
 		for(var i=0; i<num_astroids; i++){
 			if(astroids.length - 1 < i){
 				astroids.push({
-					width: 200,
-					height: 100,
+					width: Math.round(Math.random() * 300)+100,
+					height: Math.round(Math.random() * 100)+30,
 					x: Math.round(doc_width + (i * doc_width / 2)),
-					y: Math.round(Math.random() * doc_height)
+					y: Math.round(Math.random() * doc_height),
+					solid: (i%2===0 && i!==0)
 				})
 			}
 			
 			var astroid = astroids[i],
 				cur_astroid_speed = astroid_speed + (astroid_speed / 20 * i);
 			
-			if(astroid.x < 0)
+			if(astroid.x + astroid.width < 0)
 			{
 				astroids[i].x = doc_width;
 				astroids[i].y = Math.round(Math.random() * doc_height)
@@ -203,14 +231,12 @@ var minigame = function(){
 			}
 
 			astr_ctx.restore();
-			astr_ctx.fillStyle = 'white';
+			astr_ctx.fillStyle = astroid.solid ? 'red' : 'white';
 			astr_ctx.fillRect(astroid.x,astroid.y,astroid.width,astroid.height);
 			astr_ctx.setTransform(1, 0, 0, 1, 0, 0);
 			astr_ctx.save();
 
 		}
-
-		console.log(astroids, astr_ctx)
 		
 	}
 
@@ -305,11 +331,15 @@ var minigame = function(){
 				check_stage()
 			}
 
-			if(collision){
+			if(collision && collision!=='astroid'){
 				momentum_x = momentum_x > 0 ? momentum_x : 0;
 				momentum_y = momentum_y < 0 ? momentum_y : 0;
 				down_force = 0;
 			} 
+
+			if(collision==='astroid'){
+
+			}
 
 			// can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
 			momentum_x = momentum_x * drag;
