@@ -1,3 +1,6 @@
+body{
+	overflow: hidden;
+}
 
 #avatar
 {
@@ -49,12 +52,12 @@
 			content:" ";
 			position: absolute;
 			left: 50%;
-			top: -34px;
-			margin-left:-18px;
-			height: 17px;
-			width: 36px;
+			top: -54px;
+			margin-left: -50px;
+			height: 44px;
+			width: 100px;
 			background: url('/images/quadcopter.svg') no-repeat center center;
-			background-size: 36px auto;
+			background-size: 100px auto;
 	
 			// animation: avatar-after 5s infinite linear;
 	

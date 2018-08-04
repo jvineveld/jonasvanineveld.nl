@@ -557,6 +557,9 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #464c7c inset;
   transition: background-color 5000s ease-in-out 0s; }
 
+body {
+  overflow: hidden; }
+
 #avatar {
   opacity: 0;
   animation: avatar-in .3s ease-out forwards;
@@ -581,12 +584,12 @@ select:-webkit-autofill:focus {
       content: " ";
       position: absolute;
       left: 50%;
-      top: -34px;
-      margin-left: -18px;
-      height: 17px;
-      width: 36px;
+      top: -54px;
+      margin-left: -50px;
+      height: 44px;
+      width: 100px;
       background: url("/images/quadcopter.svg") no-repeat center center;
-      background-size: 36px auto;
+      background-size: 100px auto;
       z-index: -1;
       border-radius: 50%;
       transition: all .4s; }

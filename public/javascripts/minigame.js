@@ -12,7 +12,7 @@ var minigame = function(){
 	var $body = document.getElementsByTagName('body')[0];
 	var $avatar = document.getElementById('avatar');
 	var $quad = new Image();
-	var quad_x, quad_y, quad_angle = 1, quad_move_angle = 0, quad_width = 30, quad_height = 20;
+	var quad_x, quad_y, quad_angle = 1, quad_last_angle, quad_move_angle = 0, quad_width = 200, quad_height = 40;
 	var doc_width, doc_height;
 	var canvases = [];
 	var $canvas;
@@ -20,16 +20,22 @@ var minigame = function(){
 	var avatar_pos;
 	var can_ctx;
 	var astr_ctx;
-	var rotate_angle = 0;
+	var rotate_angle = 90;
+	var vector_angle = 90;
 	var momentum_x = 1;
 	var momentum_y = 1;
-	var key_increase = 1;
+	var key_increase = .5;
+	var max_speed = 8;
+	var rot_increase = 4;
 	var gravity = 0;
-	var drag = .95;
+	var drag = .98;
+	var winddrag = .97;
 	var playing = true;
 	var going_down = false;
 	var prev_pos_y = 0;
+	var gravity_increase = 4;
 	var stage = 1;
+	var speed = 0;
 	var avatar_hitcount = 0;
 	var avatar_hittarget = 4;
 	var start_time = 0;
@@ -48,7 +54,7 @@ var minigame = function(){
 			cloud: [],
 			point: []
 		},
-		speed: 8,
+		speed: .7,
 		count: {
 			solid: 0,
 			cloud: 4,
@@ -121,7 +127,7 @@ var minigame = function(){
 			}
 		},
 		20: {
-			speed: 9,
+			speed: 2,
 			count: {
 				solid: 2,
 				cloud: 6,
@@ -395,8 +401,8 @@ var minigame = function(){
 
 	function add_quad(){
 		$quad.onload = function() {
-			quad_x = avatar_pos.x + 69;
-			quad_y = avatar_pos.y - 40;
+			quad_x = avatar_pos.x + avatar_pos.width / 2;
+			quad_y = avatar_pos.y - 54;
 			
 			draw();
 		}
@@ -422,33 +428,6 @@ var minigame = function(){
 		if(active && !playing) play_pause()
 	}
 
-	function check_key_directions(){
-		let keys = [];
-		for(direction in active_keys){
-			if(active_keys[direction]){
-				switch(direction){
-					case "left": momentum_x -= key_increase;  break;
-					case "right": momentum_x += key_increase; break;
-					case "up": momentum_y -= key_increase; break;
-					case "down": momentum_y += key_increase; break;
-				}
-
-				keys.push(direction)
-			}
-		}
-
-		return keys;
-	}
-
-	function check_rotation(keys){
-		if(keys.includes('left')){
-			rotate_angle -= 4
-		}
-		if(keys.includes('right')){
-			rotate_angle += 4
-		}
-	}
-
 	function check_for_bounds(){
 		if(quad_x > doc_width)
 			quad_x = 0;
@@ -463,36 +442,84 @@ var minigame = function(){
 
 	function draw(){
 		can_ctx.clearRect(0, 0, doc_width, doc_height);
-		can_ctx.translate(Math.round(quad_x + $quad.width / 2), Math.round(quad_y + $quad.height / 2));
-		rotate_angle = rotate_angle * drag;
-		can_ctx.rotate(rotate_angle * Math.PI / 180);
-		can_ctx.drawImage($quad, 0 - $quad.width / 2, 0 - $quad.height / 2);
+		can_ctx.translate(Math.round(quad_x + quad_width/ 2), Math.round(quad_y + quad_height / 2));
+		// _rotate_angle = rotate_angle * drag;
+		can_ctx.rotate((rotate_angle - 90) * Math.PI / 180);
+		can_ctx.drawImage($quad, 0 - quad_width / 2, 0 - quad_height/ 2, quad_width, quad_height);
 		can_ctx.setTransform(1, 0, 0, 1, 0, 0);
 	}
 
 	function loop(){
 		if(playing){
-			var down_force = gravity;
-
-			var keys = check_key_directions();
 			check_for_collision()
-			check_rotation(keys);
-
-			if(stage===4){
-				render_astroids();
-			}
-
 			check_stage()
 
-			// can_ctx.clearRect(0, 0, doc_width, doc_height); // clear canvas
-			momentum_x = momentum_x * drag;
-			momentum_y = momentum_y * drag;
-			quad_angle += quad_move_angle * Math.PI / 180;
-			quad_x += momentum_x * Math.sin(quad_angle);
-			quad_y += momentum_y * Math.cos(quad_angle) + down_force;
+			var down_force = gravity;
 
-			going_down = momentum_y > prev_pos_y;
+			quad_angle = quad_last_angle;
+
+			speed = speed * winddrag;
+
+			for(direction in active_keys){
+				if(active_keys[direction]){
+					switch(direction){
+						case "left": 
+							rotate_angle -= rot_increase;
+						break;
+						case "right": 
+							rotate_angle += rot_increase;
+						break;
+						case "up": 
+							speed -= key_increase; 
+
+							var rot_dev = rotate_angle / (rotate_angle / 360),
+								vec_deg = vector_angle / (vector_angle / 360);
+
+							console.log(vector_angle, rotate_angle, rot_dev, vec_deg)
+
+							// eased_rotate_angle = rotate_angle >
+							if(active_keys.left){
+								console.log('correct!', rotate_angle, rot_increase)
+								vector_angle -= 3;
+								speed += key_increase ;
+							}
+
+							if(active_keys.right){
+								vector_angle += 3;
+								speed += key_increase ;
+							}
+
+							Math.abs(-2000) / ( Math.abs(-18000) / 360 )
+
+							quad_angle = (rotate_angle) * Math.PI / 180;
+
+						break;
+						case "down": 
+							speed += key_increase; 
+
+							quad_angle = rotate_angle * Math.PI / 180;
+						break;
+					}
+				}
+			}
+
+			// if( ! Object.keys(active_keys).length){
+			// 	if(rotate_angle > 90 && rotate_angle < 260){
+			// 		rotate_angle += rot_increase;
+			// 	} else if(rotate_angle < 90 || rotate_angle > 260){
+			// 		rotate_angle -= rot_increase;
+			// 	}
+			// }	
+
+			quad_y += (speed * Math.sin(quad_angle)) + gravity;
+			quad_x += speed * Math.cos(quad_angle);
+			
+			y_distance = momentum_y - prev_pos_y;
 			prev_pos_y = momentum_y;
+
+			if(y_distance > 0) gravity += gravity_increase
+
+			quad_last_angle = quad_angle
 
 			draw();
 			window.requestAnimationFrame(loop);
