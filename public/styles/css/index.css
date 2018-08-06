@@ -628,6 +628,13 @@ body {
   [stage="target_broke"] #avatar #shard_3 {
     display: block; }
 
+#info-line {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 14px;
+  z-index: 80; }
+
 #start-game {
   position: absolute;
   top: 0;

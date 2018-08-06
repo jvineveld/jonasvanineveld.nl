@@ -39,6 +39,8 @@ var minigame = function(){
 	var avatar_hitcount = 0;
 	var avatar_hittarget = 4;
 	var start_time = 0;
+	var info_line = '[esc] om te stoppen | [spatie] voor pauze',
+		$info_line
 	var active_keys = {
 		up: false,
 		down: false,
@@ -401,8 +403,8 @@ var minigame = function(){
 
 	function add_quad(){
 		$quad.onload = function() {
-			quad_x = avatar_pos.x + avatar_pos.width / 2;
-			quad_y = avatar_pos.y - 54;
+			quad_x = avatar_pos.x - 10;
+			quad_y = avatar_pos.y - 74;
 			
 			draw();
 		}
@@ -413,7 +415,7 @@ var minigame = function(){
 		e = e || window.event;
 
 		var active =  e.type === 'keydown';
-		
+
 		switch(e.keyCode){
 			case 38: 
 			case 87: active_keys.up = active; break;
@@ -423,9 +425,11 @@ var minigame = function(){
 			case 65: active_keys.left = active; break;
 			case 39: 
 			case 68: active_keys.right = active; break;
+			case 32: if(active) play_pause(); break;
+			case 27: if(active) exit_game(); break;
 		}
 
-		if(active && !playing) play_pause()
+		if(active && !playing && [38,87].includes(e.keyCode)) play_pause()
 	}
 
 	function check_for_bounds(){
@@ -525,7 +529,13 @@ var minigame = function(){
 			window.requestAnimationFrame(loop);
 			check_for_bounds()
 		}
+	}
 
+	function add_controls(){
+		$info_line = document.createElement('span');
+		$info_line.id = 'info-line';
+		$info_line.innerHTML = info_line;
+		$body.appendChild($info_line)
 	}
 
 	function play_pause(){ 
@@ -536,6 +546,8 @@ var minigame = function(){
 
 	function init(){
 		$body.setAttribute('game-active', true);
+
+		add_controls();
 
 		start_time = Date.now();
 
@@ -552,17 +564,55 @@ var minigame = function(){
 		document.addEventListener('click', play_pause);
 	}
 
+	function exit_game(){
+		playing = false;
+
+		canvases.forEach(function(canvas){
+			canvas.$el.parentNode.removeChild(canvas.$el)
+		});
+
+		document.removeEventListener('keydown', checkInput);
+		document.removeEventListener('keyup', checkInput);
+		document.removeEventListener('click', play_pause);
+
+		$body.removeAttribute('game-active');
+		$body.removeAttribute('stage');
+		$body.removeChild($info_line)
+
+		var types = [
+			'collision-object',
+			'touched'
+		]
+
+		types.forEach(function(type){
+			var $types = document.querySelectorAll('['+type+']');
+			for(var i=0; i<$types.length; i++){
+				$types[i].removeAttribute(type)
+				$types[i].style.transform = null;
+			}
+		})
+
+		// garbage collection
+		$body = $quad = $avatar = astroids = $canvas = $astroid_canvas = null;
+		delete window.mg.game
+		
+	}
+
 	init();
 
 	return this;
 }
 
-var mg = false;
+
+
+window.mg = {};
 function init_game(){ 
-	if(!mg) mg = minigame.apply({
-		stats: new statKeeper(),
-		notices: new notices()
-	}) 
+	if(!window.mg.game){
+		window.mg.game = minigame.apply({
+			stats: new statKeeper(),
+			notices: new notices()
+		}) 
+	}
 }
 
 
