@@ -12,41 +12,36 @@ console.log(process.env.MAILSERVER)
 const port = 8080;
 
 const send_mail = function(htmlContents, plainContents, name){
-	// Generate test SMTP service account from ethereal.email
-	// Only needed if you don't have a real mail account for testing
-	nodemailer.createTestAccount((err, account) => {
-		// create reusable transporter object using the default SMTP transport
-		let transporter = nodemailer.createTransport({
-			host: process.env.MAILSERVER,
-			port: 587,
-			secure: true, // true for 465, false for other ports
-			auth: {
-				user: process.env.MAILSERVER_USER, // generated ethereal user
-				pass: process.env.MAILSERVER_PASS // generated ethereal password
-			}
-		});
+	let transporter = nodemailer.createTransport({
+		host: process.env.MAILSERVER,
+		port: 587,
+		secure: true, // true for 465, false for other ports
+		auth: {
+			user: process.env.MAILSERVER_USER, // generated ethereal user
+			pass: process.env.MAILSERVER_PASS // generated ethereal password
+		}
+	});
 
-		// setup email data with unicode symbols
-		let mailOptions = {
-			from: 'info@makeityourown.nl', // sender address
-			to: 'jonas@makeityourown.nl', // list of receivers
-			subject: 'Website contact: '+name, // Subject line
-			text: plainContents, // plain text body
-			html: htmlContents // html body
-		};
+	// setup email data with unicode symbols
+	let mailOptions = {
+		from: 'info@makeityourown.nl', // sender address
+		to: 'jonas@makeityourown.nl', // list of receivers
+		subject: 'Website contact: '+name, // Subject line
+		text: plainContents, // plain text body
+		html: htmlContents // html body
+	};
 
-		// send mail with defined transport object
-		transporter.sendMail(mailOptions, (error, info) => {
-			if (error) {
-				return console.log(error);
-			}
-			console.log('Message sent: %s', info.messageId);
-			// Preview only available when sending through an Ethereal account
-			console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+	// send mail with defined transport object
+	transporter.sendMail(mailOptions, (error, info) => {
+		if (error) {
+			return console.log(error);
+		}
+		console.log('Message sent: %s', info.messageId);
+		// Preview only available when sending through an Ethereal account
+		console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-			// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-			// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-		});
+		// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+		// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 	});
 }
 
