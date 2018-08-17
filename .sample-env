@@ -1,3 +1,6 @@
 MAILSERVER=username@ethereal.email
 MAILSERVER_USER=someUser
 MAILSERVER_PASS=somePassword
+MAILSERVER_URL=smtps://username%40gmail.com:password@smtp.gmail.com:465
+LISTENING_PORT:8080
+DOMAIN:localhost

@@ -75,6 +75,13 @@
 
 
 @media all and (max-width: 800px){
+	body{
+		overflow: auto;
+	}
+
+	#background-video-wrapper{
+		display: none;
+	}
 	.wrapper{
 		display: block;
 		padding-top:100px;
@@ -185,7 +192,15 @@
 		align-items: center;
 
 		> div{ order: 1 }
-		#avatar{ order: 2; margin-top: 30px; }
+		#avatar{ 
+			order: 2; margin-top: 30px; 
+
+			.deco,
+			#start-game{
+				display: none !important;
+			}
+
+		}
 	}
 }
 

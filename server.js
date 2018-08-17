@@ -1,50 +1,43 @@
 "use strict";
 
-const connect = require('connect');
 const serveStatic = require('serve-static');
 const nodemailer = require('nodemailer');
-const app = connect();
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const compression = require('compression')
+const express = require('express')
+const app = express()
+var path = require('path');
 
-
-dotenv.load()
-
-console.log(process.env.MAILSERVER)
 const port = 8080;
 
+dotenv.load()
+app.use(compression())
+
 const send_mail = function(htmlContents, plainContents, name){
-	let transporter = nodemailer.createTransport({
-		host: process.env.MAILSERVER,
-		port: 587,
-		secure: true, // true for 465, false for other ports
-		auth: {
-			user: process.env.MAILSERVER_USER, // generated ethereal user
-			pass: process.env.MAILSERVER_PASS // generated ethereal password
-		}
-	});
+	return new Promise((resolve, reject) => {
+		let transporter = nodemailer.createTransport(process.env.MAILSERVER_URL);
 
-	// setup email data with unicode symbols
-	let mailOptions = {
-		from: 'info@makeityourown.nl', // sender address
-		to: 'jonas@makeityourown.nl', // list of receivers
-		subject: 'Website contact: '+name, // Subject line
-		text: plainContents, // plain text body
-		html: htmlContents // html body
-	};
+		// setup email data with unicode symbols
+		let mailOptions = {
+			from: 'info@makeityourown.nl', // sender address
+			to: 'jonas@makeityourown.nl', // list of receivers
+			subject: 'Website contact: '+name, // Subject line
+			text: plainContents, // plain text body
+			html: htmlContents // html body
+		};
+	
+		// send mail with defined transport object
+		transporter.sendMail(mailOptions, (error, info) => {
+			if (error){
+				console.log('error sending mail', error);
+				console.log('plain mail data:', plainContents)
+			}
 
-	// send mail with defined transport object
-	transporter.sendMail(mailOptions, (error, info) => {
-		if (error) {
-			return console.log(error);
-		}
-		console.log('Message sent: %s', info.messageId);
-		// Preview only available when sending through an Ethereal account
-		console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-		// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-		// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-	});
+			if(error) reject(error)
+			else resolve(true)
+		});
+	})
 }
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -79,13 +72,18 @@ app.use('/mail', function(req, res){
 
 	mailContents += '</div>';
 
-	send_mail(mailContents, plainContents, posted_fields['name']);
+	send_mail(mailContents, plainContents, posted_fields['name']).then(() => {
+		res.json({
+			success: true
+		});
+	}).catch(() => {
+		res.json({
+			success: false
+		});
+	})
 });
 
-app.use(serveStatic(__dirname+'/public')).listen(port, function(){
-	console.log('Server running on 8080...');
-	
-	var url = 'http://localhost:'+port;
-	var start = (process.platform == 'darwin'? 'open': process.platform == 'win32'? 'start': 'xdg-open');
-	require('child_process').exec(start + ' ' + url);
-});
+app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
+
+app.listen(port);
+console.log('Listening on port '+port);
