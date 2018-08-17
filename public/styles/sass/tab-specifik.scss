@@ -22,6 +22,8 @@
 	{
 		right:0;
 	}
+
+	li:before{display: none;}
 }
 
 [data-trans-to="contact"] + aside 

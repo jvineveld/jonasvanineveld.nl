@@ -1,0 +1,3 @@
+MAILSERVER=username@ethereal.email
+MAILSERVER_USER=someUser
+MAILSERVER_PASS=somePassword

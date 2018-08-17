@@ -10,6 +10,8 @@
     max-width: 600px; }
   #main.contact .back-btn {
     right: 0; }
+  #main.contact li:before {
+    display: none; }
 
 [data-trans-to="contact"] + aside .social a {
   animation: aside-social-out .3s ease-in forwards;

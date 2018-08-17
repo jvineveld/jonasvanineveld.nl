@@ -2,6 +2,8 @@
 
 form
 {
+	position: relative;
+
 	ul
 	{
 		list-style-type: none;
@@ -25,13 +27,26 @@ form
 				transition: all .3s;
 				font-size: 14px;
 			}
-
-
 		}
 	}
 
 	label
 	{
+		&:before{
+			content:" ";
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			width: 20px;
+			height: 20px;
+			background: url('/images/check.svg') no-repeat center center;
+			background-size: auto 20px;
+
+			opacity: 0;
+			transform: translate(10px, 0);
+			transition: all .3s;
+		}
+
 		&[data-valid]{
 			span
 			{
@@ -41,10 +56,18 @@ form
 		}
 
 		&[data-valid="valid"]{
+			&:before{
+				opacity: 1;
+				transform: translate(0, 0);
+			}
+			input, textarea{
+				border-color: #a6f7a6;
+			}
 			span
 			{
-				color: #1fde1f;
+				color: #a6f7a6;
 			}
+			
 		}
 	}
 
@@ -57,7 +80,7 @@ form
 		color: #fff;
 		border-radius: 3px;
 		font-size: 14px;
-		padding: 0 15px;
+		padding: 0 40px 0 15px;
 
 		outline: none;
 
@@ -72,13 +95,25 @@ form
 
 	textarea{
 		height: 100px;
-		padding: 15px 15px;
+		padding: 8px 40px 8px 15px;
+		line-height: 1.6;
 
 		&:focus
 		{
 			height: 220px;
 		}
 	}
+
+	#validation-info {
+		position: absolute;
+		left: 140px;
+		bottom: 0;
+	}
+}
+
+#validation-info div{
+	opacity: 0;
+	animation: aside-social-in .4s forwards;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

@@ -1,0 +1,8 @@
+
+    "exclude": [
+		"node_modules",
+		"build",
+		"**/build/*",
+        "**/node_modules/*"
+    ]
+}
