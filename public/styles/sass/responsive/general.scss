@@ -80,7 +80,7 @@
 	}
 
 	#background-video-wrapper{
-		display: none;
+		// display: none;
 	}
 	.wrapper{
 		display: block;
@@ -146,7 +146,7 @@
 		padding-bottom: 10px;
 		bottom: auto;
 		z-index: 20;
-		background: $bg_color;
+	//	background: $bg_color;
 		
 		.spacer
 		{
@@ -159,7 +159,7 @@
 	article{
 		position: fixed;
 		top:0; left:0; width: 100%; height: 100%;
-		background: $bg_color;
+	//	background: $bg_color;
 		padding: 20px;
 		box-sizing: border-box;
 		max-width: 100%;

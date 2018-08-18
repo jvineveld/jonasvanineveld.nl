@@ -2,7 +2,7 @@
   .wrapper {
     height: 93%; } }
 
-@media all and (max-height: 700px) {
+@media all and (max-height: 670px) {
   .wrapper {
     padding: 0 !important; }
   aside button {
@@ -16,7 +16,8 @@
       margin-left: 30px;
       min-width: 455px; }
   article[data-active] {
-    max-width: 700px; }
+    max-width: 700px;
+    min-height: 0; }
   .wrapper:before {
     flex: 0 0 1%; } }
 
@@ -25,12 +26,12 @@
     width: 125px; } }
 
 @media all and (max-height: 830px) and (max-width: 1344px) {
+  .wrapper:before {
+    display: none; }
   .wrapper > aside {
     flex: 0 0 30%; } }
 
 @media all and (max-width: 1200px) {
-  html {
-    font-size: 16px; }
   .wrapper:before {
     display: none; } }
 
@@ -39,12 +40,97 @@
     padding: 0; } }
 
 @media all and (max-width: 800px) {
+  body {
+    overflow: auto; }
   .wrapper {
     display: block;
     padding-top: 100px; }
+  .wrapper {
+    height: auto; }
+    .wrapper .social {
+      margin-top: 40px;
+      text-align: center;
+      order: 2; }
+    .wrapper nav {
+      order: 1; }
+    .wrapper aside {
+      position: relative;
+      width: 100%;
+      margin: 40px auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      padding-top: 40px; }
+      .wrapper aside:before {
+        position: absolute;
+        display: block;
+        content: " ";
+        top: 0;
+        left: 50%;
+        margin-left: -12.5px;
+        width: 25px;
+        height: 25px;
+        background: url(/images/star-hover.svg) no-repeat 50% 50%;
+        transition: all .4s; }
+      .wrapper aside button {
+        text-align: center;
+        background-image: none;
+        padding: 0;
+        line-height: 2; }
+        .wrapper aside button:before, .wrapper aside button:after {
+          display: none; }
   footer {
-    position: fixed;
-    top: 20px;
+    position: absolute;
+    top: 0;
     left: 0;
+    padding-top: 20px;
+    padding-bottom: 10px;
     bottom: auto;
-    z-index: 20; } }
+    z-index: 20; }
+    footer .spacer {
+      margin: 0 20px; }
+  article {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 100%; }
+    article#tab-intro {
+      position: relative;
+      width: auto;
+      height: auto;
+      padding: 0; }
+    article[data-active] {
+      z-index: 24; }
+  .back-btn,
+  #main.contact .back-btn {
+    top: 20px;
+    right: 20px; }
+  #tab-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    #tab-intro > div {
+      order: 1; }
+    #tab-intro #avatar {
+      order: 2;
+      margin-top: 30px; }
+      #tab-intro #avatar .deco,
+      #tab-intro #avatar #start-game {
+        display: none !important; } }
+
+@media all and (max-width: 520px) {
+  html {
+    font-size: 16px; } }
+
+@media all and (max-width: 462px) {
+  footer .spacer {
+    display: none; }
+  footer #phone {
+    display: block;
+    margin-bottom: 10px; }
+  .wrapper {
+    padding-top: 130px; } }

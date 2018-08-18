@@ -24,16 +24,16 @@ var minigame = function(){
 	var vector_angle = 90;
 	var momentum_x = 1;
 	var momentum_y = 1;
-	var key_increase = .5;
-	var max_speed = 8;
+	var key_increase = .9;
+	var max_speed = 20;
 	var rot_increase = 4;
-	var gravity = 0;
+	var gravity = 2;
 	var drag = .98;
 	var winddrag = .97;
 	var playing = true;
 	var going_down = false;
 	var prev_pos_y = 0;
-	var gravity_increase = 4;
+	var gravity_increase = 1;
 	var stage = 1;
 	var speed = 0;
 	var avatar_hitcount = 0;
@@ -196,25 +196,25 @@ var minigame = function(){
 			return;
 		}
 
-		if(avatar_hitcount === 1 && stage!==1.5){
-			stage = 1.5;
-			$body.setAttribute('stage', 'hit')
-			notices.show_notice('avatar')
-		}
-		if(avatar_hitcount === Math.round(avatar_hittarget / 2) && stage!==2){
-			stage = 2;
-			$body.setAttribute('stage', 'getting-hit')
-			notices.show_notice('avatar')
-		}
-		if(avatar_hitcount === avatar_hittarget - 1 && stage!==3){
-			stage = 3;
-			$body.setAttribute('stage', 'target_broke')
-			notices.show_notice('avatar')
-		}
-		if(avatar_hitcount === avatar_hittarget){
-			enter_final_stage();
-			notices.show_notice('avatar_success')
-		}
+		// if(avatar_hitcount === 1 && stage!==1.5){
+		// 	stage = 1.5;
+		// 	$body.setAttribute('stage', 'hit')
+		// 	notices.show_notice('avatar')
+		// }
+		// if(avatar_hitcount === Math.round(avatar_hittarget / 2) && stage!==2){
+		// 	stage = 2;
+		// 	$body.setAttribute('stage', 'getting-hit')
+		// 	notices.show_notice('avatar')
+		// }
+		// if(avatar_hitcount === avatar_hittarget - 1 && stage!==3){
+		// 	stage = 3;
+		// 	$body.setAttribute('stage', 'target_broke')
+		// 	notices.show_notice('avatar')
+		// }
+		// if(avatar_hitcount === avatar_hittarget){
+		// 	enter_final_stage();
+		// 	notices.show_notice('avatar_success')
+		// }
 	}
 
 	function enter_final_stage(){
@@ -260,6 +260,7 @@ var minigame = function(){
 
 	function check_for_collision(){
 		var has_collision = false;
+		var collisions = [];
 		var margin = 20;
 		collision_boxes.forEach(function(box, index){
 			var bounds = box.bounds;
@@ -273,6 +274,8 @@ var minigame = function(){
 					var bottomTransform = doc_height - bounds.y - 100;
 					notices.show_notice('destroyer')
 					has_collision = true;
+
+					collisions.push({ type: box.type })
 					
 					box.$el.setAttribute('touched', true)
 					box.$el.style.transform = 'translate(0, '+bottomTransform+'px)';
@@ -287,13 +290,15 @@ var minigame = function(){
 				var distance = Math.sqrt(dx * dx + dy * dy);
 
 				if (distance < circle1.radius + circle2.radius) {
-					momentum_y -= momentum_y * 2;
-					momentum_x -= momentum_x * 2;
+					// momentum_y -= momentum_y * 2;
+					// momentum_x -= momentum_x * 2;
 
-					avatar_hitcount += 1;
+					collisions.push({ type: 'solid' })
 
-					if(avatar_hitcount === avatar_hittarget)
-						collision_boxes.splice(index,1);
+					// avatar_hitcount += 1;
+
+					// if(avatar_hitcount === avatar_hittarget)
+					// 	collision_boxes.splice(index,1);
 				}
 			}
 		});
@@ -314,6 +319,8 @@ var minigame = function(){
 	
 					has_collision = 'astroid'
 
+					collisions.push({ type: type })
+
 					switch(type){
 						case 'solid':
 							momentum_x -= astroids.speed + 10;
@@ -330,7 +337,7 @@ var minigame = function(){
 			})
 		}		
 
-		return has_collision;
+		return collisions;
 	}
 
 	function render_astroids(){
@@ -455,57 +462,61 @@ var minigame = function(){
 
 	function loop(){
 		if(playing){
-			check_for_collision()
+			var collisions = check_for_collision()
 			check_stage()
-
-			var down_force = gravity;
 
 			quad_angle = quad_last_angle;
 
 			speed = speed * winddrag;
 
-			for(direction in active_keys){
-				if(active_keys[direction]){
-					switch(direction){
-						case "left": 
-							rotate_angle -= rot_increase;
-						break;
-						case "right": 
-							rotate_angle += rot_increase;
-						break;
-						case "up": 
-							speed -= key_increase; 
+				for(direction in active_keys){
+					if(active_keys[direction]){
+						switch(direction){
+							case "left": 
+								rotate_angle -= rot_increase;
+							break;
+							case "right": 
+								rotate_angle += rot_increase;
+							break;
+							case "up": 
+								var rot_dev = rotate_angle / (rotate_angle / 360),
+									vec_deg = vector_angle / (vector_angle / 360);
 
-							var rot_dev = rotate_angle / (rotate_angle / 360),
-								vec_deg = vector_angle / (vector_angle / 360);
+								if(!collisions.length){
+									speed -= key_increase; 
+								} else {
+									speed += key_increase; 
 
-							console.log(vector_angle, rotate_angle, rot_dev, vec_deg)
+								}
+	
+								// eased_rotate_angle = rotate_angle >
+								if(active_keys.left){
+									vector_angle -= 3;
+									speed += key_increase ;
+								}
+	
+								if(active_keys.right){
+									vector_angle += 3;
+									speed += key_increase ;
+								}
+	
+								// Math.abs(-2000) / ( Math.abs(-18000) / 360 )
+	
+								quad_angle = (rotate_angle) * Math.PI / 180;
 
-							// eased_rotate_angle = rotate_angle >
-							if(active_keys.left){
-								console.log('correct!', rotate_angle, rot_increase)
-								vector_angle -= 3;
-								speed += key_increase ;
+							break;
+							case "down": 
+							if(!collisions.length){
+								speed += key_increase; 
 							}
-
-							if(active_keys.right){
-								vector_angle += 3;
-								speed += key_increase ;
+							else{
+								speed -= key_increase; 
 							}
-
-							Math.abs(-2000) / ( Math.abs(-18000) / 360 )
-
-							quad_angle = (rotate_angle) * Math.PI / 180;
-
-						break;
-						case "down": 
-							speed += key_increase; 
-
-							quad_angle = rotate_angle * Math.PI / 180;
-						break;
+	
+							break;
+						}
 					}
 				}
-			}
 
 			// if( ! Object.keys(active_keys).length){
 			// 	if(rotate_angle > 90 && rotate_angle < 260){
@@ -514,14 +525,26 @@ var minigame = function(){
 			// 		rotate_angle -= rot_increase;
 			// 	}
 			// }	
+			quad_angle = (rotate_angle) * Math.PI / 180;
 
-			quad_y += (speed * Math.sin(quad_angle)) + gravity;
-			quad_x += speed * Math.cos(quad_angle);
+			if(collisions.length){
+				for(var i=0; i<collisions.length; i++){
+					var collision = collisions[i];
+
+					if(collision.type === 'solid'){
+						quad_y -= (Math.abs(speed)) * Math.sin(quad_angle);
+						quad_x -= (Math.abs(speed)) * Math.cos(quad_angle);
+						// speed = 0;
+						console.log('ok', speed, rotate_angle)
+					}
+				}
+
+			}else {
+				quad_y += (speed * Math.sin(quad_angle)) + gravity;
+				quad_x += speed * Math.cos(quad_angle);
+			}
 			
-			y_distance = momentum_y - prev_pos_y;
-			prev_pos_y = momentum_y;
-
-			if(y_distance > 0) gravity += gravity_increase
+			prev_pos_y = quad_y;
 
 			quad_last_angle = quad_angle
 
