@@ -24,8 +24,8 @@ var minigame = function(){
 	var vector_angle = 90;
 	var momentum_x = 1;
 	var momentum_y = 1;
-	var key_increase = .9;
-	var max_speed = 20;
+	var key_increase = .2;
+	var max_speed = 10;
 	var rot_increase = 4;
 	var gravity = 2;
 	var drag = .98;
@@ -281,7 +281,7 @@ var minigame = function(){
 					box.$el.style.transform = 'translate(0, '+bottomTransform+'px)';
 					collision_boxes.splice(index,1);
 				}
-			}else if(box.type === 'avatar'){
+			}else if(box.type === 'avatasdar'){
 				var circle1 = {radius: box.bounds.width / 2, c_x: (box.bounds.width / 2) + box.bounds.x, c_y: (box.bounds.height / 2) + box.bounds.y};
 				var circle2 = {radius: quad_width / 2, c_x: (quad_width / 2) + quad_x, c_y: (quad_height / 2) + quad_y};
 				
@@ -526,23 +526,9 @@ var minigame = function(){
 			// 	}
 			// }	
 			quad_angle = (rotate_angle) * Math.PI / 180;
-
-			if(collisions.length){
-				for(var i=0; i<collisions.length; i++){
-					var collision = collisions[i];
-
-					if(collision.type === 'solid'){
-						quad_y -= (Math.abs(speed)) * Math.sin(quad_angle);
-						quad_x -= (Math.abs(speed)) * Math.cos(quad_angle);
-						// speed = 0;
-						console.log('ok', speed, rotate_angle)
-					}
-				}
-
-			}else {
-				quad_y += (speed * Math.sin(quad_angle)) + gravity;
-				quad_x += speed * Math.cos(quad_angle);
-			}
+	
+			quad_y += (speed * Math.sin(quad_angle)) + gravity;
+			quad_x += speed * Math.cos(quad_angle);
 			
 			prev_pos_y = quad_y;
 

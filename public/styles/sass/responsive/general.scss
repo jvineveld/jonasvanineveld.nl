@@ -4,7 +4,7 @@
 	}
 }
 
-@media all and (max-height:670px){
+@media all and (max-height:670px) and (min-width:800px){
 	.wrapper
 	{
 		padding: 0 !important;
@@ -26,6 +26,11 @@
 			flex: 1 1;
 			margin-left: 30px;
 			min-width: 455px;
+
+			&#avatar{
+				flex: 1 1 100px;
+				min-width: 0;
+			}
 		}
 	}
 
@@ -75,20 +80,25 @@
 
 
 @media all and (max-width: 800px){
-	body{
-		overflow: auto;
-	}
-
 	#background-video-wrapper{
-		// display: none;
+		height: calc(100vh + 40px);
 
 		&:before{
 			background-color: rgba(33, 36, 59, 0.4);
 		}
 	}
+
+	#main.contact article{
+		max-width: none;
+	}
+
 	.wrapper{
 		display: block;
-		padding-top:100px;
+		padding-top:75px;
+		max-height: 100vh;
+		overflow: auto;
+		box-sizing:  border-box;
+		position: relative;
 	}
 
 	.wrapper
@@ -109,12 +119,14 @@
 		{
 			position: relative;
 			width: 100%;
-			margin: 40px auto;
+			margin: 30px auto 40px;
 			text-align: center;
 
-			display: flex;
+			display: flex !important;
 			flex-direction: column;
 			padding-top: 40px;
+
+			order: 3;
 
 			&:before
 			{
@@ -150,7 +162,7 @@
 		padding-bottom: 10px;
 		bottom: auto;
 		z-index: 20;
-	//	background: $bg_color;
+		order: 1;
 		
 		.spacer
 		{
@@ -163,16 +175,44 @@
 	article{
 		position: fixed;
 		top:0; left:0; width: 100%; height: 100%;
-	//	background: $bg_color;
 		padding: 20px;
 		box-sizing: border-box;
 		max-width: 100%;
+		overflow-y: auto;
+		overflow-x: hidden;
+		min-height: 0;
+
+		h2{
+			padding-right: 35px;
+		}
+
 		
 		&#tab-intro{
 			position: relative;
 			width: auto;
 			height: auto;
 			padding: 0;
+			display: flex !important;
+			overflow: hidden;
+			opacity: 0;
+			pointer-events:none;
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			> div{ order: 1 }
+			#avatar{ 
+				order: 2; 
+				margin-top: 30px; 
+				width: 125px;
+				height: 125px;
+
+				.deco,
+				#start-game{
+					display: none !important;
+				}
+			}
 		}
 
 		&[data-active]{
@@ -180,30 +220,145 @@
 		}
 	}
 
-	.back-btn,
-	#main.contact .back-btn
-	{
+	.back-btn{
 		top:20px;
 		right:20px;
+
+		span:before,span:after{
+			background: #e6e6e6;
+		}
 	}
 
+	#main.contact .back-btn{
+		right: 20px;
+	}
 
+	#main{
+		order: 2;
 
-	#tab-intro
-	{
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+		~ footer{
+			opacity: 0;
+			pointer-events: none;
+			visibility: hidden;
+			transform: translate(0, -40px);
+			animation: none;
+			transition: all .4s;
+		}
 
-		> div{ order: 1 }
-		#avatar{ 
-			order: 2; margin-top: 30px; 
-
-			.deco,
-			#start-game{
-				display: none !important;
+		+ aside 
+		{
+			&:before{ 
+				opacity: 0;
+				transform: scale(0);
+				transition: all .4s;
+				display: block;
 			}
 
+			.social a{
+				animation: aside-social-out .3s ease-in forwards;
+				opacity: 1;
+			
+				@for $i from 1 through 2 {
+					&:nth-child(#{$i}){
+						animation-delay:  $i * .02s;
+					}		
+				}
+			}
+
+			button{
+				animation: aside-btn-out .3s ease-in forwards;
+				opacity: 1;
+			
+				@for $i from 1 through 6 {
+					&:nth-child(#{$i}){
+						animation-delay:  $i * .02s;
+					}		
+				}
+			}
+		}
+	}
+
+	#main[data-active-tab="intro"] {
+		#tab-intro
+		{
+			opacity: 1;
+			pointer-events:all;
+		}
+
+		+ aside{
+			&:before{ 
+				opacity: 1;
+				transform: scale(1);
+			}
+
+			.social a{
+				opacity: 0;
+				animation: aside-social-in .4s ease-out forwards;
+		
+				&:nth-child(1){ animation-delay: .8s }
+				&:nth-child(2){ animation-delay: 1s }
+			}
+		
+			@for $i from 1 through 6 {
+				button:nth-child(#{$i}){
+					opacity: 0;
+					animation: aside-btn-in .4s ease-out forwards;
+					animation-delay: .2s + $i * .05s;
+				}		
+			}
+		}
+
+		~ footer{
+			opacity: 1;
+			pointer-events: all;
+			visibility: visible;
+			transform: translate(0, 0);
+		}
+	} 
+
+	form ul li{
+		label{
+			display: block;
+			transition: padding-top .3s ease-out;
+			
+			&[data-valid]{
+				padding-top:30px;
+			}
+
+
+			&:before{
+				top:40px;
+			}
+		}
+
+		span{
+			right:auto;
+			left:0;
+			top:0;
+		}
+	}
+
+	form .form-content{
+		ul{
+			margin:30px 0 0;
+
+			li{
+				margin-bottom: 20px;
+			}
+		}
+		button{
+			font-size: 23px;
+			background: rgba(255, 255, 255, 0.2);
+			padding: 10px 17px;
+		}
+
+		#validation-info{
+			font-size: 14px;
+			left: 180px;
+			line-height: 1.3;
+			height: 45px;
+			display: flex;
+			align-items: center;
 		}
 	}
 }

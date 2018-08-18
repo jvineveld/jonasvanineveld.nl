@@ -36,3 +36,7 @@
     animation-delay: 0.25s; }
   [data-trans-to="contact"] + aside button:nth-child(6) {
     animation-delay: 0.3s; }
+
+[data-trans-to="contact"] ~ footer {
+  animation: aside-btn-out .3s ease-in forwards;
+  opacity: 1; }

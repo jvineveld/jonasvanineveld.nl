@@ -26,27 +26,36 @@
 	li:before{display: none;}
 }
 
-[data-trans-to="contact"] + aside 
-{
-	.social a{
-		animation: aside-social-out .3s ease-in forwards;
-		opacity: 1;
-	
-		@for $i from 1 through 2 {
-			&:nth-child(#{$i}){
-				animation-delay:  $i * .05s;
-			}		
+[data-trans-to="contact"]{
+	+ aside 
+	{
+		.social a{
+			animation: aside-social-out .3s ease-in forwards;
+			opacity: 1;
+		
+			@for $i from 1 through 2 {
+				&:nth-child(#{$i}){
+					animation-delay:  $i * .05s;
+				}		
+			}
+		}
+
+		button{
+			animation: aside-btn-out .3s ease-in forwards;
+			opacity: 1;
+		
+			@for $i from 1 through 6 {
+				&:nth-child(#{$i}){
+					animation-delay:  $i * .05s;
+				}		
+			}
 		}
 	}
 
-	button{
+	~ footer{
 		animation: aside-btn-out .3s ease-in forwards;
-		opacity: 1;
-	
-		@for $i from 1 through 6 {
-			&:nth-child(#{$i}){
-				animation-delay:  $i * .05s;
-			}		
-		}
+			opacity: 1;
+		
 	}
+
 }

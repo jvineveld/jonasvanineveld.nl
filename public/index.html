@@ -1,22 +1,39 @@
 <!doctype html>
 <html lang="nl">
+<!--
+
+   /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+   | Jonas van Ineveld, Personal website - 2018                                 |
+   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+   | [ ✓ ] Has minigame! Found & played it already? ;-)                         |
+   | [ ✓ ] Sweet form handling & animations, send me some bs and check it out!  |
+   | [ ✓ ] Desktop / tablet and mobile responsive                               |
+   | [ ✓ ] Custom MarkDown file multilanguage content management setup          |
+   | [ ✓ ] No frameworks                                                        |
+   | [ ✓ ] No libraries                                                         |
+   | [ ✓ ] nodeJs, HTTP2 server push, brotli compressions                       |
+   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+   | Check the source: https://github.com/jvineveld/jonasvanineveld.nl          |
+   \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
+
+-->
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 	<title>Jonas van ineveld</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700" rel="stylesheet">
 	<link rel="stylesheet" href="/styles/css/index.css">
 </head>
-<body class="no-js"><script>document.getElementsByTagName('body')[0].className = ''</script>
+<body class="no-js"><script>document.body.className = ''</script>
 	<div class="wrapper">
-		<section id="main">
+		<section id="main" data-active-tab="intro">
 
 			<article id=tab-intro data-active>
 				<div id=avatar>
-					<span class=deco>
-					</span>
+					<span class=deco></span>
 					<button id=start-game onclick="init_game()">
 						<span class="start"><img width="60px" src=/images/gamepad.svg></span>
 						<span class="intro"><img width="90px" src=/images/keyboard.svg></span>
@@ -26,56 +43,39 @@
 
 				<div>
 					<header>
-						<h1>Ik ontwerp en realiseer <strong>digitale platformen</strong></h1>
+						<h1>[# md-line | intro_title #]</h1>
 					</header>
-					<p>Zowel <strong>online</strong> als (intranet) <strong>bedrijfsapplicaties</strong>.</p>
-					<p>Ik houd van <strong>schone frontends</strong>, <strong>snelle laadtijden</strong><br /> en een <strong>super gebruikersgemak / -interface</strong></p>
-					<p>Ik werk voor zowel grote merken als nieuwe start-ups,<br /><strong>freelance</strong> en <strong>interim</strong>.</p>
-					<p>Ik ben een <strong>Pixel Perfectionist</strong></p>
+
+					[# md-block | intro #]
 				</div>
 			</article>
 
 			<article id="tab-connectors">
-				<h2>Koppelen van Systemen</h2>
-				<p>Vaak wordt er binnen bedrijven met veel verschillende online platformen gewerkt. Als deze platformen niet goed op elkaar aansluiten kan dit lijden tot extra werkzaamheden als informatie dubbel invoeren, of informatie die verloren raakt door menselijke fouten.</p>
-				<p>Ik heb ervaring met het koppelen van MailChimp, SugarCRM, ClockWise, Slack, Facebook en de Google Cloud omgeving. </p>
-				<p>Zolang er een REST, Oauth, of andere API beschikbaar is, kan er gekoppeld worden :-)</p>
+				[# md-block | connectors #]
 
-				<button class="back-btn" title="Ga terug" onclick="show_tab(this, 'intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab(this, 'intro')"><span></span></button>
 			</article>
 
 			<article id="tab-plain-html">
-				<h2>Plain HTML-templates</h2>
-				<p>Minimale code met veel resultaat. Bij plain HTML-templates werk ik enkel een statisch document uit bestaande uit HTML, CSS (sass of less) en JavaScript.</p>
-				<p>Deze templates dienen als basis voor developers om hun code op aan te sluiten. Dus verwacht van ieder pagina type een html document, met bijlage folder.</p>
-				<p>In overleg met de developers kan gekozen worden voor bepaalde structuren / indelingen van pagina's die aansluiten op hun vereisten. Uiteraard wordt zoveel mogelijk opgesplitst in verschillende herbruikbare componenten.</p>
+				[# md-block | plain-html #]
 				
-				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-visuals">
-				<h2>Grafische visuals</h2>
-				<p>Door websites heen, op campagne pagina's, of in banners wil je soms wat meer dan alleen een statische mooi ontwerp.</p>
-				<p>Goed gebruik van transities en animaties, kan een ontwerp duidelijker en moderner maken, wat de gebruikers ervaring verbeterd.</p>
-				<p>Ik schrijf simpele animaties met behulp van CSS-transities en animaties.</p>
-				<p>Uitgebreide animaties maak ik met behulp van de Javascript bibliotheek GSAP.</p>
-				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				[# md-block | visuals #]
+				
+				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-cms">
-				<h2>WordPress & Magento 1/2</h2>
-				<p>Voor het beheer van de website wordt meestal een CMS-systeem gebruikt.</p>
-				<p>Afgelopen 7 jaar heb ik vele Magento 1, 2 en WordPress templates uitgewerkt.</p>
-				<p>Ook het ontwikkelen van plug-ins / extensies / shortcodes voor deze CMS-systemen is geen probleem.</p>
-				<p>Heeft u een WordPress of Magento site waar u gave ideeën voor heeft? Neem dan vooral contact met me op.</p>
-				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				[# md-block | cms #]
+				
+				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-custom">
-				<h2>Maatwerk applicaties</h2>
-				<p>Heb je een idee voor een interactieve applicatie? Ik help graag bij het uitdenken en ontwikkelen van jouw idee.</p>
-				<p>Ik heb veel verschillende soorten maatwerk applicaties uitgewerkt. Grote applicaties als omgeving voor medewerkers, waar werk gepland kan worden, en HTML handtekeningen gegenereerd worden, tot kleine facebook applicaties om een foto te maken, en te delen met overlay voor al je vrienden.</p>
-				<p>Ik heb ervaring met meerdere interactieve front-end frameworks (react, angular), en heb met verschillende software omgevingen gewerkt.</p>
+				[# md-block | customized #]
 				<!-- <p>Denk bij maatwerk ook aan bijvoorbeeld:</p>
 				<ul>
 					<li>Formulieren en registratie van administratieve documenten of speciale werkzaamheden</li>
@@ -83,59 +83,56 @@
 					<li>Geautomatiseerde nieuwsbrieven</li>
 				</ul> -->
 
-				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 		
 			<article id="tab-optimisation">
-				<h2>Laadtijd & rendering optimalisatie</h2>
-				<p>De laadtijd van je website is extreem belangrijk voor een goede conversie. Maar behalve de laadtijd, is de gebruikerservaring na het laden ook belangrijk.</p>
-				<p>Scrolt de pagina lekker vloeiend? zijn er geen haperingen? Zijn de animaties soepel, en hoe is dat voor een oude Android telefoon?</p>
-				<p>Een website kan nog zo mooi en slim gemaakt zijn. Maar als het niet soepel werkt, is de ervaring voor de gebruiker slecht.</p>
-				<p>In het verleden heb ik verschillende grote websites geoptimaliseerd.</p>
-				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				[# md-block | optimisation #]
+				
+				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 			
 			<article id="tab-contact">
-				<h2>Contact</h2>
+				<h2>[# md-line | contact_title #]</h2>
 				<form action="" method="post" onsubmit="validateFields" id="contactform">
 					<div class="form-content">
 						<ul>
 							<li data-field="name">
 								<label>
-									<span>Naam</span>
-									<input type="text" name="name" placeholder="Wat is je naam?" onkeyup="validateInput(this, 'name')" data-validation-msg="Met wie heb ik het genoegen? te korte naam..">
+									<span>[# md-line | form_name #]</span>
+									<input type="text" name="name" placeholder="[# md-line | form_name_placeholder #]" onkeyup="validateInput(this, 'name')" data-validation-msg="[# md-line | form_name_validation #]">
 								</label>
 							</li>
 							<li data-field="email">
 								<label>
-									<span id="email_phone_type">Email</span>
-									<input type="text" name="contact" placeholder="Email of telefoon nummer" onkeyup="validateInput(this, 'contact')"  data-validation-msg="Hoe kan ik contact met je opnemen?" data-email-validation-msg="Dit lijkt me geen correct mail adres.." data-phone-validation-msg="Beetje een kort telefoonnummer..">
+									<span id="email_phone_type">[# md-line | form_email #]</span>
+									<input type="text" name="contact" placeholder="[# md-line | form_contact_placeholder #]" onkeyup="validateInput(this, 'contact')"  data-validation-msg="[# md-line | form_email_validation #]" data-email-validation-msg="[# md-line | form_email_validation #]" data-phone-validation-msg="[# md-line | form_phone_validation #]">
 								</label>
 							</li>
 							<li data-field="description"><label>
-								<span>Omschrijving</span>
-								<textarea name="description" cols="30" rows="10" placeholder="Wat zou je willen weten?" onkeyup="validateInput(this, 'description')" data-validation-msg="Heb je iets meer informatie?"></textarea>
+								<span>[# md-line | form_description #]</span>
+								<textarea name="description" cols="30" rows="10" placeholder="[# md-line | form_description_placeholder #]" onkeyup="validateInput(this, 'description')" onfocus="scrollToInput(this)" data-validation-msg="[# md-line | form_description_validation #]"></textarea>
 							</label></li>
 						</ul>
-						<button type="submit" class="outline" onclick="validateFields(this); return false;">Verzenden</button> <span id="validation-info"></span>
+						<button type="submit" class="outline" onclick="validateFields(this); return false;">[# md-line | form_send #]</button> <span id="validation-info"></span>
 					</div>
 					<div class="form-failed">
-						<p style="font-weight: bold;">Er is wat mis gegaan bij het verzenden.</p> 
-						<p>Zou je contact op willen nemen via <span id="email"></span></p>
+						[# md-block | form-failed #]
+						
 					</div>
 					<div class="form-success">
-						<p style="font-weight: bold;">Je bericht is verzonden!</p>
-						<p>Dankjewel.</p> <p>Ik zal het zo snel mogelijk bekijken en indien nodig reageren.</p>
+						[# md-block | form-success #]
+						
 					</div>
 				</form>
 				
-				<button class="back-btn" title="Ga terug" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 		</section>
 	
 		<aside>
 			<div class="social">
-				<a href="https://github.com/jvineveld" title="Mijn github profiel"><svg id="github_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 543.94 140.92" width="110" >
+				<a href="https://github.com/jvineveld" title="[# md-line | github_link_title #]"><svg id="github_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 543.94 140.92" width="110" >
 					<defs>
 						<style>.cls-2{fill-rule:evenodd;}</style>
 					</defs>
@@ -152,7 +149,7 @@
 						</g>
 					</g>
 				</svg></a>
-				<a href="https://www.linkedin.com/in/jonasvanineveld/" title="Mijn linkedIn profiel"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.86 76.25" width="110" height="29">
+				<a href="https://www.linkedin.com/in/jonasvanineveld/" title="[# md-line | linkedin_link_title #]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.86 76.25" width="110" height="29">
 					<g>
 						<g>
 							<path d="M213.88,7.25a5.53,5.53,0,0,1,5.6-5.46h64.57a5.53,5.53,0,0,1,5.6,5.46V72.57a5.53,5.53,0,0,1-5.6,5.46H219.48a5.53,5.53,0,0,1-5.6-5.46V7.25Z" transform="translate(-1.79 -1.78)"></path>
@@ -169,20 +166,19 @@
 				</svg></a>
 			</div>
 			<nav>
-				<button type="button" onclick="show_tab(this, 'connectors')">Koppelen van systemen</button>
-				<button type="button" onclick="show_tab(this, 'plain-html')">Plain HTML templates</button>
-				<button type="button" onclick="show_tab(this, 'visuals')">Grafische visuals</button>
-				<button type="button" onclick="show_tab(this, 'cms')">WordPress & Magento 1/2</button>
-				<button type="button" onclick="show_tab(this, 'custom')">Maatwerk applicaties</button>
-				<button type="button" onclick="show_tab(this, 'optimisation')">Laadtijd & rendering optimalisatie</button>
+				<button type="button" onclick="show_tab(this, 'connectors')">[# md-line | connectors_title #]</button>
+				<button type="button" onclick="show_tab(this, 'plain-html')">[# md-line | plain_html_title #]</button>
+				<button type="button" onclick="show_tab(this, 'visuals')">[# md-line | visuals_title #]</button>
+				<button type="button" onclick="show_tab(this, 'cms')">[# md-line | cms_title #]</button>
+				<button type="button" onclick="show_tab(this, 'custom')">[# md-line | customized_title #]</button>
+				<button type="button" onclick="show_tab(this, 'optimisation')">[# md-line | optimisation_title #]</button>
 			</nav>
 		</aside>
+
+		<footer>
+			<span id="phone"></span> <span class="spacer">[# md-line | footer_or #]</span> <button type="button" class="outline" onclick="show_tab(this, 'contact')">[# md-line | footer_contact #]</button>
+		</footer>
 	</div>
-
-
-	<footer>
-		<span id="phone"></span> <span class="spacer">of</span> <button type="button" class="outline" onclick="show_tab(this, 'contact')">stuur een bericht</button>
-	</footer>
 
 	<div id="background-video-wrapper">
 		<div class="video-container">
@@ -226,7 +222,8 @@
 					remove_active_classes()
 
 					$tab.setAttribute('data-active', true)
-					document.getElementById("main").classList = tab
+					document.getElementById("main").classList = _tab
+					document.getElementById("main").setAttribute('data-active-tab', _tab)
 					$prev_tab = $tab
 				}, out_animation_time)
 			}
@@ -255,7 +252,8 @@
 		create_animation_lines()
 		
 		// screw the scrapers
-		document.getElementById('phone').innerHTML = ["87", "356", "409", "(0)6", "+31"].reverse().join(' ');
+		var n = ["87", "356", "409", "(0)6", "+31"].reverse().join(' ');
+		document.getElementById('phone').innerHTML = '<a href="tel:'+n.replace('(0)','').replace(/\s/g,'')+'">'+n+"</a>";
 		document.getElementById('email').innerHTML = [".nl", "own", "your", "eit", "mak", "@", "as", "on", "j"].reverse().join('')
 
 		var errors = [];
@@ -341,7 +339,7 @@
 				show_form_error(errors[0])
 			} else {
 				e.setAttribute('disabled', true)
-				show_form_error('Dankje! Nu bezig met verzenden..')
+				show_form_error('[# md-line | form_sending #]')
 				send_form(values);
 			}
 
@@ -410,6 +408,14 @@
 					
 					return;
 				break;
+			}
+		}
+
+		function scrollToInput(element){
+			if(document.body.clientWidth < 800){
+				setTimeout(function(){
+					document.getElementById('tab-contact').scrollTop = element.getBoundingClientRect().top;
+				}, 250)
 			}
 		}
 	</script>

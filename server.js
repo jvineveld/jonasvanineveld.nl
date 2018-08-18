@@ -1,18 +1,146 @@
 "use strict";
 
-const serveStatic = require('serve-static');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const compression = require('compression')
 const express = require('express')
 const app = express()
-var path = require('path');
-
+const fs = require('fs');
+const path = require('path');
+const showdown  = require('showdown');
+const converter = new showdown.Converter();
 const port = 8080;
 
 dotenv.load()
 app.use(compression())
+
+const parseCsv = function(data){
+	let lines = {};
+
+	let l = data.split('\n');
+
+	l.forEach(line => {
+		if(line.trim()=='') return;
+
+		let r = line.split(',');
+
+		lines[r[0]] = converter.makeHtml(r[1]).replace(/\<p\>/g, '').replace(/\<\/p\>/g, '');
+	});
+
+	return lines;
+}
+
+let md_line_file_contents = false;
+
+const load_markdown_lines = async function(){
+	if(md_line_file_contents) return;
+
+	return new Promise((resolve, reject) => {
+		var filePath = path.join(__dirname, '/content/nl/lines.csv');
+		fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
+			if (!err) {
+				md_line_file_contents = parseCsv(data)
+				resolve(md_line_file_contents)
+			} else {
+				reject(err);
+			}
+		});
+	})
+}
+
+const load_markdown_file = async function(file){
+	return new Promise((resolve, reject) => {
+		fs.readFile(file, {encoding: 'utf-8'}, function(err,data){
+			if (!err) {
+				resolve(data)
+			} else {
+				reject(err);
+			}
+		});
+	})
+}
+
+let md_blocks = [];
+
+const load_markdown_blocks = async function(){
+	if(md_blocks.length > 0) return;
+
+	return new Promise((resolve, reject) => {
+		let md_path = '/content/nl/';
+		let filePath = path.join(__dirname, md_path);
+
+		fs.readdir(filePath, function(err, items) {
+			if (!err) {
+				let promises = [];
+				for (let i=0; i<items.length; i++) {
+					if(items[i].includes('.md'))
+					{
+						let _path = path.join(__dirname, md_path, items[i]);
+						promises.push(load_markdown_file(_path));
+
+						md_blocks.push({
+							name: items[i].replace('.md', ''),
+							path: _path,
+						})
+					}
+				}
+
+				Promise.all(promises).then(results => {
+					results.forEach((block, index) => {
+						md_blocks[index].block = converter.makeHtml(block)
+					})
+
+					resolve(md_blocks)
+				}).catch((err) => {
+					reject(err)
+				})
+			} else {
+				reject(err);
+			}
+		});
+	})
+}
+
+const get_md_line = function(name){
+	return md_line_file_contents[name] ? md_line_file_contents[name] : '';
+}
+
+const check_for_markdown_line = function(name){
+	if(md_line_file_contents){
+		return get_md_line(name)
+	}
+}
+
+const check_for_markdown_block = function(name){
+	let rblock = false;
+	md_blocks.forEach(block => {
+		if(block.name === name){
+			rblock = block.block;
+		}
+	})
+	return rblock;
+}
+
+const init_markdown_content = async function(content){
+	await load_markdown_lines();
+	await load_markdown_blocks();
+
+	content = content.replace(/\[\#(.*?)\|(.*?)\#\]/g, function(match, type, name, asd){
+		type = type.trim()
+		name = name.trim()
+
+		switch(type){
+			case 'md-line':
+				return check_for_markdown_line(name);
+
+			case 'md-block':
+				return check_for_markdown_block(name);
+		}
+	});
+	
+	return content;
+}
 
 const send_mail = function(htmlContents, plainContents, name){
 	return new Promise((resolve, reject) => {
@@ -82,6 +210,23 @@ app.use('/mail', function(req, res){
 		});
 	})
 });
+
+
+app.get('/', function(req, res){
+	var filePath = path.join(__dirname, '/public/index.html');
+	fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
+		if (!err) {
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			init_markdown_content(data).then(resp => {
+				res.write(resp);
+				res.end();
+			})
+		} else {
+			console.log(err);
+			res.end('index.html is missing\n');
+		}
+	});
+})
 
 app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
 
