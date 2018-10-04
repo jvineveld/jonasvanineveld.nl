@@ -53,25 +53,25 @@
 			<article id="tab-connectors">
 				[# md-block | connectors #]
 
-				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab(this, 'intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab(this, 'intro')"><span></span></button>
 			</article>
 
 			<article id="tab-plain-html">
 				[# md-block | plain-html #]
 				
-				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-visuals">
 				[# md-block | visuals #]
 				
-				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-cms">
 				[# md-block | cms #]
 				
-				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 
 			<article id="tab-custom">
@@ -83,35 +83,36 @@
 					<li>Geautomatiseerde nieuwsbrieven</li>
 				</ul> -->
 
-				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 		
 			<article id="tab-optimisation">
 				[# md-block | optimisation #]
 				
-				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 			
 			<article id="tab-contact">
-				<h2>[# md-line | contact_title #]</h2>
+				[# md-block | contact #]
+
 				<form action="" method="post" onsubmit="validateFields" id="contactform">
 					<div class="form-content">
 						<ul>
 							<li data-field="name">
 								<label>
 									<span>[# md-line | form_name #]</span>
-									<input type="text" name="name" placeholder="[# md-line | form_name_placeholder #]" onkeyup="validateInput(this, 'name')" data-validation-msg="[# md-line | form_name_validation #]">
+									<input type="text" name="name" placeholder="[# md-line | form_name_placeholder | true #]" onkeyup="validateInput(this, 'name')" data-validation-msg="[# md-line | form_name_validation | true #]">
 								</label>
 							</li>
 							<li data-field="email">
 								<label>
 									<span id="email_phone_type">[# md-line | form_email #]</span>
-									<input type="text" name="contact" placeholder="[# md-line | form_contact_placeholder #]" onkeyup="validateInput(this, 'contact')"  data-validation-msg="[# md-line | form_email_validation #]" data-email-validation-msg="[# md-line | form_email_validation #]" data-phone-validation-msg="[# md-line | form_phone_validation #]">
+									<input type="text" name="contact" placeholder="[# md-line | form_contact_placeholder | true #]" onkeyup="validateInput(this, 'contact')"  data-validation-msg="[# md-line | form_email_validation | true #]" data-email-validation-msg="[# md-line | form_email_validation | true #]" data-phone-validation-msg="[# md-line | form_phone_validation | true #]">
 								</label>
 							</li>
 							<li data-field="description"><label>
 								<span>[# md-line | form_description #]</span>
-								<textarea name="description" cols="30" rows="10" placeholder="[# md-line | form_description_placeholder #]" onkeyup="validateInput(this, 'description')" onfocus="scrollToInput(this)" data-validation-msg="[# md-line | form_description_validation #]"></textarea>
+								<textarea name="description" cols="30" rows="10" placeholder="[# md-line | form_description_placeholder | true #]" onkeyup="validateInput(this, 'description')" onfocus="scrollToInput(this)" data-validation-msg="[# md-line | form_description_validation | true #]"></textarea>
 							</label></li>
 						</ul>
 						<button type="submit" class="outline" onclick="validateFields(this); return false;">[# md-line | form_send #]</button> <span id="validation-info"></span>
@@ -126,13 +127,13 @@
 					</div>
 				</form>
 				
-				<button class="back-btn" title="[# md-line | go_back #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
 		</section>
 	
 		<aside>
 			<div class="social">
-				<a href="https://github.com/jvineveld" title="[# md-line | github_link_title #]"><svg id="github_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 543.94 140.92" width="110" >
+				<a href="https://github.com/jvineveld" title="[# md-line | github_link_title | true #]"><svg id="github_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 543.94 140.92" width="110" >
 					<defs>
 						<style>.cls-2{fill-rule:evenodd;}</style>
 					</defs>
@@ -149,7 +150,7 @@
 						</g>
 					</g>
 				</svg></a>
-				<a href="https://www.linkedin.com/in/jonasvanineveld/" title="[# md-line | linkedin_link_title #]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.86 76.25" width="110" height="29">
+				<a href="https://www.linkedin.com/in/jonasvanineveld/" title="[# md-line | linkedin_link_title | true #]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.86 76.25" width="110" height="29">
 					<g>
 						<g>
 							<path d="M213.88,7.25a5.53,5.53,0,0,1,5.6-5.46h64.57a5.53,5.53,0,0,1,5.6,5.46V72.57a5.53,5.53,0,0,1-5.6,5.46H219.48a5.53,5.53,0,0,1-5.6-5.46V7.25Z" transform="translate(-1.79 -1.78)"></path>
@@ -178,6 +179,10 @@
 		<footer>
 			<span id="phone"></span> <span class="spacer">[# md-line | footer_or #]</span> <button type="button" class="outline" onclick="show_tab(this, 'contact')">[# md-line | footer_contact #]</button>
 		</footer>
+
+		<div id="language-switcher">
+			<a href="/" onclick="switch_language('nl', event)" data-active>Nederlands</a> <span class="spacer"></span> <a href="/en/" onclick="switch_language('en', event)">English</a>
+		</div>
 	</div>
 
 	<div id="background-video-wrapper">
@@ -250,6 +255,26 @@
 		}
 
 		create_animation_lines()
+
+		function switch_language(lang, e){
+			e.preventDefault();
+
+			console.log('clicked!', e.target.href)
+			var url = e.target.href;
+
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", url+'lines', true);
+			xhr.onreadystatechange = function(resp){
+				if(xhr.readyState === 4 && xhr.status === 200) {
+					console.log(JSON.parse(xhr.responseText))
+				}
+				else{
+					console.log('error!!!')
+					// document.location = url;
+				}
+			}
+			xhr.send()
+		}
 		
 		// screw the scrapers
 		var n = ["87", "356", "409", "(0)6", "+31"].reverse().join(' ');
@@ -268,10 +293,10 @@
 				lastError.$el.parentElement.removeChild(lastError.$el)
 
 				if(lastError.fade_timeout)
-				clearTimeout(lastError.fade_timeout)
+					clearTimeout(lastError.fade_timeout)
 
 				if(lastError.remove_timeout)
-				clearTimeout(lastError.remove_timeout)
+					clearTimeout(lastError.remove_timeout)
 			}
 
 			lastError.$el = $error;
@@ -303,7 +328,6 @@
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "/mail", true);
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xhr.send(postdata);
 			xhr.onreadystatechange = function(resp){
 				if(xhr.readyState === 4 && xhr.status === 200) {
 					var resp = JSON.parse(xhr.responseText);
@@ -316,6 +340,7 @@
 						$contact.setAttribute('data-send', false)
 				}
 			}	
+			xhr.send(postdata);
 		}
 		
 		function validateFields(e){
@@ -339,7 +364,7 @@
 				show_form_error(errors[0])
 			} else {
 				e.setAttribute('disabled', true)
-				show_form_error('[# md-line | form_sending #]')
+				show_form_error('[# md-line | form_sending | true #]')
 				send_form(values);
 			}
 

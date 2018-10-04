@@ -1,0 +1,30 @@
+intro_title, i design and realize **digital platforms**
+connectors_title, Connect systems
+plain_html_title, Plain HTML templates
+visuals_title, Grafic visuals
+cms_title, WordPress & Magento 1/2
+customized_title, Custom applications
+optimisation_title, Speed & rendering optimisation 
+
+contact_btn, Send a note
+github_link_title, My github profiel
+linkedin_link_title, My linkedIn profiel
+go_back, Go back
+
+form_name, Name
+form_name_placeholder, What's your name?
+form_name_validation, Who are you? Name to short..
+form_contact_placeholder, Email or phone number
+form_contact_validation, How should i contact you?
+form_email, Email
+form_email_validation, This doesn't look like a valid email adress to me..
+form_phone, Phone number
+form_phone_validation, Number is a bit short..
+form_description, Description
+form_description_placeholder, What would you like to know?
+form_description_validation, Got some more information please?
+form_sending, Thanks! Sending now..
+form_send, Send
+
+footer_or, or
+footer_contact, send a message
