@@ -47,6 +47,29 @@ footer {
     color: inherit;
     text-decoration: none; }
 
+#language-switcher {
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  width: 200px;
+  text-align: center;
+  top: 15px;
+  font-size: 14px;
+  font-weight: 500; }
+  #language-switcher a {
+    color: #fff;
+    text-decoration: none;
+    opacity: .5; }
+    #language-switcher a[data-active], #language-switcher a:hover {
+      opacity: 1; }
+  #language-switcher .spacer {
+    display: inline-block;
+    width: 2px;
+    height: 20px;
+    background: #fff;
+    margin: 0 20px;
+    vertical-align: middle; }
+
 img {
   max-width: 100%;
   height: auto; }

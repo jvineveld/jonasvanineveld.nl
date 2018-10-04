@@ -15,6 +15,17 @@ const port = 8080;
 dotenv.load()
 app.use(compression())
 
+let languages = {
+	nl: {
+		lines: {},
+		blocks: []
+	},
+	en: {
+		lines: {},
+		blocks: []
+	}
+};
+
 const parseCsv = function(data){
 	let lines = {};
 
@@ -31,17 +42,16 @@ const parseCsv = function(data){
 	return lines;
 }
 
-let md_line_file_contents = false;
-
-const load_markdown_lines = async function(){
-	if(md_line_file_contents) return;
+const load_markdown_lines = async function(lang){
+	if(languages[lang].lines.length) return;
 
 	return new Promise((resolve, reject) => {
-		var filePath = path.join(__dirname, '/content/nl/lines.csv');
+		var filePath = path.join(__dirname, '/content/'+lang+'/lines.csv');
 		fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
 			if (!err) {
-				md_line_file_contents = parseCsv(data)
-				resolve(md_line_file_contents)
+				let lines = parseCsv(data)
+				languages[lang].lines = lines
+				resolve(lines)
 			} else {
 				reject(err);
 			}
@@ -61,13 +71,11 @@ const load_markdown_file = async function(file){
 	})
 }
 
-let md_blocks = [];
-
-const load_markdown_blocks = async function(){
-	if(md_blocks.length > 0) return;
+const load_markdown_blocks = async function(lang){
+	if(languages[lang].blocks.length > 0) return;
 
 	return new Promise((resolve, reject) => {
-		let md_path = '/content/nl/';
+		let md_path = '/content/'+lang+'/';
 		let filePath = path.join(__dirname, md_path);
 
 		fs.readdir(filePath, function(err, items) {
@@ -79,7 +87,7 @@ const load_markdown_blocks = async function(){
 						let _path = path.join(__dirname, md_path, items[i]);
 						promises.push(load_markdown_file(_path));
 
-						md_blocks.push({
+						languages[lang].blocks.push({
 							name: items[i].replace('.md', ''),
 							path: _path,
 						})
@@ -88,10 +96,10 @@ const load_markdown_blocks = async function(){
 
 				Promise.all(promises).then(results => {
 					results.forEach((block, index) => {
-						md_blocks[index].block = converter.makeHtml(block)
+						languages[lang].blocks[index].block = converter.makeHtml(block)
 					})
 
-					resolve(md_blocks)
+					resolve(languages[lang].blocks)
 				}).catch((err) => {
 					reject(err)
 				})
@@ -102,19 +110,19 @@ const load_markdown_blocks = async function(){
 	})
 }
 
-const get_md_line = function(name){
-	return md_line_file_contents[name] ? md_line_file_contents[name] : '';
+const get_md_line = function(name, lang){
+	return languages[lang].lines[name] ? languages[lang].lines[name] : '';
 }
 
-const check_for_markdown_line = function(name){
-	if(md_line_file_contents){
-		return get_md_line(name)
+const check_for_markdown_line = function(name, lang){
+	if(Object.keys(languages[lang].lines).length){
+		return get_md_line(name, lang)
 	}
 }
 
-const check_for_markdown_block = function(name){
+const check_for_markdown_block = function(name, lang){
 	let rblock = false;
-	md_blocks.forEach(block => {
+	languages[lang].blocks.forEach(block => {
 		if(block.name === name){
 			rblock = block.block;
 		}
@@ -122,20 +130,28 @@ const check_for_markdown_block = function(name){
 	return rblock;
 }
 
-const init_markdown_content = async function(content){
-	await load_markdown_lines();
-	await load_markdown_blocks();
+const init_markdown_content = async function(content, lang){
+	await load_markdown_lines(lang);
+	await load_markdown_blocks(lang);
 
-	content = content.replace(/\[\#(.*?)\|(.*?)\#\]/g, function(match, type, name, asd){
-		type = type.trim()
-		name = name.trim()
+	// console.log(languages)
+
+	content = content.replace(/\[#(.*?)#\]/g, function(match, line){
+		let name, type, parts, 
+			plain = false;
+
+		parts = line.split('|')
+
+		if( parts.length ) type = parts[0].trim()
+		if( parts.length > 1 ) name = parts[1].trim()
+		if( parts.length > 2 ) plain = parts[2].trim()
 
 		switch(type){
 			case 'md-line':
-				return check_for_markdown_line(name);
+				return plain ? check_for_markdown_line(name, lang) : '<span data-name="'+name+'" class="md-line">'+check_for_markdown_line(name, lang)+'</span>';
 
 			case 'md-block':
-				return check_for_markdown_block(name);
+				return plain ? check_for_markdown_block(name, lang) : '<div data-name="'+name+'" class="md-block">'+check_for_markdown_block(name, lang)+'</div>';
 		}
 	});
 	
@@ -217,7 +233,7 @@ app.get('/', function(req, res){
 	fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
 		if (!err) {
 			res.writeHead(200, {'Content-Type': 'text/html'});
-			init_markdown_content(data).then(resp => {
+			init_markdown_content(data, 'nl').then(resp => {
 				res.write(resp);
 				res.end();
 			})
@@ -227,6 +243,38 @@ app.get('/', function(req, res){
 		}
 	});
 })
+
+app.get('/en', function(req, res){
+	var filePath = path.join(__dirname, '/public/index.html');
+	fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
+		if (!err) {
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			init_markdown_content(data, 'en').then(resp => {
+				res.write(resp);
+				res.end();
+			})
+		} else {
+			console.log(err);
+			res.end('index.html is missing\n');
+		}
+	});
+})
+
+app.get('/en/lines', function(req, res){
+	var filePath = path.join(__dirname, '/public/index.html');
+	fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
+		if (!err) {
+			init_markdown_content(data, 'en').then(resp => {
+				res.json(languages['en']);
+				res.end();
+			})
+		} else {
+			console.log(err);
+			res.end('index.html is missing\n');
+		}
+	});
+})
+
 
 app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
 
