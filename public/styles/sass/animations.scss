@@ -1,3 +1,12 @@
+@keyframes lang-active-in {
+	from{
+		transform: scale(3) !important;
+	}
+	to{
+		transform: scale(1) !important; 
+	}
+}
+
 @keyframes line-in {
 	from{
 		opacity: 0;
@@ -188,5 +197,27 @@
 	100%{
 		opacity: 0;
 		transform:translate(0, 30px);
+	}
+}
+
+@keyframes md-line-in {
+	from{
+		opacity: 0;
+		transform: scale(1.3);
+	}
+	to{
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes md-line-out {
+	from{
+		opacity: 1;
+		transform: scale(1);
+	}
+	to{
+		transform: scale(.7);
+		opacity: 0;
 	}
 }

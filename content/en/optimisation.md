@@ -1,9 +1,9 @@
-## Laadtijd & rendering optimalisatie
+## Loadtime & rendering optimisation 
 
-De laadtijd van je website is extreem belangrijk voor een goede conversie. Maar behalve de laadtijd, is de gebruikerservaring na het laden ook belangrijk.
+The loadtime is extremely important for a good conversion. But next to that, the customer experience after loading is also very important.
 
-Scrolt de pagina lekker vloeiend? zijn er geen haperingen? Zijn de animaties soepel, en hoe is dat voor een oude Android telefoon?
+Is the page scrolling smooth? No stuttering? Are the animations smooth, and how is that for the old android phones?
 
-Een website kan nog zo mooi en slim gemaakt zijn. Maar als het niet soepel werkt, is de ervaring voor de gebruiker slecht.
+A website can be made so beautifully and smart. But if things don't work smooth, the experience for the customer ain't great.
 
-In het verleden heb ik verschillende grote websites geoptimaliseerd.
+In the past i've optimized different big website's.

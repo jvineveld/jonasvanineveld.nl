@@ -1,9 +1,9 @@
-## Grafische visuals
+## Graphical visuals
 
-Door websites heen, op campagne pagina's, of in banners wil je soms wat meer dan alleen een statische mooi ontwerp.
+Sometimes, in websites, campaign pages or in banners, you want more than just a static beautiful design.
 
-Goed gebruik van transities en animaties, kan een ontwerp duidelijker en moderner maken, wat de gebruikers ervaring verbeterd.
+A good use of transitions and animations, can make a design more clear and modern, wat enhaches the customer experience.
 
-Ik schrijf simpele animaties met behulp van CSS-transities en animaties.
+Simple animations are written using CSS-transitions and animations.
 
-Uitgebreide animaties maak ik met behulp van de Javascript bibliotheek GSAP.
+Extended animations i make using the JavaScript library GSAP.

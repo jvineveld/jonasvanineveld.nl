@@ -1,4 +1,4 @@
-Wherever it is for **online** or (intranet) **company applications**.
+Both **online** and (intranet) **company applications**.
 
 I love **clear frontends**, **fast loading time** <br>
 and great **user experience / -interface**

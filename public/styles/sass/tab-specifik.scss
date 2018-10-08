@@ -21,6 +21,10 @@
 	.back-btn
 	{
 		right:0;
+
+		&:before{
+			border-radius: 50%;
+		}
 	}
 
 	li:before{display: none;}

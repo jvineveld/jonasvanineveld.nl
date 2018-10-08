@@ -15,12 +15,18 @@ const port = 8080;
 dotenv.load()
 app.use(compression())
 
+let domain = 'localhost:8080';
+
 let languages = {
 	nl: {
+		name: 'Nederlands',
+		path: '/',
 		lines: {},
 		blocks: []
 	},
 	en: {
+		name: 'English',
+		path: '/en/',
 		lines: {},
 		blocks: []
 	}
@@ -130,6 +136,31 @@ const check_for_markdown_block = function(name, lang){
 	return rblock;
 }
 
+const render_canonicals = function(current_language){
+	let html = '';
+	let langs = Object.keys(languages).filter((lang) => lang !== current_language);
+	
+	langs.forEach(lang => {
+		html += '<link rel="alternate" hreflang="'+lang+'" href="'+domain+languages[lang].path+'" />';
+
+	})
+
+	return html;
+}
+
+const render_language_links = function(current_language){
+	let html = '';
+	let langs = Object.keys(languages);
+
+	langs.forEach(lang => {
+		let active = lang === current_language ? 'data-active' : '';
+		html += html !== '' ? '<span class="spacer"></span>' : '';
+		html += '<a href="'+languages[lang].path+'" onclick="switch_language(\''+lang+'\', event)" '+active+'>'+languages[lang].name+'</a>';
+
+	})
+	return html;
+}
+
 const init_markdown_content = async function(content, lang){
 	await load_markdown_lines(lang);
 	await load_markdown_blocks(lang);
@@ -152,8 +183,19 @@ const init_markdown_content = async function(content, lang){
 
 			case 'md-block':
 				return plain ? check_for_markdown_block(name, lang) : '<div data-name="'+name+'" class="md-block">'+check_for_markdown_block(name, lang)+'</div>';
+			
+			case 'canonical_link':
+				return render_canonicals(lang);
+			
+			case 'language_tag':
+				return lang;
+			
+			case 'lang_links':
+				return render_language_links(lang);
+			
 		}
 	});
+	
 	
 	return content;
 }
@@ -265,7 +307,22 @@ app.get('/en/lines', function(req, res){
 	fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
 		if (!err) {
 			init_markdown_content(data, 'en').then(resp => {
-				res.json(languages['en']);
+				res.json({...languages['en'], forms: [resp.match(/<form.*?>(.*?)<\/form>/s)[1]]});
+				res.end();
+			})
+		} else {
+			console.log(err);
+			res.end('index.html is missing\n');
+		}
+	});
+})
+
+app.get('/lines', function(req, res){
+	var filePath = path.join(__dirname, '/public/index.html');
+	fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
+		if (!err) {
+			init_markdown_content(data, 'nl').then(resp => {
+				res.json({...languages['nl'], forms: [resp.match(/<form.*?>(.*?)<\/form>/s)[1]]});
 				res.end();
 			})
 		} else {

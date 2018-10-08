@@ -1,7 +1,8 @@
-## Maatwerk applicaties
+## Custom applications
 
-Heb je een idee voor een interactieve applicatie? Ik help graag bij het uitdenken en ontwikkelen van jouw idee.
+Do you have an idea for a interactive application? I would like to help you shape, develop and create your idea.
 
-Ik heb veel verschillende soorten maatwerk applicaties uitgewerkt. Grote applicaties als omgeving voor medewerkers, waar werk gepland kan worden, en HTML handtekeningen gegenereerd worden, tot kleine facebook applicaties om een foto te maken, en te delen met overlay voor al je vrienden.
+I've made many different types of custom applications. Big applications, like an evironment for employees, where a day schedule can be made and organized for the future, and HTML signatures can be generated. But also small applications for facebook, to create and overlay a photo to share with friends.
 
-Ik heb ervaring met meerdere interactieve front-end frameworks (react, angular), en heb met verschillende software omgevingen gewerkt.
+I've got experience in multiple front-end frameworks (react, angular), and have worked with different software evironments and techniques.
+

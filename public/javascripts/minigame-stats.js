@@ -1,8 +1,9 @@
 /**
- * JavaScript quadcopter minigame 
- * 
- * Stats & score counter using FireBase
- * @author Jonas van Ineveld
+   /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+   | Stat and score couter for minigame				                            |
+   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+   | @author Jonas van Ineveld, Personal website - 2018                         |
+   \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
  */
 
 var statKeeper = function(){

@@ -1,2 +1,2 @@
-**Er is wat mis gegaan bij het verzenden.**
-Zou je contact op willen nemen via <span id="email"></span>
+**Something went wrong sending...**
+Would you please contact me on <span id="email"></span>

@@ -1,7 +1,7 @@
-## Koppelen van Systemen
+## Connecting systems
 
-Vaak wordt er binnen bedrijven met veel verschillende online platformen gewerkt. Als deze platformen niet goed op elkaar aansluiten kan dit lijden tot extra werkzaamheden als informatie dubbel invoeren, of informatie die verloren raakt door menselijke fouten.
+Many times, within companies, many different platformes are used. If these platforms don't connect well, this could lead to extra labour like inserting information twice, or information that get's lost by human error.
 
-Ik heb ervaring met het koppelen van MailChimp, SugarCRM, ClockWise, Slack, Facebook en de Google Cloud omgeving.
+I've got experience with connecting MailChimp, SugarCRM, ClockWise, Slack, Facebook and the Google Cloud environment.
 
-Zolang er een REST, Oauth, of andere API beschikbaar is, kan er gekoppeld worden :-)
+As long as there is a REST, Oauth, or any other API available, there can be connected :-)

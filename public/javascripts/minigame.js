@@ -1,11 +1,15 @@
 /**
- * JavaScript quadcopter minigame
- * 
- * In my spare time i fly with a 5" FPV quadcopter
- * 
- * Created this just because drones are awesome.
- * It all began so small and simple, then i wanted to make it more fun..
- * @author Jonas van Ineveld
+   /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+   | JavaScript quadcopter minigame                                             |
+   |                                                                            |
+   | In my spare time i fly with a 5" FPV quadcopter                            |
+   | Created this just because drones are awesome.                              |
+   |                                                                            |
+   | Credits to:                                                                |
+   | Paul irish for the Animation frame polyfill                                |
+   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+   | @author Jonas van Ineveld, Personal website - 2018                         |
+   \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
  */
 
 var minigame = function(){
@@ -187,13 +191,16 @@ var minigame = function(){
 			cur_time = Date.now();
 			sec_in = Math.floor((cur_time - start_time) / 1000);
 
-			console.log('sec in', sec_in, sec_stages[sec_in])
 			if(sec_stages[sec_in] && !sec_stages[sec_in].activated){
 				sec_stages[sec_in].activated = true;
 				astroids = Object.assign(astroids, sec_stages[sec_in]);
-				console.log('new astroids object', astroids);
 			}
 			return;
+		}
+		
+		if(collision_boxes.length === 1 && stage !== 2){
+			stage = 2;
+			notices.play_final_notices();
 		}
 
 		// if(avatar_hitcount === 1 && stage!==1.5){
@@ -615,7 +622,7 @@ var minigame = function(){
 
 
 window.mg = {};
-function init_game(){ 
+function ig(){ 
 	if(!window.mg.game){
 		window.mg.game = minigame.apply({
 			stats: new statKeeper(),
@@ -623,6 +630,8 @@ function init_game(){
 		}) 
 	}
 }
+
+var hc=0,ht=3; function eg(){ if(hc===ht){ ig(); hc = 0; } else { hc++ } document.getElementById('avatar').setAttribute('data-enabler', hc); }
 
 
 /**

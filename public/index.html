@@ -1,18 +1,17 @@
 <!doctype html>
-<html lang="nl">
+<html lang="[# language_tag #]">
 <!--
 
    /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
    | Jonas van Ineveld, Personal website - 2018                                 |
    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-   | [ ✓ ] Has minigame! Found & played it already? ;-)                         |
-   | [ ✓ ] Sweet form handling & animations, send me some bs and check it out!  |
    | [ ✓ ] Desktop / tablet and mobile responsive                               |
    | [ ✓ ] Custom MarkDown file multilanguage content management setup          |
    | [ ✓ ] No frameworks                                                        |
    | [ ✓ ] No libraries                                                         |
    | [ ✓ ] nodeJs, HTTP2 server push, brotli compressions                       |
    | [ ✓ ] Hosted in the google AppEngine cloud environment                     |
+   | [ ✓ ] Has minigame! Found & played it already? ;-)                         |
    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
    | Check the source: https://github.com/jvineveld/jonasvanineveld.nl          |
    \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
@@ -21,12 +20,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="robots" content="noindex">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<title>Jonas van ineveld</title>
+	<title>Jonas van Ineveld - Freelance Full Stack / Front-end Developer</title>
+	[# canonical_link #]	
 
-	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700" rel="stylesheet">
+	<link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700|Work+Sans|Noto+Sans:400,400i,700,700i" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700|IBM+Plex+Serif:400,400i" rel="stylesheet">
 	<link rel="stylesheet" href="/styles/css/index.css">
 </head>
 <body class="no-js"><script>document.body.className = ''</script>
@@ -36,11 +37,11 @@
 			<article id=tab-intro data-active>
 				<div id=avatar>
 					<span class=deco></span>
-					<button id=start-game onclick="init_game()">
-						<span class="start"><img width="60px" src=/images/gamepad.svg></span>
-						<span class="intro"><img width="90px" src=/images/keyboard.svg></span>
+					<button id=start-game onclick="eg()">
+						<span class="start"><img width="60px" height="60px" src=/images/gamepad.svg></span>
+						<span class="intro"><img width="90px" height="90px" src=/images/keyboard.svg></span>
 					</button>
-					<img src=/images/avatar-2.png alt='Jonas van Ineveld' width=176 height=176 />
+					<img src=/images/avatar.jpg alt='Jonas van Ineveld' width=176 height=176 />
 				</div>
 
 				<div>
@@ -183,7 +184,7 @@
 		</footer>
 
 		<div id="language-switcher">
-			<a href="/" onclick="switch_language('nl', event)" data-active>Nederlands</a> <span class="spacer"></span> <a href="/en/" onclick="switch_language('en', event)">English</a>
+			[# lang_links #]
 		</div>
 	</div>
 
@@ -195,261 +196,14 @@
 			</video>
 		</div>
 	</div>
-
-	<script>
-		var out_animation_time = 500;
-		var $prev_tab = document.getElementById('tab-intro');
-
-		function remove_active_classes(){
-			var tabs = document.querySelectorAll('[id^="tab"]')
-			for(var i=0; i<tabs.length; i++){
-				tabs[i].removeAttribute('data-active')
-			}
-		}
-
-		function show_tab(el, tab){
-			
-			var _tab = tab ? tab : el,
-				$tab = document.getElementById('tab-'+_tab)
-
-			if($tab){
-				document.getElementById('main').setAttribute('data-trans-to', _tab)
-
-				if($prev_tab) $prev_tab.setAttribute('data-active', 'out')
-
-				var buttons = document.querySelectorAll('aside button')
-
-				for(var i=0; i<buttons.length; i++){
-					buttons[i].removeAttribute('data-active')
-				}
-
-				if(_tab === tab) el.setAttribute('data-active', true)
-
-				setTimeout(function(){
-					remove_active_classes()
-
-					$tab.setAttribute('data-active', true)
-					document.getElementById("main").classList = _tab
-					document.getElementById("main").setAttribute('data-active-tab', _tab)
-					$prev_tab = $tab
-				}, out_animation_time)
-			}
-		}
-
-		var animation_lines = ['h2'];
-
-		function create_animation_lines(){
-			animation_lines.forEach(function(line){
-				var lines = document.querySelectorAll(line);
-
-				if(!lines.length)
-					return;
-				
-				for(var i=0; i<lines.length; i++){
-					$line = lines[i];
-					$line.innerHTML = $line.innerHTML.replace('&amp;', '&').replace(/./g, function(match){
-						return '<span>'+match+'</span>';
-					})
-
-					$line.setAttribute('data-charanimate', 'true')
-				}
-			})
-		}
-
-		create_animation_lines()
-
-		function switch_language(lang, e){
-			e.preventDefault();
-
-			console.log('clicked!', e.target.href)
-			var url = e.target.href;
-
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", url+'lines', true);
-			xhr.onreadystatechange = function(resp){
-				if(xhr.readyState === 4 && xhr.status === 200) {
-					console.log(JSON.parse(xhr.responseText))
-				}
-				else{
-					console.log('error!!!')
-					// document.location = url;
-				}
-			}
-			xhr.send()
-		}
-		
-		// screw the scrapers
-		var n = ["87", "356", "409", "(0)6", "+31"].reverse().join(' ');
-		document.getElementById('phone').innerHTML = '<a href="tel:'+n.replace('(0)','').replace(/\s/g,'')+'">'+n+"</a>";
-		document.getElementById('email').innerHTML = [".nl", "own", "your", "eit", "mak", "@", "as", "on", "j"].reverse().join('')
-
-		var errors = [];
-		var lastError = {};
-		var $errorWrap = document.getElementById('validation-info')
-
-		function show_form_error(msg){
-			var $error = document.createElement('div')
-			$error.innerHTML = msg;
-
-			if(lastError.$el){
-				lastError.$el.parentElement.removeChild(lastError.$el)
-
-				if(lastError.fade_timeout)
-					clearTimeout(lastError.fade_timeout)
-
-				if(lastError.remove_timeout)
-					clearTimeout(lastError.remove_timeout)
-			}
-
-			lastError.$el = $error;
-			lastError.fade_timeout = setTimeout(function(){
-				$errorWrap.setAttribute('data-fadeout', true)
-
-				lastError.remove_timeout = setTimeout(function(){
-					$errorWrap.removeChild($error)
-
-					lastError = {};
-				}, 1000)
-			}, 1000)
-
-			$errorWrap.appendChild($error)
-		}
-
-		function send_form(values){
-			let postdata = function(data){
-				var str = '';
-				var names = Object.keys(data);
-				for(var i=0; i<names.length; i++){
-					str += (str==='') ? '' : '&';
-					str += names[i] + '=' + data[names[i]]
-				}
-
-				return str;
-			}(values)
-
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "/mail", true);
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xhr.onreadystatechange = function(resp){
-				if(xhr.readyState === 4 && xhr.status === 200) {
-					var resp = JSON.parse(xhr.responseText);
-					var $contact = document.getElementById('tab-contact');
-					
-					console.log(resp.success, resp)
-					if(resp.success)
-						$contact.setAttribute('data-send', true)
-					else
-						$contact.setAttribute('data-send', false)
-				}
-			}	
-			xhr.send(postdata);
-		}
-		
-		function validateFields(e){
-
-			var fields = document.forms.contactform.elements,
-				errors = [],
-				values = {}
-			
-			for(var i=0; i<fields.length; i++){
-				let $field = fields[i],
-					is_valid = $field.parentElement.dataset.valid === 'valid';
-
-				if($field.name!=='' && !is_valid){
-					errors.push($field.dataset.validationMsg)
-				} else {
-					values[$field.name] = [$field.value]
-				}
-			}
-
-			if(errors.length){
-				show_form_error(errors[0])
-			} else {
-				e.setAttribute('disabled', true)
-				show_form_error('[# md-line | form_sending | true #]')
-				send_form(values);
-			}
-
-			return false;
-		}
-
-		function validate_email(email){
-			return email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/)
-		}
-
-		function validateInput(el, type){
-			var val = el.value,
-				valid = el.parentElement.dataset.valid
-
-			if(val.length > 0 && !valid)
-			{
-				el.parentElement.setAttribute('data-valid', 'filled')
-			}
-			else if(val.length === 0 && valid !== true)
-			{
-				el.parentElement.removeAttribute('data-valid')
-
-				return;
-			}
-
-			switch(type){
-				case 'name':
-					if(val.length >= 4 && valid !== 'valid')
-						el.parentElement.setAttribute('data-valid', 'valid')
-					else if(val.length > 0 && val.length < 4 && valid === 'valid')
-						el.parentElement.setAttribute('data-valid', 'filled')
-					return;
-				break;
-				case 'contact':
-
-					var $typeLabel = document.getElementById('email_phone_type'),
-						is_mail = isNaN(val[0]) && val[0] !== '+' ? true : val.includes('@') ? true : false,
-						label = 'Email';
-						
-					if(!is_mail)
-					{
-						label = 'Telefoon';
-						el.dataset.validationMsg = el.dataset.phoneValidationMsg;
-
-						if(val.length >= 10 && valid !== 'valid')
-							el.parentElement.setAttribute('data-valid', 'valid')
-						else if(val.length < 10 && valid === 'valid')
-							el.parentElement.setAttribute('data-valid', 'filled')
-					}
-					else{
-						el.dataset.validationMsg = el.dataset.emailValidationMsg;
-
-						if(validate_email(val) && valid !== 'valid')
-							el.parentElement.setAttribute('data-valid', 'valid')
-						else if(!validate_email(val) && valid === 'valid')
-							el.parentElement.setAttribute('data-valid', 'filled')
-					}
-
-					$typeLabel.innerHTML = label;
-						
-					return;
-				break;
-				case 'description':
-					if(val.length > 60 && valid !== 'valid')
-						el.parentElement.setAttribute('data-valid', 'valid')
-					
-					return;
-				break;
-			}
-		}
-
-		function scrollToInput(element){
-			if(document.body.clientWidth < 800){
-				setTimeout(function(){
-					document.getElementById('tab-contact').scrollTop = element.getBoundingClientRect().top;
-				}, 250)
-			}
-		}
-	</script>
+	
+	<script src="/javascripts/general.js"></script>
+	<script src="/javascripts/form-handling.js"></script>
+	<script src="/javascripts/translate.js"></script>
 
 	<script>
 	/**
-	 * A minigame i wrote just for you, find it and have some fun! ;-)
+	 * A minigame i wrote, just for you <3 , find it and have some fun! ;-)
 	 **/
 	</script>
 	<div class="sounds" id="mingame-sounds">
@@ -469,9 +223,11 @@
 			<source src="/sounds/minigame/avatar_destroy.mp3"></source>
 		</audio>
 	</div>
+
 	<script src="/javascripts/minigame-notices.js"></script>
 	<script src="/javascripts/minigame-stats.js"></script>
 	<script src="/javascripts/minigame.js"></script>
+
 
 	<!-- <script>init_game()</script> -->
 </body>

@@ -76,18 +76,6 @@ body{
 		display: none;
 	}
 
-	&:hover,
-	[game-active="true"] &
-	{
-		.deco{
-			opacity: 1;
-			transform: scale(1);
-
-			// &:before{ animation: avatar-before 5s infinite linear; }
-			&:after{ animation: avatar-after 5s infinite linear; }
-		}	
-	}
-
 	[game-active="true"] &
 	{
 		.deco:after,
@@ -105,6 +93,15 @@ body{
 		z-index: 2;
 	}
 
+	> img{
+		border-radius: 50%;
+		border: 2px solid #014d63;
+
+		
+		top: -2px;
+		left: -2px;
+	}
+
 	[stage="hit"] &{
 		#shard_1{ display: block; }
 	}
@@ -118,6 +115,40 @@ body{
 		#shard_1{ display: block; }
 		#shard_2{ display: block; }
 		#shard_3{ display: block; }
+	}
+
+	
+	&[data-enabler]{
+		#start-game{
+			cursor: pointer;
+		}
+	}
+	&[data-enabler="2"],
+	&[data-enabler="3"]{
+		&:hover
+		{
+			.deco{
+				opacity: 1;
+				transform: scale(1);
+
+				// &:before{ animation: avatar-before 5s infinite linear; }
+				&:after{ animation: avatar-after 5s infinite linear; }
+			}	
+		}
+	
+	}
+
+	&[data-enabler="3"]{
+		&:hover #start-game{
+			opacity: .8;
+			transition-duration: 1s;
+	
+			.start{ display: block; animation-delay: .2s; }
+			
+			&:before{
+				transform: scale(1);
+			}
+		}
 	}
 }
 
@@ -147,7 +178,10 @@ body{
 	transition: opacity .3s;
 	outline: none;
 
-	cursor: pointer;
+	width: 176px;
+	height: 176px;
+
+	cursor: default;
 
 	span{
 		display: none;
@@ -177,18 +211,6 @@ body{
 		margin-left: 5px;
 		width: 4rem;
 		height: auto;
-	}
-
-	#avatar:hover &,
-	[game-active="true"] &{
-		opacity: 1;
-		transition-duration: 1s;
-
-		.start{ display: block; animation-delay: .2s; }
-		
-		&:before{
-			transform: scale(1);
-		}
 	}
 
 	[game-active="true"] &{
@@ -258,7 +280,7 @@ body{
 		z-index: 40;
 	}
 
-	#background-video-wrapper{ display: none; }
+	#background-video-wrapper, #language-switcher{ display: none; }
 
 	[collision-object]{
 		display: block;

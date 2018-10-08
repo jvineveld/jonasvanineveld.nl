@@ -1,8 +1,7 @@
 ## Plain HTML-templates
 
-Minimale code met veel resultaat. Bij plain HTML-templates werk ik enkel een statisch document uit bestaande uit HTML, CSS (sass of less) en JavaScript.
+Minimal code with great result. When creating HTML-templates i usually only create a static document, existing of HTML, CSS (sass or less) and JavaScript.
 
-Deze templates dienen als basis voor developers om hun code op aan te sluiten. Dus verwacht van ieder pagina type een html document, met bijlage folder.
+These templates serve as a base for developers to connect theire code to. So expect of every page type a html document, with assats folder.
 
-In overleg met de developers kan gekozen worden voor bepaalde structuren / indelingen van pagina's die aansluiten op hun vereisten. Uiteraard wordt zoveel mogelijk opgesplitst in verschillende herbruikbare componenten.
-				
+In consulation with the developers, there can be a choise made for specifik structures / formats of pages that meet the requirements. Offcourse as much as possible will be split up into reusable applications.

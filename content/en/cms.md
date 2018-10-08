@@ -1,9 +1,9 @@
 ## WordPress & Magento 1/2
 
-Voor het beheer van de website wordt meestal een CMS-systeem gebruikt.
+For the management of a website usually a CMS is used.
 
-Afgelopen 7 jaar heb ik vele Magento 1, 2 en WordPress templates uitgewerkt.
+The past 7 years i've been (front-end) developing lots of templates for wordpress and Magento 1 & 2.
 
-Ook het ontwikkelen van plug-ins / extensies / shortcodes voor deze CMS-systemen is geen probleem.
+Also, the development of plugins, extensions and shortcodes for these platforms has not been a problem.
 
-Heeft u een WordPress of Magento site waar u gave ideeën voor heeft? Neem dan vooral contact met me op.
+Do you have a WordPress or Magento website and a cool idea? Please contact me, i like challenges!

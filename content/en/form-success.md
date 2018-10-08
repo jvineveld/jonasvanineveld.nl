@@ -1,5 +1,5 @@
-**Je bericht is verzonden!**
+**Your message has been sent!**
 
-Dankjewel.
+Thank you.
 
-Ik zal het zo snel mogelijk bekijken en indien nodig reageren.
+I'll look into it as soon as possible, and reply when necessary.
