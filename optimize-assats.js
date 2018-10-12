@@ -22,7 +22,7 @@ const relative_dirs = (files) => {
 }
 var options = { toplevel: false };
 
-var uglified = uglify.minify(relative_dirs(['modernizr.js', 'general.js', 'translate.js', 'form-handling.js', 'minigame.js', 'minigame-stats.js', 'minigame-notices.js']), options);
+var uglified = uglify.minify(relative_dirs(['modernizr.js', 'general.js', 'translate.js', 'form-handling.js', 'minigame.js', 'minigame-notices.js']), options);
 
 fs.writeFile('public/javascripts/all.js', fileHead+uglified.code, function (err){
   if(err) {

@@ -49,6 +49,20 @@ function show_tab(el, tab){
     }
 }
 
+function insert_back_buttons(){
+    var $articles = document.querySelectorAll('#main > article');
+
+    for(var i=0; i < $articles.length; i++){
+        var $article = $articles[i];
+        
+        if($article.id !== 'tab-intro'){
+            $article.innerHTML += '<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab(this, \'intro\')"><span>x</span></button>';
+        }
+    }
+}
+
+insert_back_buttons();
+
 setTimeout(function(){
     show_tab(document.getElementById('tab-intro'), 'intro');
 
