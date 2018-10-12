@@ -350,6 +350,7 @@ let pushfiles = {
 	};
 
 const addServerPushFiles = (res, page) => {
+	return;
 	
 	let headers = {
 			request: {
@@ -438,11 +439,11 @@ var options = 	{
 	key: fs.readFileSync('./dev_ssl/cert.key') 
 }
 
-spdy
-	.createServer(options, app)
-	.listen(port, ()=>{
-	  console.log(`Server is listening on `+domain+` port `+port+`.
-  You can open the URL in the browser.`)
-	}
-  )
-// app.listen(port);
+// spdy
+// 	.createServer(options, app)
+// 	.listen(port, ()=>{
+// 	  console.log(`Server is listening on `+domain+` port `+port+`.
+//   You can open the URL in the browser.`)
+// 	}
+//   )
+app.listen(port);
