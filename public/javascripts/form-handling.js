@@ -9,11 +9,13 @@
 
 var errors = [];
 var lastError = {};
-var $errorWrap = document.getElementById('validation-info')
 
 function show_form_error(msg){
+    var $errorWrap = document.getElementById('validation-info')
     var $error = document.createElement('div')
     $error.innerHTML = msg;
+
+    console.log(msg)
 
     if(lastError.$el){
         lastError.$el.parentElement.removeChild(lastError.$el)
@@ -86,11 +88,13 @@ function validateFields(e){
         }
     }
 
+    console.log(errors, fields)
+
     if(errors.length){
         show_form_error(errors[0])
     } else {
         e.setAttribute('disabled', true)
-        show_form_error('[# md-line | form_sending | true #]')
+        show_form_error(document.getElementById('send-form-btn').dataset.sendingMsg)
         send_form(values);
     }
 

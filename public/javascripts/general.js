@@ -11,7 +11,7 @@
  */
 
 var out_animation_time = 500;
-var $prev_tab = document.getElementById('tab-intro');
+var $prev_tab = false;
 
 function remove_active_classes(){
     var tabs = document.querySelectorAll('[id^="tab"]')
@@ -42,12 +42,17 @@ function show_tab(el, tab){
             remove_active_classes()
 
             $tab.setAttribute('data-active', true)
-            document.getElementById("main").classList = _tab
+            document.getElementById("main").setAttribute('class', _tab)
             document.getElementById("main").setAttribute('data-active-tab', _tab)
             $prev_tab = $tab
         }, out_animation_time)
     }
 }
+
+setTimeout(function(){
+    show_tab(document.getElementById('tab-intro'), 'intro');
+
+}, 400)
 
 var animation_lines = ['h2'];
 

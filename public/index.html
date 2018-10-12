@@ -34,7 +34,7 @@
 	<div class="wrapper">
 		<section id="main" data-active-tab="intro">
 
-			<article id=tab-intro data-active>
+			<article id=tab-intro>
 				<div id=avatar>
 					<span class=deco></span>
 					<button id=start-game onclick="eg()">
@@ -79,12 +79,6 @@
 
 			<article id="tab-custom">
 				[# md-block | customized #]
-				<!-- <p>Denk bij maatwerk ook aan bijvoorbeeld:</p>
-				<ul>
-					<li>Formulieren en registratie van administratieve documenten of speciale werkzaamheden</li>
-					<li>Automatische PDF-rapporten & analyses van data</li>
-					<li>Geautomatiseerde nieuwsbrieven</li>
-				</ul> -->
 
 				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
 			</article>
@@ -118,7 +112,7 @@
 								<textarea name="description" cols="30" rows="10" placeholder="[# md-line | form_description_placeholder | true #]" onkeyup="validateInput(this, 'description')" onfocus="scrollToInput(this)" data-validation-msg="[# md-line | form_description_validation | true #]"></textarea>
 							</label></li>
 						</ul>
-						<button type="submit" class="outline" onclick="validateFields(this); return false;">[# md-line | form_send #]</button> <span id="validation-info"></span>
+						<button type="submit" class="outline" onclick="validateFields(this); return false;" data-sending-msg="[# md-line | form_sending | true #]" id="send-form-btn">[# md-line | form_send #]</button> <span id="validation-info"></span>
 					</div>
 					<div class="form-failed">
 						[# md-block | form-failed #]
@@ -192,18 +186,18 @@
 		<div class="video-container">
 			<video autoplay loop muted playsinline>
 				<source src="/videos/background-badq2.mp4" type="video/mp4" />
-				<!-- <source src="PATH_TO_WEBM" type="video/webm" /> -->
 			</video>
 		</div>
 	</div>
 	
+	<script src="/javascripts/modernizr.js"></script>
 	<script src="/javascripts/general.js"></script>
 	<script src="/javascripts/form-handling.js"></script>
 	<script src="/javascripts/translate.js"></script>
 
 	<script>
 	/**
-	 * A minigame i wrote, just for you <3 , find it and have some fun! ;-)
+	 * A minigame i wrote; just for you <3 find it and have some fun! ;-)
 	 **/
 	</script>
 	<div class="sounds" id="mingame-sounds">
@@ -227,8 +221,5 @@
 	<script src="/javascripts/minigame-notices.js"></script>
 	<script src="/javascripts/minigame-stats.js"></script>
 	<script src="/javascripts/minigame.js"></script>
-
-
-	<!-- <script>init_game()</script> -->
 </body>
 </html>

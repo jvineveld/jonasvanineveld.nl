@@ -1,5 +1,7 @@
 "use strict";
 
+const logger = require('morgan')
+const spdy = require('spdy')
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
@@ -13,7 +15,9 @@ const converter = new showdown.Converter();
 const port = 8080;
 
 dotenv.load()
-app.use(compression())
+
+// app.use(compression())
+app.use(logger('dev'))
 
 let domain = 'localhost:8080';
 
@@ -262,7 +266,8 @@ app.use('/mail', function(req, res){
 		res.json({
 			success: true
 		});
-	}).catch(() => {
+	}).catch((error) => {
+		console.log(error)
 		res.json({
 			success: false
 		});
@@ -271,6 +276,7 @@ app.use('/mail', function(req, res){
 
 
 app.get('/', function(req, res){
+	addServerPushFiles(res, 'home');
 	var filePath = path.join(__dirname, '/public/index.html');
 	fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
 		if (!err) {
@@ -287,6 +293,7 @@ app.get('/', function(req, res){
 })
 
 app.get('/en', function(req, res){
+	addServerPushFiles(res, 'home');
 	var filePath = path.join(__dirname, '/public/index.html');
 	fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
 		if (!err) {
@@ -332,8 +339,113 @@ app.get('/lines', function(req, res){
 	});
 })
 
+let pushfiles = {
+		home: {
+			files: {
+				js: ['modernizr.js', 'general.js', 'translate.js', 'form-handling.js', 'minigame.js', 'minigame-stats.js', 'minigame-notices.js'],
+				css: ['index.css'],
+				svg: ['gamepad.svg', 'keyboard.svg']
+			}
+				
+		}
+	};
+
+const addServerPushFiles = (res, page) => {
+	let headers = {
+			request: {
+			accept: '*/*'
+			}
+		},
+		path = '';
+
+	Object.keys(pushfiles[page].files).forEach(type => {
+		switch(type){
+			case "css":
+				headers.response = {
+					'content-type': 'text/css; charset=UTF-8'
+				} 
+				path = '/styles/css/';
+			break;
+			case "js":
+				headers.response = {
+					'content-type': 'application/javascript; charset=UTF-8'
+				} 
+				path = '/javascripts/';
+			break;
+			case "svg":
+				headers.response = {
+					'content-type': 'image/svg+xml; charset=UTF-8'
+				} 
+				path = '/images/';
+			break;
+
+		}
+
+		pushfiles[page].files[type].forEach(file => {
+			let stream = res.push(path+file, headers, (error, stream) => {
+				if (error) return;
+	
+				  stream.end(pushfiles[page].raw[type][file]);
+			})
+			stream.on('error', (error) => {
+				console.log('pushfile error', error)
+			})
+		})
+	})
+}
+
+
+const preloadPushFile = (pageName, filename, type) => {
+	let path = '';
+
+	switch(type){
+		case "css":
+			path = 'public/styles/css/';
+		break;
+		case "js":
+			path = 'public/javascripts/';
+		break;
+		case "svg":
+			path = 'public/images/';
+		break;
+
+	}
+
+	fs.readFile(path+filename, 'utf8', (error, data) => {
+		console.log('loaded', filename)
+		if (error) console.log('got error loading pushfile', error);
+
+		if(!pushfiles[pageName].raw) pushfiles[pageName].raw = {}; 
+		if(!pushfiles[pageName].raw[type]) pushfiles[pageName].raw[type] = {}; 
+
+		pushfiles[pageName].raw[type][filename] = data;
+	})
+}
+
+const preloadServerPushFiles = () => {
+	Object.keys(pushfiles).forEach(pageName => {
+		Object.keys(pushfiles[pageName].files).forEach((type) => {
+			pushfiles[pageName].files[type].forEach((file) => {
+				preloadPushFile(pageName, file, type)
+			})
+		})
+	})
+}
+
+preloadServerPushFiles()
 
 app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
 
-app.listen(port);
-console.log('Listening on port '+port);
+var options = 	{ 
+	cert: fs.readFileSync('./dev_ssl/cert.pem'), 
+	key: fs.readFileSync('./dev_ssl/cert.key') 
+}
+
+spdy
+	.createServer(options, app)
+	.listen(port, ()=>{
+	  console.log(`Server is listening on `+domain+` port `+port+`.
+  You can open the URL in the browser.`)
+	}
+  )
+// app.listen(port);

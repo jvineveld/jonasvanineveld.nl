@@ -15,7 +15,7 @@ form
 			position: relative;
 			margin: 0 0 30px;
 
-			span
+			label > span
 			{
 				position: absolute;
 				right: 100%;
@@ -48,7 +48,7 @@ form
 		}
 
 		&[data-valid]{
-			span
+			> span
 			{
 				opacity: 1;
 				transform: translate(0, 0);
@@ -63,7 +63,7 @@ form
 			input, textarea{
 				border-color: #a6f7a6;
 			}
-			span
+			> span
 			{
 				color: #a6f7a6;
 			}
@@ -108,8 +108,8 @@ form
 
 	#validation-info {
 		position: absolute;
-		left: 140px;
-		bottom: 0;
+		right: 0;
+		bottom: -2px;
 	}
 }
 
