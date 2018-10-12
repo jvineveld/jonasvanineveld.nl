@@ -27,13 +27,13 @@
 	[# canonical_link #]	
 
 	<link rel='shortcut icon' type='image/x-icon' href=/favicon.ico />
-	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700" rel=stylesheet>
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P%7CMaven+Pro:400,500,700" rel=stylesheet>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel=stylesheet>
 	<link rel=stylesheet href=/styles/css/index.css>
 </head>
 <body class=no-js><script>document.body.className = ''</script>
 	<div class=wrapper>
-		<section id=main data-active-tab=intro>
+		<div id=main data-active-tab=intro>
 
 			<article id=tab-intro>
 				<div id=avatar>
@@ -93,7 +93,7 @@
 			<article id="tab-contact">
 				[# md-block | contact #]
 
-				<form action="" method="post" onsubmit="validateFields" id="contactform">
+				<form action="/" method="post" onsubmit="validateFields" id="contactform">
 					<div class="form-content">
 						<ul>
 							<li data-field="name">
@@ -127,7 +127,7 @@
 				
 				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span>x</span></button>
 			</article>
-		</section>
+		</div>
 	
 		<aside>
 			<div class="social">
@@ -203,19 +203,19 @@
 	</script>
 	<div class="sounds" id="mingame-sounds">
 		<audio controls id="sound_lvlup">
-			<source src="/sounds/minigame/lvlup.mp3"></source>
+			<source src="/sounds/minigame/lvlup.mp3" />
 		</audio>
 		<audio controls id="sound_coin">
-			<source src="/sounds/minigame/coin.mp3"></source>
+			<source src="/sounds/minigame/coin.mp3" />
 		</audio>	
 		<audio controls id="sound_error">
-			<source src="/sounds/minigame/error.mp3"></source>
+			<source src="/sounds/minigame/error.mp3" />
 		</audio>	
 		<audio controls id="sound_fail">
-			<source src="/sounds/minigame/fail.mp3"></source>
+			<source src="/sounds/minigame/fail.mp3" />
 		</audio>
 		<audio controls id="sound_avatar_destroy">
-			<source src="/sounds/minigame/avatar_destroy.mp3"></source>
+			<source src="/sounds/minigame/avatar_destroy.mp3" />
 		</audio>
 	</div>
 

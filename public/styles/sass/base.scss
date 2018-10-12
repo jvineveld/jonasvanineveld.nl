@@ -21,17 +21,12 @@ body
 {
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: center;
 	height: 80%;
 	padding:0 10vw;
 
-	&:before{
-		content: " ";
-		display: block;
-		flex: 1 1;
-	}
-	section{ flex: 0 0 50%}
-	aside{ flex: 0 0 40% }
+	#main{ flex: 0 0 500px; }
+	aside{ flex: 0 0 335px; }
 }
 
 footer
