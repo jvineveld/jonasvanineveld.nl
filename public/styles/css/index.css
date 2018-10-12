@@ -224,6 +224,7 @@ footer {
 
 #language-switcher {
   position: absolute;
+  z-index: 20;
   left: 50%;
   margin-left: -100px;
   width: 200px;
