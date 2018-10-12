@@ -10,6 +10,8 @@
     max-width: 600px; }
   #main.contact .back-btn {
     right: 0; }
+    #main.contact .back-btn:before {
+      border-radius: 50%; }
   #main.contact li:before {
     display: none; }
 

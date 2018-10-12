@@ -232,9 +232,9 @@ var minigame = function(){
 
 	function set_collisions(){
 		collision_elements.forEach(function(element){
-			let $elements = document.querySelectorAll(element);
+			var $elements = document.querySelectorAll(element);
 			for(var i=0; i<$elements.length; i++){
-				let $element = $elements[i];
+				var $element = $elements[i];
 				$element.setAttribute('collision-object', true)
 				collision_boxes.push({
 					$el: $element,
@@ -410,7 +410,7 @@ var minigame = function(){
 
 	function pick_astroid(type){
 		console.log(type, astroids.types)
-		let types = astroids.types[type]
+		var types = astroids.types[type]
 
 		return types[Math.floor(Math.random() * types.length)];
 	}

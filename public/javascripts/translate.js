@@ -27,9 +27,14 @@ function switch_language(lang, e){
             replace_forms(data.forms)
 
             create_animation_lines()
-
-            var stateObj = { lang: lang };
-            history.pushState(stateObj, document.getElementsByTagName('title')[0].innerText, url);
+            
+            if(Modernizr.history){
+                var stateObj = { lang: lang };
+                history.pushState(stateObj, document.getElementsByTagName('title')[0].innerText, url);
+            } else {
+                // screw old browsers, the effect won't be there too
+                document.location.href = url;
+            }
         }
     }
     xhr.send()

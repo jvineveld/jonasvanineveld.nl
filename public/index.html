@@ -9,9 +9,9 @@
    | [ ✓ ] Custom MarkDown file multilanguage content management setup          |
    | [ ✓ ] No frameworks                                                        |
    | [ ✓ ] No libraries                                                         |
-   | [ ✓ ] nodeJs, HTTP2 server push, brotli compressions                       |
+   | [ ✓ ] nodeJs, HTTP2 server push, gzip compression                          |
    | [ ✓ ] Hosted in the google AppEngine cloud environment                     |
-   | [ ✓ ] Has minigame! Found & played it already? ;-)                         |
+   | [ ✓ ] Has hidden minigame! Found & played it already? ;-)                  |
    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
    | Check the source: https://github.com/jvineveld/jonasvanineveld.nl          |
    \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
@@ -27,7 +27,8 @@
 	[# canonical_link #]	
 
 	<link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700|Work+Sans|Noto+Sans:400,400i,700,700i" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700|IBM+Plex+Serif:400,400i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
 	<link rel="stylesheet" href="/styles/css/index.css">
 </head>
 <body class="no-js"><script>document.body.className = ''</script>
@@ -56,37 +57,37 @@
 			<article id="tab-connectors">
 				[# md-block | connectors #]
 
-				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab(this, 'intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab(this, 'intro')"><span>x</span></button>
 			</article>
 
 			<article id="tab-plain-html">
 				[# md-block | plain-html #]
 				
-				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span>x</span></button>
 			</article>
 
 			<article id="tab-visuals">
 				[# md-block | visuals #]
 				
-				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span>x</span></button>
 			</article>
 
 			<article id="tab-cms">
 				[# md-block | cms #]
 				
-				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span>x</span></button>
 			</article>
 
 			<article id="tab-custom">
 				[# md-block | customized #]
 
-				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span>x</span></button>
 			</article>
 		
 			<article id="tab-optimisation">
 				[# md-block | optimisation #]
 				
-				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span>x</span></button>
 			</article>
 			
 			<article id="tab-contact">
@@ -124,13 +125,13 @@
 					</div>
 				</form>
 				
-				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span></span></button>
+				<button class="back-btn" title="[# md-line | go_back | true #]" onclick="show_tab('intro')"><span>x</span></button>
 			</article>
 		</section>
 	
 		<aside>
 			<div class="social">
-				<a href="https://github.com/jvineveld" title="[# md-line | github_link_title | true #]"><svg id="github_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 543.94 140.92" width="110" >
+				<a href="https://github.com/jvineveld" title="[# md-line | github_link_title | true #]"><svg id="github_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 543.94 140.92" width="110" height="29">
 					<defs>
 						<style>.cls-2{fill-rule:evenodd;}</style>
 					</defs>

@@ -188,7 +188,7 @@ body {
   text-align: center;
   height: 100%;
   margin: 0;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased; }
 
 .wrapper {
@@ -237,11 +237,12 @@ footer {
   #language-switcher a {
     color: #fff;
     text-decoration: none;
+    animation: tab-in .8s forwards;
     opacity: .5; }
-    #language-switcher a[data-active], #language-switcher a:hover {
+    #language-switcher a:hover {
       opacity: 1; }
     #language-switcher a[data-active] {
-      animation: lang-active-in .4s infinite; }
+      display: none; }
   #language-switcher .spacer {
     display: inline-block;
     width: 2px;
@@ -275,7 +276,7 @@ audio {
   display: none; }
 
 button {
-  font-family: 'Maven Pro', sans-serif; }
+  font-family: "Roboto", sans-serif; }
 
 button.outline {
   position: relative;
@@ -624,7 +625,7 @@ form {
     outline: none;
     transition: all .3s ease-out;
     box-sizing: border-box;
-    font-family: 'Maven Pro', sans-serif; }
+    font-family: "Roboto", sans-serif; }
     form input:focus, form textarea:focus {
       border-color: #F5A623; }
   form textarea {
@@ -950,9 +951,12 @@ article {
     animation-play-state: running; }
   article[data-active='out'] {
     animation: tab-out 0.3s ease-in forwards; }
+  article h1 {
+    font-size: 21px; }
   article h2 {
     margin-top: 0;
-    line-height: 30px; }
+    line-height: 39px;
+    font-size: 22px; }
   article ul {
     list-style-type: none; }
     article ul li {
@@ -969,7 +973,8 @@ article {
         background-size: 20px auto; }
 
 .social {
-  text-align: left; }
+  text-align: left;
+  height: 36px; }
   .social svg {
     max-width: 83px; }
   .social a {
@@ -1077,6 +1082,7 @@ aside {
   animation: back-btn-in .3s ease-out forwards;
   animation-delay: .3s;
   border: 0;
+  overflow: hidden;
   outline: none; }
   .back-btn span {
     position: absolute;
@@ -1084,7 +1090,8 @@ aside {
     height: 0;
     pointer-events: none;
     transition: transform .2s ease-out;
-    transform-origin: 50% 50%; }
+    transform-origin: 50% 50%;
+    text-indent: -9000px; }
     .back-btn span:before, .back-btn span:after {
       content: " ";
       position: absolute;
@@ -1104,10 +1111,10 @@ aside {
   .back-btn:before {
     content: " ";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 5px;
+    left: 4px;
+    width: 21px;
+    height: 21px;
     border: 2px solid #fff;
     border-radius: 50%;
     box-sizing: border-box;
@@ -1121,6 +1128,8 @@ aside {
       background: #fff; }
   .back-btn:focus:before {
     opacity: .3; }
+  .back-btn:focus span {
+    transform: rotate(90deg) scale(0.8); }
 
 #tab-intro {
   color: #fff;
@@ -1195,7 +1204,8 @@ aside {
 
 @media all and (max-width: 1200px) and (max-height: 700px) {
   #avatar {
-    width: 125px; } }
+    width: 125px;
+    height: 125px; } }
 
 @media all and (max-height: 830px) and (max-width: 1344px) {
   .wrapper:before {
@@ -1443,3 +1453,55 @@ aside {
   margin-top: -50vh;
   width: 150vw;
   margin-left: -25vw; }
+
+.no-object-fit #avatar {
+  opacity: 1;
+  animation: none; }
+
+.no-cssanimations article[data-active],
+.no-cssanimations aside button,
+.no-cssanimations aside .social a,
+.no-cssanimations #language-switcher,
+.no-cssanimations footer,
+.no-cssanimations .back-btn,
+.no-cssanimations h1 {
+  opacity: 1; }
+
+.no-cssanimations p, .no-cssanimations [data-charanimate] span, .no-cssanimations li {
+  opacity: 1 !important; }
+
+.no-cssanimations .back-btn {
+  width: auto;
+  color: #fff;
+  padding: 0; }
+  .no-cssanimations .back-btn span {
+    text-indent: 0;
+    opacity: 1;
+    background: none;
+    height: auto;
+    width: auto;
+    line-height: 1;
+    font-size: 23px;
+    position: static; }
+
+.no-flexbox .wrapper {
+  display: block;
+  max-width: 1200px;
+  margin: 80px auto 0; }
+  .no-flexbox .wrapper > section {
+    float: left;
+    max-width: 50%; }
+    .no-flexbox .wrapper > section article {
+      max-width: 100%; }
+  .no-flexbox .wrapper > aside {
+    float: right;
+    max-width: 40%;
+    width: 40%; }
+
+.no-flexbox #contactform {
+  width: 600px;
+  max-width: 100%; }
+
+.no-placeholder form ul li label > span {
+  opacity: 1;
+  transform: none; }

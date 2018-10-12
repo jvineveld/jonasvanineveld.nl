@@ -7,4 +7,82 @@
             margin-left: -25vw;
         }
     }
+
+    // because this is triggerd in ie11, i'll also prevent some animations here being bugged in ie11 becuase they are animations inside animations..
+
+    #avatar{
+        opacity: 1;
+        animation: none;
+    }
+}
+
+.no-cssanimations
+{
+    article[data-active],
+    aside button,
+    aside .social a,
+    #language-switcher, 
+    footer,
+    .back-btn, 
+    h1{
+        opacity: 1;
+    }
+
+    p, [data-charanimate] span, li{
+        opacity: 1 !important;
+    }
+
+    // here i just asume ppl also wont be able to see :before and :afters (ie9)
+    .back-btn {
+        width: auto;
+        color: #fff;
+        padding:0; 
+
+        span{
+            text-indent:0;
+            opacity: 1;
+            background: none;
+            height: auto;
+            width: auto;
+
+            line-height: 1;
+            font-size: 23px;
+            position: static;            
+        }
+    } 
+}
+
+.no-flexbox{
+    .wrapper{
+        display: block;
+        max-width: 1200px;
+        margin:80px auto 0;
+
+        > section{
+            float:left;
+            max-width: 50%;
+
+            article{
+                max-width: 100%;
+            }
+        }
+
+        > aside{
+            float: right;
+            max-width: 40%;
+            width: 40%;
+        }
+    }
+
+    #contactform{
+        width: 600px;
+        max-width: 100%;
+    }
+}
+
+.no-placeholder{
+    form ul li label > span{
+        opacity: 1;
+        transform: none;
+    }
 }

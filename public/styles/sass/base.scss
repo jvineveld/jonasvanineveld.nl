@@ -13,7 +13,7 @@ body
 	height: 100%;
 	margin: 0;
 	
-	font-family: 'Noto Sans', sans-serif;
+	font-family: $font_family;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -73,15 +73,16 @@ footer
 	a{
 		color: #fff;
 		text-decoration: none;
+		animation: tab-in .8s forwards; 
 
 		opacity: .5;
 
-		&[data-active], &:hover{
+		&:hover{
 			opacity: 1;
 		}
 
 		&[data-active]{
-			animation: lang-active-in .4s infinite;
+			display: none;
 		}
 	}
 
@@ -124,7 +125,7 @@ audio{
 }
 
 button{
-	font-family: 'Maven Pro', sans-serif;
+	font-family: $button_font_family;
 }
 
 button.outline

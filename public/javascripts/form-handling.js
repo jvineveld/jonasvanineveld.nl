@@ -42,7 +42,7 @@ function show_form_error(msg){
 }
 
 function send_form(values){
-    let postdata = function(data){
+    var postdata = function(data){
         var str = '';
         var names = Object.keys(data);
         for(var i=0; i<names.length; i++){
@@ -78,7 +78,7 @@ function validateFields(e){
         values = {}
     
     for(var i=0; i<fields.length; i++){
-        let $field = fields[i],
+        var $field = fields[i],
             is_valid = $field.parentElement.dataset.valid === 'valid';
 
         if($field.name!=='' && !is_valid){

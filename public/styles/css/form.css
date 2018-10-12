@@ -7,7 +7,7 @@ form {
     form ul li {
       position: relative;
       margin: 0 0 30px; }
-      form ul li span {
+      form ul li label > span {
         position: absolute;
         right: 100%;
         margin-right: 20px;
@@ -29,7 +29,7 @@ form {
     opacity: 0;
     transform: translate(10px, 0);
     transition: all .3s; }
-  form label[data-valid] span {
+  form label[data-valid] > span {
     opacity: 1;
     transform: translate(0, 0); }
   form label[data-valid="valid"]:before {
@@ -37,7 +37,7 @@ form {
     transform: translate(0, 0); }
   form label[data-valid="valid"] input, form label[data-valid="valid"] textarea {
     border-color: #a6f7a6; }
-  form label[data-valid="valid"] span {
+  form label[data-valid="valid"] > span {
     color: #a6f7a6; }
   form input, form textarea {
     width: 100%;
@@ -62,8 +62,8 @@ form {
       height: 220px; }
   form #validation-info {
     position: absolute;
-    left: 140px;
-    bottom: 0; }
+    right: 0;
+    bottom: -2px; }
 
 .form-failed,
 .form-success {

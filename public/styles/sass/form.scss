@@ -87,7 +87,7 @@ form
 		transition: all .3s ease-out;
 		box-sizing: border-box;
 
-		font-family: 'Maven Pro', sans-serif;
+		font-family: $form_font_family;
 
 		&:focus
 		{

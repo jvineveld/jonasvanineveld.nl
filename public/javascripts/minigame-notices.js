@@ -1,6 +1,6 @@
 /**
    /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
-   | Notices & Sounds for minigame					                            |
+   | Notices & Sounds for minigame                                              |
    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
    | @author Jonas van Ineveld, Personal website - 2018                         |
    \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
@@ -12,7 +12,7 @@ var notices = function(){
 		animation_duration = 1500,
 		last_time = 0;
 
-	let notices = {
+	var notices = {
 		destroyer: [
 			'Sloop het maar..',
 			'Laat je nog iets over voor de rest?',
