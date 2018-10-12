@@ -16,10 +16,10 @@ const port = 8080;
 
 dotenv.load()
 
-// app.use(compression())
+app.use(compression())
 app.use(logger('dev'))
 
-let domain = 'localhost:8080';
+let domain = 'https://localhost:8080';
 
 let languages = {
 	nl: {
@@ -158,7 +158,6 @@ const render_language_links = function(current_language){
 
 	langs.forEach(lang => {
 		let active = lang === current_language ? 'data-active' : '';
-		html += html !== '' ? '<span class="spacer"></span>' : '';
 		html += '<a href="'+languages[lang].path+'" onclick="switch_language(\''+lang+'\', event)" '+active+'>'+languages[lang].name+'</a>';
 
 	})
@@ -351,6 +350,7 @@ let pushfiles = {
 	};
 
 const addServerPushFiles = (res, page) => {
+	
 	let headers = {
 			request: {
 			accept: '*/*'
@@ -382,14 +382,11 @@ const addServerPushFiles = (res, page) => {
 		}
 
 		pushfiles[page].files[type].forEach(file => {
-			let stream = res.push(path+file, headers, (error, stream) => {
-				if (error) return;
-	
-				  stream.end(pushfiles[page].raw[type][file]);
-			})
+			let stream = res.push(path+file, headers);
 			stream.on('error', (error) => {
 				console.log('pushfile error', error)
 			})
+			stream.end(pushfiles[page].raw[type][file]);
 		})
 	})
 }
