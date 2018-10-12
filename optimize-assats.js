@@ -1,5 +1,6 @@
-var fs = require('fs');
-var uglify = require("uglify-js");
+const fs = require('fs');
+const uglify = require("uglify-js");
+const brotli = require('brotli');
 
 let fileHead = `/**
    /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ 
@@ -13,7 +14,6 @@ const relative_dirs = (files) => {
         fileHead += `   | - `+path+'\n'
         return  fs.readFileSync(path, "utf8")
     })
-    console.log(tmp)
     fileHead += `   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ 
    | @author Jonas van Ineveld, Personal website - 2018                         |
    \\~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
@@ -31,3 +31,24 @@ fs.writeFile('public/javascripts/all.js', fileHead+uglified.code, function (err)
     console.log("Script generated and saved:", 'public/javascripts/all.js');
   }      
 });
+
+
+const create_brotli_crompressed_files = (brotli_files) => {
+    brotli_files.forEach(file => {
+        fs.writeFile(file+'.br', brotli.compress(fs.readFileSync(file)), function(err){ 
+            if (!err) { 
+                console.log('Brotli crompressed file:', file)
+            }
+        });
+    })
+}
+
+create_brotli_crompressed_files([
+    'public/images/avatar.jpg',
+    'public/images/star-hover.svg',
+    'public/images/star-full.svg',
+    'public/images/star.svg',
+    'public/images/gamepad.svg',
+    'public/images/keyboard.svg',
+    'public/styles/css/index.css',
+]);

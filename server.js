@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const compression = require('compression')
+const expressStaticGzip = require("express-static-gzip");
 const express = require('express')
 const app = express()
 const fs = require('fs');
@@ -18,6 +19,8 @@ dotenv.load()
 
 app.use(compression())
 app.use(logger('dev'))
+
+const enable_http2 = false;
 
 let domain = 'https://localhost:8080';
 
@@ -341,9 +344,9 @@ app.get('/lines', function(req, res){
 let pushfiles = {
 		home: {
 			files: {
-				js: ['modernizr.js', 'general.js', 'translate.js', 'form-handling.js', 'minigame.js', 'minigame-stats.js', 'minigame-notices.js'],
+				js: ['all.js'],
 				css: ['index.css'],
-				svg: ['gamepad.svg', 'keyboard.svg']
+				img: ['avatar.jpg']
 			}
 				
 		}
@@ -373,9 +376,9 @@ const addServerPushFiles = (res, page) => {
 				} 
 				path = '/javascripts/';
 			break;
-			case "svg":
+			case "img":
 				headers.response = {
-					'content-type': 'image/svg+xml; charset=UTF-8'
+					'content-type': 'image/jpeg'
 				} 
 				path = '/images/';
 			break;
@@ -430,20 +433,28 @@ const preloadServerPushFiles = () => {
 	})
 }
 
-preloadServerPushFiles()
+app.use(expressStaticGzip(path.join(__dirname, 'public'), {
+	enableBrotli: true,
+	index: false,
+    customCompressions: [{
+        encodingName: 'deflate',
+        fileExtension: 'zz'
+    }],
+    orderPreference: ['br', 'deflate']
+})); //  "public" off of current is root
 
-app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
+if(enable_http2){
+	preloadServerPushFiles()
 
-var options = 	{ 
-	cert: fs.readFileSync('./dev_ssl/cert.pem'), 
-	key: fs.readFileSync('./dev_ssl/cert.key') 
+	var options = 	{ 
+		cert: fs.readFileSync('./ssl/cert.pem'), 
+		key: fs.readFileSync('./ssl/cert.key') 
+	}
+
+	spdy.createServer(options, app).listen( port, () =>{
+		console.log(`Server is listening on port `+port+`.You can open the URL in the browser.`)
+	});
+} else {
+	app.listen(port);		
+	console.log(`Server is listening on port `+port+`.You can open the URL in the browser.`)
 }
-
-// spdy
-// 	.createServer(options, app)
-// 	.listen(port, ()=>{
-// 	  console.log(`Server is listening on `+domain+` port `+port+`.
-//   You can open the URL in the browser.`)
-// 	}
-//   )
-app.listen(port);
