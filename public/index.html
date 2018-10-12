@@ -1,46 +1,46 @@
 <!doctype html>
 <html lang="[# language_tag #]">
-<!--
-
-   /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
-   | Jonas van Ineveld, Personal website - 2018                                 |
-   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-   | [ ✓ ] Desktop / tablet and mobile responsive                               |
-   | [ ✓ ] Custom MarkDown file multilanguage content management setup          |
-   | [ ✓ ] No frameworks                                                        |
-   | [ ✓ ] No libraries                                                         |
-   | [ ✓ ] nodeJs, HTTP2 server push, gzip compression                          |
-   | [ ✓ ] Hosted in the google AppEngine cloud environment                     |
-   | [ ✓ ] Has hidden minigame! Found & played it already? ;-)                  |
-   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-   | Check the source: https://github.com/jvineveld/jonasvanineveld.nl          |
-   \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
-
--->
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="robots" content="noindex">
+	<!--
+
+	/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+	| Jonas van Ineveld, Personal website - 2018                                 |
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+	| [ ✓ ] Desktop / tablet and mobile responsive                               |
+	| [ ✓ ] Custom MarkDown file multilanguage content management setup          |
+	| [ ✓ ] No frameworks                                                        |
+	| [ ✓ ] No libraries                                                         |
+	| [ ✓ ] nodeJs, HTTP2 server push, gzip compression                          |
+	| [ ✓ ] Hosted in the google AppEngine cloud environment                     |
+	| [ ✓ ] Has hidden minigame! Found & played it already? ;-)                  |
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+	| Check the source: https://github.com/jvineveld/jonasvanineveld.nl          |
+	\~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
+
+	-->
+	<meta name=viewport content="width=device-width, initial-scale=1.0">
+	<meta name=robots content="noindex">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 	<title>Jonas van Ineveld - Freelance Full Stack / Front-end Developer</title>
 	[# canonical_link #]	
 
-	<link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel='shortcut icon' type='image/x-icon' href=/favicon.ico />
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Maven+Pro:400,500,700" rel=stylesheet>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel=stylesheet>
+	<link rel=stylesheet href=/styles/css/index.css>
 </head>
-<body class="no-js"><script>document.body.className = ''</script>
-	<div class="wrapper">
-		<section id="main" data-active-tab="intro">
+<body class=no-js><script>document.body.className = ''</script>
+	<div class=wrapper>
+		<section id=main data-active-tab=intro>
 
 			<article id=tab-intro>
 				<div id=avatar>
 					<span class=deco></span>
 					<button id=start-game onclick="eg()">
-						<span class="start"><img width="60px" height="60px" src=/images/gamepad.svg></span>
-						<span class="intro"><img width="90px" height="90px" src=/images/keyboard.svg></span>
+						<span class="start"><img width=60 height=60 src=/images/gamepad.svg alt="play?"></span>
+						<span class="intro"><img width=90 height=90 src=/images/keyboard.svg alt="Use WASD"></span>
 					</button>
 					<img src=/images/avatar.jpg alt='Jonas van Ineveld' width=176 height=176 />
 				</div>
@@ -202,19 +202,19 @@
 	 **/
 	</script>
 	<div class="sounds" id="mingame-sounds">
-		<audio controls preload="true" id="sound_lvlup" volume="0.1">
+		<audio controls id="sound_lvlup">
 			<source src="/sounds/minigame/lvlup.mp3"></source>
 		</audio>
-		<audio controls preload="true" id="sound_coin" volume="0.1">
+		<audio controls id="sound_coin">
 			<source src="/sounds/minigame/coin.mp3"></source>
 		</audio>	
-		<audio controls preload="true" id="sound_error" volume="0.1">
+		<audio controls id="sound_error">
 			<source src="/sounds/minigame/error.mp3"></source>
 		</audio>	
-		<audio controls preload="true" id="sound_fail" volume="0.1">
+		<audio controls id="sound_fail">
 			<source src="/sounds/minigame/fail.mp3"></source>
 		</audio>
-		<audio controls preload="true" id="sound_avatar_destroy" volume="0.1">
+		<audio controls id="sound_avatar_destroy">
 			<source src="/sounds/minigame/avatar_destroy.mp3"></source>
 		</audio>
 	</div>
