@@ -123,7 +123,8 @@
 		white-space: nowrap;
 	}
 
-	html{ overflow: hidden; }//mobile scroll fix
+	// mobile scroll fix
+	html{ overflow: hidden; }
 
 	.wrapper{
 		height: auto;
@@ -139,7 +140,7 @@
 
 		.social
 		{
-			margin-top: 40px;
+			margin: 40px 0;
 			text-align: center;
 
 			order:2;
@@ -385,7 +386,7 @@
 			}
 		}
 		button{
-			font-size: 23px;
+			font-size: 16px;
 			background: rgba(255, 255, 255, 0.2);
 			padding: 10px 17px;
 		}
@@ -404,6 +405,50 @@
 @media all and (max-width: 520px){
 	html{
 		font-size: 16px;
+	}
+
+
+	#phone a{
+		left: 11vw;
+		background: url("/images/phone.svg") no-repeat center;
+	}
+
+	#mailme{
+		position: absolute;
+		right: 11vw;
+		text-indent: -9000px;
+		background: url('/images/email-outline.svg') no-repeat center;
+		
+		border:0;
+
+		&:after{display: none;}
+	}
+
+	#language-switcher{
+		top: 26px;
+		left: 50%;
+		margin-left: -50px;
+		width: 100px;
+
+		a{
+			line-height: 40px;
+		}
+	}
+
+	footer{
+		top: 26px;
+
+		.spacer{ display: none;}
+		a,button{
+			position: absolute;
+			top: 0;
+			text-indent: -9000px;
+			overflow: hidden;
+			display: block;
+			background-size: 27px 27px;
+			width: 40px;
+			height: 40px;
+		}
 	}
 }
 
@@ -430,6 +475,6 @@
 
 	.wrapper
 	{
-		padding-top:141px;
+		padding-top:60px;
 	}
 }
