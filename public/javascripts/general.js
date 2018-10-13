@@ -65,7 +65,6 @@ insert_back_buttons();
 
 setTimeout(function(){
     show_tab(document.getElementById('tab-intro'), 'intro');
-
 }, 400)
 
 var animation_lines = ['h2'];

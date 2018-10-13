@@ -413,7 +413,7 @@ const preloadPushFile = (pageName, filename, type) => {
 	}
 
 	fs.readFile(path+filename, 'utf8', (error, data) => {
-		console.log('loaded', filename)
+		console.log('pushfile pre-loaded', filename)
 		if (error) console.log('got error loading pushfile', error);
 
 		if(!pushfiles[pageName].raw) pushfiles[pageName].raw = {}; 
@@ -434,7 +434,7 @@ const preloadServerPushFiles = () => {
 }
 
 app.use(expressStaticGzip(path.join(__dirname, 'public'), {
-	enableBrotli: true,
+	enableBrotli: false,
 	index: false,
     customCompressions: [{
         encodingName: 'deflate',

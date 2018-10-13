@@ -5,6 +5,16 @@
 	}
 }
 
+
+@media all and (min-width:870px){
+	.wrapper
+	{
+		#main{ flex: 0 0 500px; }
+		aside{ flex: 0 0 335px; }
+	}
+}
+
+
 @media all and (max-height:830px){
 	.wrapper{
 		height: 93%;
@@ -114,17 +124,15 @@
 	}
 
 	.wrapper{
+		height: auto;
 		display: block;
 		padding-top:13vw;
-		max-height: 100vh;
+		max-height: 99.99vh;
 		overflow: auto;
 		box-sizing:  border-box;
 		position: relative;
-	}
-
-	.wrapper
-	{
-		height: auto;
+		-webkit-overflow-scrolling: touch;
+		z-index: 0;
 
 		.social
 		{

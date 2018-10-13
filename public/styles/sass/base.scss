@@ -25,8 +25,8 @@ body
 	height: 80%;
 	padding:0 10vw;
 
-	#main{ flex: 0 0 500px; }
-	aside{ flex: 0 0 335px; }
+	#main{ flex: 0 0 50%; }
+	aside{ flex: 0 0 40%; }
 }
 
 footer
@@ -256,16 +256,6 @@ button.outline
 			animation-delay: 1;
 		}
 	}
-}
-
-footer{
-	// .spacer {position: relative;}
-	// .spacer .old{
-	// 	top: -1px !important;
-	// }
-	// button .old{
-	// 	top: 0 !important;
-	// }
 }
 
 aside nav button{
