@@ -35,7 +35,12 @@ function switch_language(lang, e){
                 // screw old browsers, the effect won't be there too
                 document.location.href = url;
             }
+        } else if (xhr.readyState === 4 && xhr.status !== 200){
+            // got error retrieving translation? then redirect to URL
+            document.location.href = url;
         }
+
+        console.log('new translate ready state', xhr.readyState, xhr.status)
     }
     xhr.send()
 }
