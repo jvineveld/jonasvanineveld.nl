@@ -129,6 +129,7 @@
 		height: auto;
 		display: block;
 		padding-top:17vw;
+		padding-bottom: 40px;
 		max-height: 99.99vh;
 		overflow: auto;
 		box-sizing:  border-box;
@@ -154,7 +155,7 @@
 		{
 			position: relative;
 			width: 100%;
-			margin: 30px auto 40px;
+			margin: 30px auto 0;
 			text-align: center;
 
 			display: flex !important;
