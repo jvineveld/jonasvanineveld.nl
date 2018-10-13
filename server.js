@@ -434,7 +434,7 @@ const preloadServerPushFiles = () => {
 }
 
 app.use(expressStaticGzip(path.join(__dirname, 'public'), {
-	enableBrotli: true,
+	enableBrotli: false,
 	index: false,
     customCompressions: [{
         encodingName: 'deflate',

@@ -1,3 +1,10 @@
+@media all and (min-width:975px){
+	.wrapper aside{
+		flex: 0 0 390px;
+		margin-left: 10vw;
+	}
+}
+
 @media all and (max-height:830px){
 	.wrapper{
 		height: 93%;

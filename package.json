@@ -6,6 +6,7 @@
 		"postinstall": "node ./conf/spdy-quickfix.js",
 		"build-css": "node-sass-chokidar public/styles/sass/index.scss -o public/styles/css --output-style compressed",
 		"watch-css": "npm run build-css && node-sass-chokidar public/styles/sass -o public/styles/css --watch --recursive",
+		"optimize": "node optimize-assats.js",
 		"start": "node server.js"
 	},
 	"devDependencies": {
