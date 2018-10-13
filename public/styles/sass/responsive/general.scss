@@ -123,10 +123,12 @@
 		white-space: nowrap;
 	}
 
+	html{ overflow: hidden; }//mobile scroll fix
+
 	.wrapper{
 		height: auto;
 		display: block;
-		padding-top:13vw;
+		padding-top:17vw;
 		max-height: 99.99vh;
 		overflow: auto;
 		box-sizing:  border-box;
@@ -427,6 +429,6 @@
 
 	.wrapper
 	{
-		padding-top:130px;
+		padding-top:141px;
 	}
 }
