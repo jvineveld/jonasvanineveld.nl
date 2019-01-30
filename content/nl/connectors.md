@@ -1,7 +1,9 @@
 ## Koppelen van Systemen
 
-Vaak wordt er binnen bedrijven met veel verschillende online platformen gewerkt. Als deze platformen niet goed op elkaar aansluiten kan dit leiden tot extra werkzaamheden als informatie dubbel invoeren, of informatie die verloren raakt door menselijke fouten.
+Als er binnen bedrijven met verschillende online software wordt gewerkt, kan dit leiden tot extra werkzaamheden. Denk hierbij aan het dubbel invoeren van informatie, of in verschillende systemen moeten opzoeken van informatie.
 
-Ik heb ervaring met het koppelen van MailChimp, SugarCRM, ClockWise, Slack, Facebook en de Google Cloud omgeving.
+Om dit te voorkomen kan ik een dashboard maken waarin je de verschillende gegevens kan inzien, en eventueel actie kan ondernemen. Ook kan informatie automatisch van systeem A naar systeem B worden overgezet op gewenste momenten.
 
-Zolang er een REST, Oauth, of andere API beschikbaar is, kan er gekoppeld worden :-)
+Ik heb ervaring met het koppelen van MailChimp, SugarCRM, ClockWise, Slack, Facebook, Google mail / kalender en de Google Cloud omgeving.
+
+Neem contact op voor meer informatie.
